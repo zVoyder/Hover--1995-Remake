@@ -1,2 +1,11 @@
-# Hover! 1995Rep
- Hover! 1995 Remake - Gamelab
+# Hover! 1995 Remake
+
+This project is a reinterpretation of the original game Hover! 1995.
+
+This project is made by 
+ - ...
+ - ...
+ - ...
+ - ...
+
+Team created for the first year Game Lab of the Event Horizon School Milan.
