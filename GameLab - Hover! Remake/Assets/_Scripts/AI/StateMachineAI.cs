@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Extension;
+using Extension.Methods;
 
 /// <summary>
 /// This script is a state machine for an enemy AI in a Unity game.

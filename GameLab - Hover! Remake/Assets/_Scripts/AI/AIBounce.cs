@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Extension;
 
 /// <summary>
 /// This class is a necessary class tha permits the addforce
@@ -11,7 +12,7 @@ using UnityEngine.AI;
 [RequireComponent( typeof(Rigidbody), typeof(NavMeshAgent), typeof(StateMachineAI) )]
 public class AIBounce : MonoBehaviour
 {
-    public string collisionTag = "Player";
+    public string collisionTag = Extension.Constants.Tags.PLAYER;
     [Range(10, 50)] public float force = 10f;
     [Tooltip("How long before the AI start to run again?")] [Range(.5f, 5)] public float recover = 1.5f;
 

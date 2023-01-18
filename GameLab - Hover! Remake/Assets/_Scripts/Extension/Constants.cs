@@ -28,7 +28,7 @@ namespace Extension
         public static class Layers
         {
             public const int PLAYER = 3;
-            public const int MINIMAP = (1 << 3) | (1 << 6);
+            public const int MINIMAP = (1 << 3) | (1 << 6) | (1 << 7);
         }
     }
 }
