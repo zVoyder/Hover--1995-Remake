@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - EnemyFlag
+  - Minimap
+  - Pickup
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
-  - 
+  - Minimap
+  - VisibleMinimap
   - 
   - 
   - 
