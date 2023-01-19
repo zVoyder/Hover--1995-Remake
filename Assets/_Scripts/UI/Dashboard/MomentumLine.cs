@@ -27,7 +27,7 @@ public class MomentumLine : MonoBehaviour
         float curr = Mathematics.Percent(rigidBody.velocity.magnitude / 1000f, 1); // Percentage calculation based on the magnitude of the rigidbody
         _image.fillAmount = curr;
 
-        float angle = Mathf.Atan2(rigidBody.velocity.x, rigidBody.velocity.z) * Mathf.Rad2Deg; // Math formula to calculate the angle
+        float angle = Vector3.Angle(rigidBody.velocity, rigidBody.transform.forward); // Calculate the angle beetween the Vector3 of the velocity end the forward Vector3 of the transform of the rigidbody
         _image.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
