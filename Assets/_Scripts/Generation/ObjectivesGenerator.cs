@@ -17,7 +17,7 @@ public class ObjectivesGenerator : MonoBehaviour
     {
         remainingEnabledObjects = nObjectives;
 
-        usedPositions.Add(Generate());
+        usedPositions.Add(Generate().position);
     }
 
     public void SpawnInRandomPosition(int n)
