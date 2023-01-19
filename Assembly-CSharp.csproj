@@ -74,6 +74,7 @@
     <Compile Include="Assets\_Scripts\Player\Player.cs" />
     <Compile Include="Assets\_Scripts\UI\Dashboard\MomentumLine.cs" />
     <Compile Include="Assets\_Scripts\Utility\SimpleMove.cs" />
+    <Compile Include="Assets\_Scripts\Utility\NewBehaviourScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
