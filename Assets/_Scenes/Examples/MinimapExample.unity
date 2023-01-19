@@ -1945,6 +1945,10 @@ PrefabInstance:
       propertyPath: followSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6735348694253520485, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
+      propertyPath: cameraViewSize
+      value: 56.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6735348694253520486, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
       propertyPath: m_Name
       value: MinimapCamera

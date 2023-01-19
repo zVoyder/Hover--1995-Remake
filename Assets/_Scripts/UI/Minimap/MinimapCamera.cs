@@ -14,7 +14,7 @@ public class MinimapCamera : MonoBehaviour
     public GameObject pointer; // pointer object that the minimap camera will follow
 
     public RenderTexture renderMinimapTexture; // render texture that the minimap camera will render to
-    [Range(5, 20)] public float cameraViewSize = 10f; // size of the minimap's view
+    [Range(5, 50)] public float cameraViewSize = 10f; // size of the minimap's view
     [Range(50, 100)] public float cameraHeight = 50f; // height of the minimap camera
 
     private Transform _toFollow; // the transform of the object to follow
