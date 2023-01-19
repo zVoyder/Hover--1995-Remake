@@ -260,13 +260,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objective: {fileID: 3279394251967285728, guid: 1b473e1019489a141bc4e93b634ee9a3, type: 3}
-  nObjectives: 1
   positions:
   - {x: 30, y: 1, z: 30}
   - {x: 20, y: 1, z: 20}
   - {x: 40, y: 1, z: 40}
-  remainingEnabledObjects: 0
-  usedPositions: []
 --- !u!1 &783691629
 GameObject:
   m_ObjectHideFlags: 0

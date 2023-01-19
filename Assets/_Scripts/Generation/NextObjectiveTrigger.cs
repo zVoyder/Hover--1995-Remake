@@ -12,7 +12,7 @@ public class NextObjectiveTrigger : MonoBehaviour
     [Tooltip("Who can grab this objective?")]public string triggerTag = Extension.Constants.Tags.PLAYER; // Tag of the entity that can grab this objective
     
     private ObjectivesGenerator _gen; //The ObjectivesGenerator
-    internal int objectiveNumber; // How many objectives i need to spawn then, Internal so I can access it only via script
+
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class NextObjectiveTrigger : MonoBehaviour
     }
 
     /// <summary>
-    /// OnTriggerEnter Event for triggering the next spawn of the objectives
+    /// OnTriggerEnter Event for triggering the next spawn of the objective
     /// and detroying the current one
     /// </summary>
     /// <param name="other"></param>
@@ -28,16 +28,7 @@ public class NextObjectiveTrigger : MonoBehaviour
     {
         if (other.CompareTag(triggerTag))
         {
-            if (_gen.remainingEnabledObjects > 0)
-            {
-                _gen.SpawnInRandomPosition(--_gen.remainingEnabledObjects);
-            }
-            else
-            {
-                _gen.Reset();
-                _gen.SpawnInRandomPosition(_gen.nObjectives);
-            }
-
+            _gen.SpawnInRandomPosition();
             Destroy(gameObject);
         }
     }

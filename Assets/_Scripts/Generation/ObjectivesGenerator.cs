@@ -5,50 +5,42 @@ using UnityEngine;
 public class ObjectivesGenerator : MonoBehaviour
 {
     public GameObject objective;
-    public int nObjectives;
     public List<Vector3> positions;
 
-    public int remainingEnabledObjects;
-    public List<Vector3> usedPositions;
+    private int _remainingEnabledObjects;
 
     private void Start()
     {
-        remainingEnabledObjects = nObjectives;
-
-        SpawnInRandomPosition(remainingEnabledObjects);
+        _remainingEnabledObjects = positions.Count;
+        SpawnInRandomPosition();
     }
 
-    public void SpawnInRandomPosition(int n)
+    /// <summary>
+    /// Spawn the object in a random position
+    /// </summary>
+    public void SpawnInRandomPosition()
     {
-        for (int i = 0; i < n; i++)
+        if (_remainingEnabledObjects > 0)
         {
             Transform t;
-
             t = Generate();
-            usedPositions.Add(t.position);
 
-            t.GetComponent<NextObjectiveTrigger>().objectiveNumber = remainingEnabledObjects;
+            _remainingEnabledObjects--;
         }
     }
 
+    /// <summary>
+    /// Generate a random position of the list and remove it from the list
+    /// </summary>
+    /// <returns></returns>
     private Transform Generate()
     {
-        Transform t;
-        int r;
-
-        do
-        {
-            r = Random.Range(0, positions.Count - 1);
-            t = Instantiate(objective, positions[r], Random.rotation).transform;
-        } while (usedPositions.Contains(t.position));
-
+        int r = positions.Count-1;
+        Debug.Log(r);
         
-        return t;
-    }
+        Transform t = Instantiate(objective, positions[r], Random.rotation).transform;
+        positions.RemoveAt(r);
 
-    public void Reset()
-    {
-        remainingEnabledObjects = nObjectives;
-        usedPositions.Clear();
+        return t;
     }
 }

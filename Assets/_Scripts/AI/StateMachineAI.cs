@@ -174,6 +174,7 @@ public class StateMachineAI : MonoBehaviour
     /// <param name="position">the position i want to set for _destination</param>
     private void GoToLocation(Vector3 position)
     {
+
         _agent.SetDestination(position);
         _destination = position;
     }
@@ -190,7 +191,9 @@ public class StateMachineAI : MonoBehaviour
         // and i mulitply it by the radius of the navmesh
         Vector3 randomPoint = _originPosition + Random.insideUnitSphere * _navmeshRange;
 
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) //If it is on the navmesh
+        NavMeshPath navMeshPath = new NavMeshPath();
+        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)
+            && _agent.CalculatePath(hit.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete) //If it is on the navmesh
         {
             return hit.position;
         }
