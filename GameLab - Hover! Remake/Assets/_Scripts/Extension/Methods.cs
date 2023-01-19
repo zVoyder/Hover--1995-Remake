@@ -83,8 +83,18 @@ namespace Extension
             }
         }
 
+        /// <summary>
+        /// This class is an extension methods holder abount math calculations.
+        /// </summary>
         public static class Mathematics
         {
+
+            /// <summary>
+            /// Return the percent of the number based on the max number given
+            /// </summary>
+            /// <param name="n">number</param>
+            /// <param name="max">max number</param>
+            /// <returns>percentage</returns>
             public static float Percent(float n, float max)
             {
                 return (n / max) * 100f;

@@ -1,38 +1,33 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Extension.Methods;
 using UnityEngine;
 using UnityEngine.UI;
-using Extension.Methods;
 
-[RequireComponent(typeof(RectTransform))]
+
+/// <summary>
+/// This script is used to display the direction of
+/// momentum of a Rigidbody as a line in the user interface.
+/// It uses an image element to represent the line and uses
+/// the velocity of the target Rigidbody to determine the rotation angle of the image.
+/// </summary>
+[RequireComponent(typeof(Image))]
 public class MomentumLine : MonoBehaviour
 {
     public Rigidbody rigidBody;
-    public float thick = 5f, maxHeight = 100f;
 
-
-    private RectTransform _rectTransform;
+    private Image _image;
 
     void Start()
     {
-        _rectTransform = GetComponent<RectTransform>();
-        _rectTransform.sizeDelta = new Vector2(thick, 0f);
+        _image = GetComponent<Image>();
+        _image.fillAmount = 0f;
     }
-    
-    
+
     void Update()
     {
-        float curr = Mathematics.Percent(rigidBody.velocity.magnitude * 10, maxHeight);
-        if (curr > maxHeight)
-            curr = maxHeight;
+        float curr = Mathematics.Percent(rigidBody.velocity.magnitude / 1000f, 1); // Percentage calculation based on the magnitude of the rigidbody
+        _image.fillAmount = curr;
 
-
-        _rectTransform.sizeDelta = new Vector2(thick, curr);
-
-        //float r = ;
-        _rectTransform.rotation = Quaternion.Euler(rigidBody.velocity * rigidBody.velocity.magnitude);
-
-        Debug.Log(curr);
+        float angle = Mathf.Atan2(-rigidBody.velocity.x, rigidBody.velocity.z) * Mathf.Rad2Deg; // Math formula to calculate the angle
+        _image.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
