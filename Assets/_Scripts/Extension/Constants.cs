@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Extension
 {
-
     /// <summary>
     /// Namespace used for constants
     /// </summary>
@@ -29,6 +28,24 @@ namespace Extension
         {
             public const int PLAYER = 3;
             public const int MINIMAP = (1 << 3) | (1 << 6) | (1 << 7);
+        }
+
+        /// <summary>
+        /// Screen Resolution constants
+        /// </summary>
+        public static class ScreenResolution
+        {
+            public static Vector2Int WINDOWED = new Vector2Int(800, 600);
+
+
+        }
+
+        /// <summary>
+        /// Default names of the gameobject to find
+        /// </summary>
+        public static class GameObjectNames
+        {
+            public const string PAUSE = "Pause";
         }
     }
 }

@@ -68,7 +68,7 @@ public class StateMachineAI : MonoBehaviour
 #endif
 
         // Check if the player is within the detection range
-        if (CanReachLocation(transform.position, _toChase.position, detectionRange))
+        if (CanSeeLocation(transform.position, _toChase.position, detectionRange))
         {
             // If so, set the state to CHASE
             _currentState = AIState.CHASE;
@@ -77,7 +77,7 @@ public class StateMachineAI : MonoBehaviour
         {
             // Check if there is an objective within range
             if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject closest)
-                && CanReachLocation(transform.position, closest.transform.position, detectionRange))
+                && CanSeeLocation(transform.position, closest.transform.position, detectionRange))
             {
                 // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
                 _closestObjective = closest.transform;
@@ -144,13 +144,13 @@ public class StateMachineAI : MonoBehaviour
     #region Condition Methods
 
     /// <summary>
-    /// Check if the player can reach a location
+    /// Check if the agent can see the location
     /// </summary>
     /// <param name="from">transform of the origin raycast source</param>
     /// <param name="to">transform of destination source</param>
     /// <param name="range">range within can check</param>
     /// <returns></returns>
-    private bool CanReachLocation(Vector3 from, Vector3 to, float range)
+    private bool CanSeeLocation(Vector3 from, Vector3 to, float range)
     {
         bool r = Vector3.Distance(from, to) <= range 
             && !NavMesh.Raycast(from, to, out NavMeshHit hit, NavMesh.AllAreas);
@@ -161,6 +161,29 @@ public class StateMachineAI : MonoBehaviour
 #endif
 
         return r;
+    }
+
+
+    /// <summary>
+    /// Check if the agent can calculate a path to reach the destination position
+    /// </summary>
+    /// <param name="point">point i want to reach</param>
+    /// <param name="finalDestination">final destination</param>
+    /// <returns>True if it can reach the point, False if not</returns>
+    private bool CanReachLocation(Vector3 point, out Vector3 finalDestination)
+    {
+        NavMeshPath path = new NavMeshPath();
+
+        if (NavMesh.SamplePosition(point, out NavMeshHit hit, 1.0f, NavMesh.AllAreas) // If the destination point is on the navmesh
+            && _agent.CalculatePath(hit.position, path)
+            && path.status == NavMeshPathStatus.PathComplete) // And if the path with the point is found and Complete
+        {
+            finalDestination = hit.position;
+            return true;
+        }
+
+        finalDestination = Vector3.zero;
+        return false;
     }
 
     #endregion
@@ -174,7 +197,6 @@ public class StateMachineAI : MonoBehaviour
     /// <param name="position">the position i want to set for _destination</param>
     private void GoToLocation(Vector3 position)
     {
-
         _agent.SetDestination(position);
         _destination = position;
     }
@@ -185,17 +207,13 @@ public class StateMachineAI : MonoBehaviour
     /// <returns>A random point on the NavMesh</returns>
     private Vector3 RandomPoint()
     {
-        NavMeshHit hit;
-
         // I set the randompoint from the world origin, then i add a random point in a sphere
         // and i mulitply it by the radius of the navmesh
         Vector3 randomPoint = _originPosition + Random.insideUnitSphere * _navmeshRange;
 
-        NavMeshPath navMeshPath = new NavMeshPath();
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)
-            && _agent.CalculatePath(hit.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete) //If it is on the navmesh
+        if (CanReachLocation(randomPoint, out Vector3 dest)) // if the path with the point is found and Complete
         {
-            return hit.position;
+            return dest;
         }
 
         return transform.position; // otherwise stay there

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SceneSetting;
+using Extension;
+using System;
 
 /// <summary>
 /// This class is used for Pause the Game with a specified input
@@ -10,17 +11,34 @@ using SceneSetting;
 /// </summary>
 public class UIMenu : MonoBehaviour
 {
-    [Tooltip("GameObject I want to enable when I pause the game")]public GameObject pauseUI;
-    [Tooltip("Input KeyCode")] public KeyCode pause = InputManager.PAUSE; 
+    [Tooltip("Input KeyCode")] public KeyCode pause = InputManager.PAUSE;
+
+    [SerializeField] private Vector2Int _windowed = Extension.Constants.ScreenResolution.WINDOWED;
+
+    private Resolution _fullResolution;
+    private GameObject _pauseUI;
 
     bool isPaused = false; //Check variable
-    private Resolution _fullResolution = SceneSetting.ScreenResolution.STARTED;
 
     private void Awake()
     {
-        pauseUI.SetActive(false); // Disable the GameObject to insure is enabled only when the game is paused
         _fullResolution = Screen.currentResolution;
-        Screen.SetResolution(800, 600, true);
+
+        _fullResolution = Screen.currentResolution;
+
+        Screen.SetResolution(_windowed.x, _windowed.y, true);
+    }
+
+    private void Start()
+    {
+        try {
+            _pauseUI = transform.Find(Extension.Constants.GameObjectNames.PAUSE).gameObject;
+            _pauseUI.SetActive(false); // Disable the GameObject to insure is enabled only when the game is paused
+        }
+        catch (NullReferenceException)
+        {
+            Debug.LogError("NullReferenceException: be sure to have a child 'Pause' in " + transform.name);
+        }
     }
 
     void Update()
@@ -28,8 +46,7 @@ public class UIMenu : MonoBehaviour
         if (Input.GetKeyDown(pause)) // Input
         {
             isPaused = Pause(isPaused);
-            pauseUI.SetActive(isPaused);
-           
+            _pauseUI.SetActive(isPaused);
         }
 
         if (Input.GetKeyDown(InputManager.FULLSCREEN))

@@ -231,7 +231,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386554607}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -643,9 +643,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb9036af610fc54f9805e2296f7e10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseUI: {fileID: 386554607}
   pause: 284
-  fullScreen: 285
+  _windowed: {x: 800, y: 600}
 --- !u!1 &1904910937
 GameObject:
   m_ObjectHideFlags: 0
