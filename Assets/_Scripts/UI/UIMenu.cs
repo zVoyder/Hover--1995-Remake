@@ -26,7 +26,7 @@ public class UIMenu : MonoBehaviour
 
         _fullResolution = Screen.currentResolution;
 
-        Screen.SetResolution(_windowed.x, _windowed.y, true);
+        Screen.SetResolution(_fullResolution.width, _fullResolution.height, true);
     }
 
     private void Start()
@@ -43,7 +43,7 @@ public class UIMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(pause)) // Input
+        if (Input.GetKeyDown(pause))
         {
             isPaused = Pause(isPaused);
             _pauseUI.SetActive(isPaused);
@@ -51,7 +51,10 @@ public class UIMenu : MonoBehaviour
 
         if (Input.GetKeyDown(InputManager.FULLSCREEN))
         {
-            Screen.SetResolution(_fullResolution.width, _fullResolution.height, true);
+            if (!Screen.fullScreen) // If it is not in fullscreen mode
+                Screen.SetResolution(_fullResolution.width, _fullResolution.height, true); // Set it to fullScreen mode
+            else
+                Screen.SetResolution(_windowed.x, _windowed.y, false); // Set it to windowed mode
         }
     }
 
