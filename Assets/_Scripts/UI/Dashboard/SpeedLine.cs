@@ -13,6 +13,10 @@ using UnityEngine.UI;
 public class SpeedLine : MonoBehaviour
 {
     public Rigidbody rigidBody;
+    
+    [Range(1, 20), SerializeField,
+        Tooltip("Set this float to scale the fill amount, higher values means less fill.")]private float _fillDump = 1f;
+    [Range(0,1)] public float cap = 1.0f;
 
     private Image _image;
 
@@ -24,7 +28,8 @@ public class SpeedLine : MonoBehaviour
 
     void Update()
     {
-        float curr = Mathematics.Percent(rigidBody.velocity.magnitude / 1000f, 1); // Percentage calculation based on the magnitude of the rigidbody
-        _image.fillAmount = curr;
+        float len = Mathematics.Percent(rigidBody.velocity.magnitude / (_fillDump * 1000f), 1); // Percentage calculation based on the magnitude of the rigidbody
+        len = len > cap ? cap : len; //Check if it is higher of the cap
+        _image.fillAmount = len;
     }
 }

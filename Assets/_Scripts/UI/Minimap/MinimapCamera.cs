@@ -18,13 +18,14 @@ public class MinimapCamera : MonoBehaviour
     [Range(50, 100)] public float cameraHeight = 50f; // height of the minimap camera
 
     private Transform _toFollow; // the transform of the object to follow
-    private LayerMask _visibleLayers = Extension.Constants.Layers.MINIMAP; // the layers that the minimap camera should render
+    private LayerMask _visibleLayers = Extension.Constants.Layers.ALLMINIMAP; // the layers that the minimap camera should render
     private Camera _camera; // the minimap camera
     private Image _backGroundImage; // the image component of the minimap
 
+    private Light _minimapLight;
+
     private void Start()
     {
-
         if (Finder.TryFindGameObjectWithTag(Extension.Constants.Tags.MINIMAP, out GameObject gm) // try to find the minimap object
             && gm.TryGetComponent<Image>(out Image img)) // try to get the image component from the minimap object
         {
@@ -47,6 +48,16 @@ public class MinimapCamera : MonoBehaviour
         {
             Debug.LogError("The PLAYER GameObject was not found.");
         }
+
+
+        Camera.main.cullingMask =~ Extension.Constants.Layers.MINIMAP;
+
+        _minimapLight = gameObject.AddComponent<Light>() as Light;
+        _minimapLight.type = LightType.Directional;
+        _minimapLight.color = Color.white;
+        _minimapLight.intensity = 1;
+        _minimapLight.shadows = LightShadows.None;
+        _minimapLight.cullingMask = _visibleLayers;
 
         _camera = gameObject.AddComponent<Camera>() as Camera; // add a camera component to this game object
         _camera.clearFlags = CameraClearFlags.SolidColor;

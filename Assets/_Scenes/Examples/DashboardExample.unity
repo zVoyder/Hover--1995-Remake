@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21442
+  m_Name: pb_Mesh38714
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14681,9 +14681,33 @@ PrefabInstance:
     m_TransformParent: {fileID: 2113041397}
     m_Modifications:
     - target: {fileID: 5179305765351308269, guid: 89a8dcb85f83b0f41b320efc932011bc, type: 3}
+      propertyPath: cap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179305765351308269, guid: 89a8dcb85f83b0f41b320efc932011bc, type: 3}
+      propertyPath: _fillDump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179305765351308269, guid: 89a8dcb85f83b0f41b320efc932011bc, type: 3}
       propertyPath: rigidBody
       value: 
       objectReference: {fileID: 935006079}
+    - target: {fileID: 5179305765351308269, guid: 89a8dcb85f83b0f41b320efc932011bc, type: 3}
+      propertyPath: fillingScale
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179305765351308271, guid: 89a8dcb85f83b0f41b320efc932011bc, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179305765351308271, guid: 89a8dcb85f83b0f41b320efc932011bc, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179305765351308271, guid: 89a8dcb85f83b0f41b320efc932011bc, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5179305767246724648, guid: 89a8dcb85f83b0f41b320efc932011bc, type: 3}
       propertyPath: m_Name
       value: DashboardSample

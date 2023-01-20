@@ -13,7 +13,7 @@ using Extension;
 public class AIBounce : MonoBehaviour
 {
     public string collisionTag = Extension.Constants.Tags.PLAYER;
-    [Range(10, 50)] public float force = 10f;
+    [Range(5, 50)] public float bumpForce = 10f, pushForce = 5f;
     [Tooltip("How long before the AI start to run again?")] [Range(.5f, 5)] public float recover = 1.5f;
 
     private Rigidbody _rb;
@@ -32,7 +32,11 @@ public class AIBounce : MonoBehaviour
         if (collision.transform.CompareTag(collisionTag)) // If the collision is with the specific tag
         {
             StartCoroutine(RenableIn(recover)); // Start the corutine for recovering after the bounce
-            _rb.AddForce(-transform.forward * force, ForceMode.Impulse);
+            _rb.AddForce(-transform.forward * bumpForce, ForceMode.Impulse); //bump backward
+
+            if(collision.transform.TryGetComponent<Rigidbody>(out Rigidbody rb)){
+                rb.AddForce(-rb.transform.forward * pushForce, ForceMode.Impulse); // push the player backward
+            }
         }
     }
 
