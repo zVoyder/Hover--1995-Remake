@@ -9,6 +9,8 @@ using Extension.Methods;
 /// </summary>
 public class MinimapCamera : MonoBehaviour
 {
+    [Header("Be sure the Player's Camera is the Main Camera")]
+
     public Color backgroundColor = Color.black; // color of the minimap background
 
     public GameObject pointer; // pointer object that the minimap camera will follow
@@ -53,6 +55,8 @@ public class MinimapCamera : MonoBehaviour
         Camera.main.cullingMask =~ Extension.Constants.Layers.MINIMAP;
 
         _minimapLight = gameObject.AddComponent<Light>() as Light;
+        Camera.main.gameObject.AddComponent<IgnoreLight>().Limelight = _minimapLight; // add a the IgnoreLight component to the MainCamera
+
         _minimapLight.type = LightType.Directional;
         _minimapLight.color = Color.white;
         _minimapLight.intensity = 1;
@@ -85,4 +89,6 @@ public class MinimapCamera : MonoBehaviour
         // update the minimap camera's rotation to match the pointer object's rotation
         transform.rotation = Quaternion.Euler(90, _toFollow.eulerAngles.y, 0f);
     }
+
+
 }
