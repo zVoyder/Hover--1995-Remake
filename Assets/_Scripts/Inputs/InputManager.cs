@@ -9,6 +9,10 @@ public static class InputManager
     public static KeyCode DOWN = KeyCode.S;
     public static KeyCode RIGHT = KeyCode.D;
 
+    public static KeyCode JUMP = KeyCode.A;
+    public static KeyCode WALL = KeyCode.S;
+    public static KeyCode INVISIBLE = KeyCode.D;
+
     public static string VERTICAL = "Vertical";
     public static string HORIZONTAL = "Horizontal";
 
