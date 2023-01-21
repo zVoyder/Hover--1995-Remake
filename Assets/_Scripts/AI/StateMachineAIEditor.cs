@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 
 
-public enum WorldOriginGenerationType
-{
-    TERRAIN,
-    MESH,
-    CUSTOM
-};
-
 /// <summary>
 /// Custom editor fot the script StateMachineAI
 /// </summary>
