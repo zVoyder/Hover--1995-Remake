@@ -81,6 +81,23 @@ namespace Extension
 
                 return true;
             }
+
+
+            public static bool TryFindGameObject(string name, out GameObject gObject)
+            {
+                try
+                {
+                    Debug.Log("Trovate");
+                    gObject = GameObject.Find(name); //Try to take it
+                }
+                catch (System.Exception)
+                {
+                    gObject = null;
+                    return false;
+                }
+
+                return true;
+            }
         }
 
         /// <summary>

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.24160615, g: 0.21854943, b: 0.16343212, a: 1}
+  m_IndirectSpecularColor: {r: 0.4462893, g: 0.4960872, b: 0.5746397, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -444,13 +444,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371614791}
-  m_LocalRotation: {x: 0.6573928, y: -0.6338564, z: 0.2475524, w: -0.32369512}
+  m_LocalRotation: {x: 0.20286244, y: -0.60398936, z: 0.7273309, w: -0.2550165}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -6.417, y: 132.229, z: 270.75598}
+  m_LocalEulerAnglesHint: {x: 50.817, y: 72.68, z: 257.167}
 --- !u!1 &418634868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1371,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!154 &1603597762
 TerrainCollider:
@@ -1647,7 +1647,11 @@ MonoBehaviour:
   detectionRange: 20
   speed: 3.5
   acceleration: 8
-  nevMeshAgentHeightOffset: 0.1
+  size: {x: 100, y: 100}
+  floorType: 0
+  plane: {fileID: 0}
+  terrainData: {fileID: 15600000, guid: 8f8bc2e1287f6344d8edfa97e8a7fe40, type: 2}
+  _nevMeshAgentHeightOffset: 0.1
 --- !u!195 &1712195099
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1884,6 +1888,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3881132145893745798, guid: 00b68bfc2310647468a532ac9ba0ddb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3881132146045212851, guid: 00b68bfc2310647468a532ac9ba0ddb5, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1931,6 +1939,10 @@ PrefabInstance:
     - target: {fileID: 3881132146045212855, guid: 00b68bfc2310647468a532ac9ba0ddb5, type: 3}
       propertyPath: m_Name
       value: EnemyExample
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881132146045212855, guid: 00b68bfc2310647468a532ac9ba0ddb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00b68bfc2310647468a532ac9ba0ddb5, type: 3}
@@ -1992,6 +2004,10 @@ PrefabInstance:
     - target: {fileID: 6735348694253520486, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
       propertyPath: m_Name
       value: MinimapCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 6735348694253520486, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}

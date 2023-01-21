@@ -1,6 +1,3 @@
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Extension.Methods;
@@ -17,6 +14,15 @@ using Extension.Methods;
 [RequireComponent(typeof(NavMeshAgent))]
 public class StateMachineAI : MonoBehaviour
 {
+
+
+    public enum WorldOriginGenerationType
+    {
+        TERRAIN,
+        PLANE,
+        CUSTOM
+    };
+
     // Tags
     [Header("Objectives")]
     [Tooltip("The tag of the GameObject the AI must find and grab")] public string objectiveTag = Extension.Constants.Tags.ENEMY_FLAG;
@@ -24,14 +30,22 @@ public class StateMachineAI : MonoBehaviour
 
     // Declarations of the navigation variables
     [Header("Navigation")]
+    
     [Tooltip("The detection range of the AI")] [Range(10, 100)] public float detectionRange = 20f;
     [Tooltip("The speed of the AI")] [Range(1, 50)] public float speed = 3.5f;
     [Tooltip("The accelearation of the AI")] [Range(1, 50)] public float acceleration = 8f;
     [Tooltip("Offset of the NavMeshAgent Height, use it for setting the right height of the NavMesh otherwise there will be differences " +
         "between the Collider Component and the Collider of the NavMesh")]
-    [Range(0, 1)] public float nevMeshAgentHeightOffset = 0.1f;
+    
 
 
+    [HideInInspector] public Vector2 size;
+    [HideInInspector] public WorldOriginGenerationType floorType;
+    [HideInInspector] public Transform plane;
+    [HideInInspector] public TerrainData terrainData;
+
+
+    [Range(0, 1), SerializeField] private float _nevMeshAgentHeightOffset = 0.1f;
     private float _stoppingDistance = 1f;
     private Vector3 _originPosition, _destination; 
     private Transform _toChase, _closestObjective;
@@ -49,7 +63,7 @@ public class StateMachineAI : MonoBehaviour
         _agent.speed = speed;
         _agent.acceleration = acceleration;
         _agent.stoppingDistance = _stoppingDistance;
-        _agent.baseOffset -= nevMeshAgentHeightOffset;
+        _agent.baseOffset -= _nevMeshAgentHeightOffset;
 
         _toChase = GameObject.FindGameObjectWithTag(toChaseTag).transform; // find the player in the scene
 
@@ -225,22 +239,49 @@ public class StateMachineAI : MonoBehaviour
     /// <returns>the position of the world origin</returns>
     private Vector3 SetWorldOrigin(out float radius)
     {
-        TerrainData data = new TerrainData();
+        float width, height;
 
-        try
+        switch (floorType)
         {
-             data = Terrain.activeTerrain.terrainData; // I try to get the terrain in the scene
-        }catch(System.Exception)
-        {
-            Debug.LogError("Terrain not found in the scene.");
+
+            case WorldOriginGenerationType.TERRAIN:
+                width = terrainData.size.x;
+                height = terrainData.size.z;
+
+                break;
+
+            case WorldOriginGenerationType.PLANE:
+                width = plane.lossyScale.x * 10f;
+                height = plane.lossyScale.x * 10f;
+                break;
+
+
+            case WorldOriginGenerationType.CUSTOM:
+                width = size.x;
+                height = size.y;
+
+                break;
+
+            default:
+                width = 100f;
+                height = 100f;
+                break;
         }
 
-        float width = data.size.x;
-        float height = data.size.z;
+        width /= 2;
+        height /= 2;
 
-        radius = Mathf.Sqrt(Mathf.Pow(width / 2, 2) + Mathf.Pow(height / 2, 2)); // Math formula for calculating the radius of the map.
+        radius = Mathf.Sqrt(Mathf.Pow(width, 2) + Mathf.Pow(height, 2)); // Math formula for calculating the radius of the map.
 
-        return new Vector3(width / 2, 0, height / 2); // return the origin position
+        /*
+         * This lines here needs for testing, it checks if the radius generate is correct by creating a sphere at the center of the map.
+        GameObject sphere =
+            GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.transform.position = new Vector3(width, 0, height);
+        sphere.transform.localScale = new Vector3(radius*2, radius*2, radius*2); // multiply by 2 because this is the scale not the radius
+        */
+
+        return new Vector3(width, 0, height); // return the origin position
     }
 
     #endregion
