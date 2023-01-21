@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyOnCollision : MonoBehaviour
 {
-    public string tagName = "Enemy";
+    public string tagName = Extension.Constants.Tags.ENEMY;
 
     private void OnCollisionEnter(Collision collision)
     {

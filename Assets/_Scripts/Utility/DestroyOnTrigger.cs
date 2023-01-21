@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyOnTrigger : MonoBehaviour
 {
-    public string tagName = "Enemy";
+    public string tagName = Extension.Constants.Tags.ENEMY;
 
     private void OnTriggerEnter(Collider other)
     {
