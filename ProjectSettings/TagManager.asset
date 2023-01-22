@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Enemy
   - EnemyFlag
-  - Minimap
   - Pickup
   layers:
   - Default

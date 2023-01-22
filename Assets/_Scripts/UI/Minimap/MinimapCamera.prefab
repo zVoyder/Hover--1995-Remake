@@ -45,6 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
   pointer: {fileID: 6622205759710557243, guid: d32e2e36604e1754fbf3292da9ff274f, type: 3}
-  renderMinimapTexture: {fileID: 8400000, guid: 3281323c170ba3b43b2f31734758f09a, type: 2}
+  minimapUI: {fileID: 0}
   cameraViewSize: 20
   cameraHeight: 50
