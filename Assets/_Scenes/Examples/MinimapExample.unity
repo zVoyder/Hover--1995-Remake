@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4462893, g: 0.4960872, b: 0.5746397, a: 1}
+  m_IndirectSpecularColor: {r: 0.41155323, g: 0.43639404, b: 0.4462325, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -356,7 +356,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &371614791
 GameObject:
@@ -444,13 +444,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371614791}
-  m_LocalRotation: {x: 0.20286244, y: -0.60398936, z: 0.7273309, w: -0.2550165}
+  m_LocalRotation: {x: 0.4305875, y: -0.46962819, z: 0.5611768, w: -0.52832234}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50.817, y: 72.68, z: 257.167}
+  m_LocalEulerAnglesHint: {x: 4.135, y: 79.13, z: 269.963}
 --- !u!1 &418634868
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +483,7 @@ Transform:
   - {fileID: 1186476594}
   - {fileID: 1441104998}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &617947865
 GameObject:
@@ -886,7 +886,7 @@ Transform:
   - {fileID: 1798223504}
   - {fileID: 314501805}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1100131517
 GameObject:
@@ -1429,7 +1429,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704608420
 GameObject:
@@ -1628,7 +1628,7 @@ Transform:
   m_Children:
   - {fileID: 1024495645}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1712195098
 MonoBehaviour:
@@ -1647,11 +1647,11 @@ MonoBehaviour:
   detectionRange: 20
   speed: 3.5
   acceleration: 8
+  _nevMeshAgentHeightOffset: 0.1
   size: {x: 100, y: 100}
   floorType: 0
   plane: {fileID: 0}
   terrainData: {fileID: 15600000, guid: 8f8bc2e1287f6344d8edfa97e8a7fe40, type: 2}
-  _nevMeshAgentHeightOffset: 0.1
 --- !u!195 &1712195099
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1894,7 +1894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3881132146045212851, guid: 00b68bfc2310647468a532ac9ba0ddb5, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3881132146045212851, guid: 00b68bfc2310647468a532ac9ba0ddb5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1955,7 +1955,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6735348694253520483, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6735348694253520483, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1998,16 +1998,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6735348694253520485, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
+      propertyPath: minimapUI
+      value: 
+      objectReference: {fileID: 1225802990}
+    - target: {fileID: 6735348694253520485, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
+      propertyPath: luminosity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6735348694253520485, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
       propertyPath: cameraHeight
-      value: 50
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6735348694253520485, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
+      propertyPath: cameraViewSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6735348694253520485, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
+      propertyPath: minimapLuminosity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6735348694253520486, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
       propertyPath: m_Name
       value: MinimapCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 6735348694253520486, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
@@ -2048,11 +2060,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 156
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2104,11 +2116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285119, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_Name
-      value: Minimap
-      objectReference: {fileID: 0}
-    - target: {fileID: 9046105773707449228, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: MinimapUI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}

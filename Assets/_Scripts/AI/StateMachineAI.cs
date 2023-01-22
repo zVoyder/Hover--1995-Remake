@@ -35,7 +35,8 @@ public class StateMachineAI : MonoBehaviour
     [Tooltip("The speed of the AI")] [Range(1, 50)] public float speed = 3.5f;
     [Tooltip("The accelearation of the AI")] [Range(1, 50)] public float acceleration = 8f;
     [Tooltip("Offset of the NavMeshAgent Height, use it for setting the right height of the NavMesh otherwise there will be differences " +
-        "between the Collider Component and the Collider of the NavMesh")]
+        "between the Collider Component and the Collider of the NavMesh"),
+    Range(0, 1), SerializeField] private float _nevMeshAgentHeightOffset = 0.1f;
     
 
 
@@ -45,7 +46,6 @@ public class StateMachineAI : MonoBehaviour
     [HideInInspector] public TerrainData terrainData;
 
 
-    [Range(0, 1), SerializeField] private float _nevMeshAgentHeightOffset = 0.1f;
     private float _stoppingDistance = 1f;
     private Vector3 _originPosition, _destination; 
     private Transform _toChase, _closestObjective;
