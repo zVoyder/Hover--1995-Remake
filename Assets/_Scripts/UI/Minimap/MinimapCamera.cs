@@ -9,8 +9,6 @@ using Extension.Methods;
 /// </summary>
 public class MinimapCamera : MonoBehaviour
 {
-    //[Header("Be sure the Player's Camera is the Main Camera")]
-
     public Color backgroundColor = Color.black; // color of the minimap background
 
     public GameObject pointer; // pointer object that the minimap camera will follow
@@ -60,7 +58,7 @@ public class MinimapCamera : MonoBehaviour
         mpCamera.targetTexture = 
             new RenderTexture((int)background.rectTransform.sizeDelta.x, //Creating a new render texture with the size of the minimapUI
             (int)background.rectTransform.sizeDelta.y, 8, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
-        mpCamera.targetTexture.antiAliasing = 0;
+        mpCamera.targetTexture.antiAliasing = 1;
         mpCamera.targetTexture.Create(); //constructor to create it
 
         minimapUI.GetComponentInChildren<RawImage>().texture = mpCamera.targetTexture; // setting the rendertexture in the rawimage of the minimapUI
