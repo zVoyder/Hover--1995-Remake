@@ -82,7 +82,7 @@ public class StateMachineAI : MonoBehaviour
 #endif
 
         // Check if the player is within the detection range
-        if (CanSeeLocation(transform.position, _toChase.position, detectionRange))
+        if (CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange))
         {
             // If so, set the state to CHASE
             _currentState = AIState.CHASE;
@@ -91,7 +91,7 @@ public class StateMachineAI : MonoBehaviour
         {
             // Check if there is an objective within range
             if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject closest)
-                && CanSeeLocation(transform.position, closest.transform.position, detectionRange))
+                && CanSeeLocation(transform.position, closest.transform.position, heightEyesOffset, detectionRange))
             {
                 // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
                 _closestObjective = closest.transform;
@@ -164,10 +164,10 @@ public class StateMachineAI : MonoBehaviour
     /// <param name="to">transform of destination source</param>
     /// <param name="range">range within can check</param>
     /// <returns></returns>
-    private bool CanSeeLocation(Vector3 from, Vector3 to, float range)
+    private bool CanSeeLocation(Vector3 from, Vector3 to, float offset, float range)
     {
         bool r = Vector3.Distance(from, to) <= range 
-            && !NavMesh.Raycast(new Vector3(from.x, from.y + heightEyesOffset, from.z), to, out NavMeshHit hit, NavMesh.AllAreas);
+            && !NavMesh.Raycast(new Vector3(from.x, from.y + offset, from.z), to, out NavMeshHit hit, NavMesh.AllAreas);
 
 #if DEBUG
         Color color = r ? Color.green : Color.red;
