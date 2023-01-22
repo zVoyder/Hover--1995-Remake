@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
   m_Name: AnimationPlayableAsset(Clone)
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: -1638789572408541109, guid: 9c9eda347d32ce64cbc4ecd2f4587218, type: 3}
+  m_Clip: {fileID: -1638789572408541109, guid: acf0c6cfe86921e4bb3c82ab72c8c406, type: 3}
   m_Position: {x: 0, y: 0, z: 0}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_UseTrackMatchFields: 1
