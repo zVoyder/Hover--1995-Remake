@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerInventory : MonoBehaviour
@@ -27,7 +27,7 @@ public class PlayerInventory : MonoBehaviour
     private float m_buffTimer = 0; //timer to set a duration for the buffs
     private float m_nerfTimer = 0; //timer to set a duration for the nerfs
     private Rigidbody rigidBody;
-    Collider coll;
+    Collider sphereCollider;
     RBPlayerMovement pm;
 
     // Start is called before the first frame update
@@ -35,7 +35,7 @@ public class PlayerInventory : MonoBehaviour
     { 
         //getting Rigidbody and BoxCollidercomponents
         rigidBody = GetComponent<Rigidbody>();
-        coll = GetComponent<Collider>();
+        sphereCollider = GetComponent<BoxCollider>();
         pm = GetComponent<RBPlayerMovement>();
     }
 
@@ -58,7 +58,7 @@ public class PlayerInventory : MonoBehaviour
             m_springCounter = 0;
         }
         //jumping input
-        if (m_springCounter > 0 && isGrounded && Input.GetKeyDown(KeyCode.A))
+        if (m_springCounter > 0 && isGrounded && Input.GetKeyDown(InputManager.JUMP))
         {
             //jump effective movement
             rigidBody.AddForce(Vector3.up * m_jumpForce * Time.deltaTime);

@@ -11,32 +11,33 @@ public class RBPlayerMovement : MonoBehaviour
     public float m_rotationForce; //force of the rotation (can be setted in the inspetor)
 
 
-    // Start is called before the first frame update
-    void Start()
+    void Start() // Start is called before the first frame update
     {
         m_rigidBody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate() //updates every 0.02 seconds to adapt to the physics
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(InputManager.FORWARD))//forward acceleration key binding
         {
-            m_rigidBody.AddForce(transform.forward * m_maxSpeed, ForceMode.Acceleration);
+            m_rigidBody.AddForce(transform.forward * m_maxSpeed, ForceMode.Acceleration); //forward acceleration
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(InputManager.BACKWARD))//backward acceleration key binding
         {
-            m_rigidBody.AddForce(-transform.forward * m_maxSpeed, ForceMode.Acceleration);
+            m_rigidBody.AddForce(-transform.forward * m_maxSpeed, ForceMode.Acceleration); //backward acceleration
         }
+    }
 
-        //rotation to left
-        if (Input.GetKey(KeyCode.LeftArrow))
+    void Update() // Update is called once per frame
+    {
+
+        if (Input.GetKey(InputManager.TURNLEFT))//left rotation key binding
         {
             transform.Rotate(Vector3.up, -m_rotationForce * Time.deltaTime); //effective left rotation
         }
-        //rotation to right
-        if (Input.GetKey(KeyCode.RightArrow))
+        
+        if (Input.GetKey(InputManager.TURNRIGHT)) //right rotation key binding
         {
             transform.Rotate(Vector3.up, m_rotationForce * Time.deltaTime); //effective right rotation
         }
