@@ -117,5 +117,33 @@ namespace Extension
                 return (n / max) * 100f;
             }
         }
+
+        public static class Audios {
+
+            /// <summary>
+            /// Here's an adaptation to allow the passing of 
+            /// AudioSourceSetting Objects into the mix so that you can copy the properties.
+            /// may be helpful in certain situations where you want to be able to assign
+            /// an AudioMixer as well as adjust other properties within the inspector.
+            /// </summary>
+            /// <param name="audioSetting"></param>
+            /// <param name="pos"></param>
+            /// <returns></returns>
+            public static void PlayClipAtPoint(AudioSFX audioSetting, Vector3 pos)
+            {
+                GameObject tempGO = new GameObject("TempAudio"); // create the temp object
+                tempGO.transform.position = pos; // set its position
+                AudioSource tempASource = tempGO.AddComponent<AudioSource>(); // add an audio source
+                tempASource.clip = audioSetting.clip;
+                tempASource.volume = audioSetting.volume;
+                tempASource.pitch = audioSetting.pitch;
+                tempASource.outputAudioMixerGroup = audioSetting.mixerGroup;
+                tempASource.spatialBlend = audioSetting.spatialBlend;
+
+                tempASource.Play(); // start the sound
+                MonoBehaviour.Destroy(tempGO, tempASource.clip.length);
+            }
+
+        }
     }
 }
