@@ -5,13 +5,13 @@ using UnityEngine;
 public class ObjectivesGenerator : MonoBehaviour
 {
     public GameObject objective;
+    public int quantity = 3;
     public List<Vector3> positions;
-
     private int _remainingEnabledObjects;
 
     private void Start()
     {
-        _remainingEnabledObjects = positions.Count;
+        _remainingEnabledObjects = quantity;
         SpawnInRandomPosition();
     }
 
@@ -38,7 +38,7 @@ public class ObjectivesGenerator : MonoBehaviour
         int r = positions.Count-1;
         Debug.Log(r);
         
-        Transform t = Instantiate(objective, positions[r], Random.rotation).transform;
+        Transform t = Instantiate(objective, positions[r], Quaternion.Euler(new Vector3(0, Random.Range(0, 180), 0))).transform;
         positions.RemoveAt(r);
 
         return t;

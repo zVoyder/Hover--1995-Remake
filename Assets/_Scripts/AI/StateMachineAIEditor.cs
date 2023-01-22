@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-
+using UnityEngine;
 
 /// <summary>
 /// Custom editor fot the script StateMachineAI
@@ -9,21 +9,30 @@ using UnityEditor;
 [CustomEditor(typeof(StateMachineAI))]
 public class StateMachineAIEditor : Editor //Extend the class editor
 {
+    StateMachineAI _script;
+
+
+    private void OnEnable()
+    {
+
+        _script = (StateMachineAI)target;
+    }
+
     public override void OnInspectorGUI() //Override the method OnInspectorGUI
     {
         base.OnInspectorGUI();
+        //Set the target of the editor to the script StateMachineAI by casting it.
 
-        StateMachineAI script = (StateMachineAI)target; //Set the target of the editor to the script StateMachineAI by casting it.
-
-        script.floorType = (StateMachineAI.WorldOriginGenerationType)EditorGUILayout.EnumPopup("Floor Type", script.floorType); // Setting the enum pop up
+        _script.heightEyesOffset = EditorGUILayout.Slider("Height Eyes Offset", _script.heightEyesOffset, 0, _script.transform.localScale.y);
+        _script.floorType = (StateMachineAI.WorldOriginGenerationType)EditorGUILayout.EnumPopup("Floor Type", _script.floorType); // Setting the enum pop up
 
 
         //Switch for
-        switch (script.floorType) // Switch for each type of the enum
+        switch (_script.floorType) // Switch for each type of the enum
         {
             case StateMachineAI.WorldOriginGenerationType.CUSTOM:
 
-                script.size = EditorGUILayout.Vector2Field("Size", script.size);
+                _script.size = EditorGUILayout.Vector2Field("Size", _script.size);
 
 
                 break;
@@ -31,13 +40,13 @@ public class StateMachineAIEditor : Editor //Extend the class editor
             case StateMachineAI.WorldOriginGenerationType.TERRAIN:
 
                 //ObjectField method needs the casting to the object i want to use (in this case TerrainData).
-                script.terrainData = (UnityEngine.TerrainData)EditorGUILayout.ObjectField("Terrain", script.terrainData, typeof(UnityEngine.TerrainData), true);
+                _script.terrainData = (UnityEngine.TerrainData)EditorGUILayout.ObjectField("Terrain", _script.terrainData, typeof(UnityEngine.TerrainData), true);
 
                 break;
 
             case StateMachineAI.WorldOriginGenerationType.PLANE:
                 
-                script.plane = (UnityEngine.Transform)EditorGUILayout.ObjectField("Plane", script.plane, typeof(UnityEngine.Transform), true);
+                _script.plane = (UnityEngine.Transform)EditorGUILayout.ObjectField("Plane", _script.plane, typeof(UnityEngine.Transform), true);
 
                 break;
         }

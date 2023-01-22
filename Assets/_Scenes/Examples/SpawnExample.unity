@@ -260,10 +260,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objective: {fileID: 3279394251967285728, guid: 1b473e1019489a141bc4e93b634ee9a3, type: 3}
+  quantity: 5
   positions:
-  - {x: 30, y: 1, z: 30}
-  - {x: 20, y: 1, z: 20}
-  - {x: 40, y: 1, z: 40}
+  - {x: 10, y: 0, z: 10}
+  - {x: 20, y: 0, z: 20}
+  - {x: 30, y: 0, z: 30}
+  - {x: 50, y: 0, z: 50}
+  - {x: 60, y: 0, z: 60}
 --- !u!1 &783691629
 GameObject:
   m_ObjectHideFlags: 0

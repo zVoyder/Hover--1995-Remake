@@ -37,15 +37,16 @@ public class StateMachineAI : MonoBehaviour
     [Tooltip("Offset of the NavMeshAgent Height, use it for setting the right height of the NavMesh otherwise there will be differences " +
         "between the Collider Component and the Collider of the NavMesh"),
     Range(0, 1), SerializeField] private float _nevMeshAgentHeightOffset = 0.1f;
-    
 
 
+    [HideInInspector, Tooltip("Set the eyes height")] public float heightEyesOffset = 0f;
     [HideInInspector] public Vector2 size;
     [HideInInspector] public WorldOriginGenerationType floorType;
     [HideInInspector] public Transform plane;
     [HideInInspector] public TerrainData terrainData;
 
 
+    
     private float _stoppingDistance = 1f;
     private Vector3 _originPosition, _destination; 
     private Transform _toChase, _closestObjective;
@@ -166,11 +167,11 @@ public class StateMachineAI : MonoBehaviour
     private bool CanSeeLocation(Vector3 from, Vector3 to, float range)
     {
         bool r = Vector3.Distance(from, to) <= range 
-            && !NavMesh.Raycast(from, to, out NavMeshHit hit, NavMesh.AllAreas);
+            && !NavMesh.Raycast(new Vector3(from.x, from.y + heightEyesOffset, from.z), to, out NavMeshHit hit, NavMesh.AllAreas);
 
 #if DEBUG
         Color color = r ? Color.green : Color.red;
-        Debug.DrawLine(from, to, color);
+        Debug.DrawLine(new Vector3(from.x, from.y + heightEyesOffset, from.z), to, color);
 #endif
 
         return r;
