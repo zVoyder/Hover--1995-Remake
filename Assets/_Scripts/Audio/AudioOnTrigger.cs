@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// Simple script that plays an audio on trigger enter
+/// </summary>
 public class AudioOnTrigger : MonoBehaviour
 {
     public List<string> bumpableTags = new List<string>() { Extension.Constants.Tags.PLAYER };
