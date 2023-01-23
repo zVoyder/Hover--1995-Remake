@@ -13,7 +13,7 @@ public class UIMenu : MonoBehaviour
 {
     [Tooltip("Input KeyCode")] public KeyCode pause = InputManager.PAUSE;
 
-    [SerializeField] private Vector2Int _windowed = Extension.Constants.ScreenResolution.WINDOWED;
+    [SerializeField] private Vector2Int _windowed = Constants.ScreenResolution.WINDOWED;
 
     private Resolution _fullResolution;
     private GameObject _pauseUI;
@@ -32,7 +32,7 @@ public class UIMenu : MonoBehaviour
     private void Start()
     {
         try {
-            _pauseUI = transform.Find(Extension.Constants.GameObjectNames.PAUSE).gameObject;
+            _pauseUI = transform.Find(Constants.GameObjectNames.PAUSE).gameObject;
             _pauseUI.SetActive(false); // Disable the GameObject to insure is enabled only when the game is paused
         }
         catch (NullReferenceException)

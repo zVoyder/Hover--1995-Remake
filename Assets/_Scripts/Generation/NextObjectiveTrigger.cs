@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class NextObjectiveTrigger : MonoBehaviour
 {
-    [Tooltip("Who can grab this objective?")]public string triggerTag = Extension.Constants.Tags.PLAYER; // Tag of the entity that can grab this objective
+    [Tooltip("Who can grab this objective?")]public string triggerTag = Constants.Tags.PLAYER; // Tag of the entity that can grab this objective
     
     private ObjectivesGenerator _gen; //The ObjectivesGenerator
 

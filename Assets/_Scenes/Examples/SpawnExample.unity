@@ -262,11 +262,11 @@ MonoBehaviour:
   objective: {fileID: 3279394251967285728, guid: 1b473e1019489a141bc4e93b634ee9a3, type: 3}
   quantity: 5
   positions:
-  - {x: 10, y: 0, z: 10}
-  - {x: 20, y: 0, z: 20}
-  - {x: 30, y: 0, z: 30}
-  - {x: 50, y: 0, z: 50}
-  - {x: 60, y: 0, z: 60}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!1 &783691629
 GameObject:
   m_ObjectHideFlags: 0

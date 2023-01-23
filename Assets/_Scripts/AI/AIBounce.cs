@@ -12,7 +12,7 @@ using UnityEngine.AI;
 public class AIBounce : MonoBehaviour
 {
     [Tooltip("Look at Target when bumped")]public bool lookAtTarget = true;
-    public List<string> collisionTags = new List<string>(){ Extension.Constants.Tags.PLAYER };
+    public List<string> collisionTags = new List<string>(){ Constants.Tags.PLAYER };
     [Tooltip("Bump force of this rigidbody backward"), Range(5, 50)] public float bumpForce = 10f;
     [Tooltip("Push force of the rigidbody that collides forward"), Range(5, 50)] public float pushForce = 5f;
     [Tooltip("How long before the AI start to run again?")] [Range(.5f, 5)] public float recover = 1.5f;

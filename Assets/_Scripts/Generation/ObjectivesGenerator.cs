@@ -16,7 +16,7 @@ public class ObjectivesGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn the object in a random position
+    /// Spawn the object in a random position and descrease the remaining objects to spawn
     /// </summary>
     public void SpawnInRandomPosition()
     {
@@ -30,13 +30,12 @@ public class ObjectivesGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Generate a random position of the list and remove it from the list
+    /// Generate the objective in a random position of the list and remove that position from the list
     /// </summary>
     /// <returns></returns>
     private Transform Generate()
     {
-        int r = positions.Count-1;
-        Debug.Log(r);
+        int r = positions.Count - 1;
         
         Transform t = Instantiate(objective, positions[r], Quaternion.Euler(new Vector3(0, Random.Range(0, 180), 0))).transform;
         positions.RemoveAt(r);

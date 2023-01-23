@@ -6,13 +6,10 @@ using UnityEngine;
 
 namespace Extension
 {
-    namespace Methods
-    {
-
-        /// <summary>
+    /// <summary>
         /// This class is an extension methods holder abount findings GameObjects in the scene.
         /// </summary>
-        public static class Finder
+    public static class Finder
         {
             /// <summary>
             /// Get the closest gameobject in an array of gameobjects
@@ -99,50 +96,72 @@ namespace Extension
                 return true;
             }
         }
-
+    
+    /// <summary>
+    /// This class is an extension methods holder abount math calculations.
+    /// </summary>
+    public static class Mathematics
+    {
+    
         /// <summary>
-        /// This class is an extension methods holder abount math calculations.
+        /// Return the percent of the number based on the max number given
         /// </summary>
-        public static class Mathematics
+        /// <param name="n">number</param>
+        /// <param name="max">max number</param>
+        /// <returns>percentage</returns>
+        public static float Percent(float n, float max)
         {
-
-            /// <summary>
-            /// Return the percent of the number based on the max number given
-            /// </summary>
-            /// <param name="n">number</param>
-            /// <param name="max">max number</param>
-            /// <returns>percentage</returns>
-            public static float Percent(float n, float max)
-            {
-                return (n / max) * 100f;
-            }
+            return (n / max) * 100f;
+        }
+    
+    
+        /// <summary>
+        /// Compares two floating point numbers and return true if they are the approximately the
+        /// same number.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// 
+        /// <returns>true if they are approximately the same</returns>
+        public static bool Approximately(float a, float b, float tollerance)
+        {
+            return (a - b < tollerance);
         }
 
-        public static class Audios
+
+        public static bool IsCentered(Transform A, Transform B, float threshold)
         {
-
-            /// <summary>
-            /// Method to allow the passing of 
-            /// AudioSFX Object into the mix so that copy the properties.
-            /// </summary>
-            /// <param name="audioSetting">AudioSFX settings</param>
-            /// <param name="pos">position you want to spawn the audio</param>
-            /// <returns></returns>
-            public static void PlayClipAtPoint(AudioSFX audioSetting, Vector3 pos)
-            {
-                GameObject tempGO = new GameObject("ClipAtPoint " + pos); // create the temp object
-                tempGO.transform.position = pos; // set its position
-                AudioSource tempASource = tempGO.AddComponent<AudioSource>(); // add an audio source
-                tempASource.clip = audioSetting.clip;
-                tempASource.volume = audioSetting.volume;
-                tempASource.pitch = audioSetting.pitch;
-                tempASource.outputAudioMixerGroup = audioSetting.mixerGroup;
-                tempASource.spatialBlend = audioSetting.spatialBlend;
-
-                tempASource.Play(); // play the sound
-                MonoBehaviour.Destroy(tempGO, tempASource.clip.length); // destroy the gameobject at clip's end
-            }
-
+            Vector3 centerA = A.transform.position;
+            Vector3 centerB = B.transform.position;
+            return Vector3.Distance(centerA, centerB) < threshold;
         }
+
+    }
+    
+    public static class Audios
+    {
+    
+        /// <summary>
+        /// Method to allow the passing of 
+        /// AudioSFX Object into the mix so that copy the properties.
+        /// </summary>
+        /// <param name="audioSetting">AudioSFX settings</param>
+        /// <param name="pos">position you want to spawn the audio</param>
+        /// <returns></returns>
+        public static void PlayClipAtPoint(AudioSFX audioSetting, Vector3 pos)
+        {
+            GameObject tempGO = new GameObject("ClipAtPoint " + pos); // create the temp object
+            tempGO.transform.position = pos; // set its position
+            AudioSource tempASource = tempGO.AddComponent<AudioSource>(); // add an audio source
+            tempASource.clip = audioSetting.clip;
+            tempASource.volume = audioSetting.volume;
+            tempASource.pitch = audioSetting.pitch;
+            tempASource.outputAudioMixerGroup = audioSetting.mixerGroup;
+            tempASource.spatialBlend = audioSetting.spatialBlend;
+
+            tempASource.Play(); // play the sound
+            MonoBehaviour.Destroy(tempGO, tempASource.clip.length); // destroy the gameobject at clip's end
+        }
+    
     }
 }

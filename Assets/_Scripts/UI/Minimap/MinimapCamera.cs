@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Extension.Methods;
+using Extension;
 
 /// <summary>
 /// This class simulate a minimap using a camera component and Rendered Texture
@@ -19,7 +19,7 @@ public class MinimapCamera : MonoBehaviour
     [Range(5, 100)] public float cameraHeight = 50f; // height of the minimap camera
 
     private Transform _toFollow; // the transform of the object to follow
-    private LayerMask _visibleLayers = Extension.Constants.Layers.ALLMINIMAP; // the layers that the minimap camera should render
+    private LayerMask _visibleLayers = Constants.Layers.ALLMINIMAP; // the layers that the minimap camera should render
 
     private Light _minimapLight;
 
@@ -28,7 +28,7 @@ public class MinimapCamera : MonoBehaviour
         Image background = minimapUI.GetComponent<Image>();
         background.color = backgroundColor; // set the color of the minimap's background
 
-        if (Finder.TryFindGameObjectWithTag(Extension.Constants.Tags.PLAYER, out GameObject pl))
+        if (Finder.TryFindGameObjectWithTag(Constants.Tags.PLAYER, out GameObject pl))
         {
             GameObject p = GameObject.Instantiate(pointer, pl.transform) as GameObject; // instantiate the pointer object as a child of the player
             p.transform.localPosition = new Vector3(0, 1f, 0);
@@ -42,7 +42,7 @@ public class MinimapCamera : MonoBehaviour
 
         Camera plCamera = pl.GetComponentInChildren<Camera>();
 
-        plCamera.cullingMask =~ Extension.Constants.Layers.MINIMAP;
+        plCamera.cullingMask =~ Constants.Layers.MINIMAP;
         _minimapLight = gameObject.AddComponent<Light>() as Light;
         plCamera.gameObject.AddComponent<IgnoreLight>().Limelight = _minimapLight; // add a the IgnoreLight component to the MainCamera
 

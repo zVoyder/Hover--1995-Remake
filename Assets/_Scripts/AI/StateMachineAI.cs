@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Extension.Methods;
+using Extension;
 
 /// <summary>
 /// This script is a state machine for an enemy AI in a Unity game.
@@ -11,11 +11,10 @@ using Extension.Methods;
 /// The script also includes methods for checking if the AI can reach a location and for setting a
 /// random destination for the AI to move to.
 /// </summary>
+
 [RequireComponent(typeof(NavMeshAgent))]
 public class StateMachineAI : MonoBehaviour
 {
-
-
     public enum WorldOriginGenerationType
     {
         TERRAIN,
@@ -25,8 +24,8 @@ public class StateMachineAI : MonoBehaviour
 
     // Tags
     [Header("Objectives")]
-    [Tooltip("The tag of the GameObject the AI must find and grab")] public string objectiveTag = Extension.Constants.Tags.ENEMY_FLAG;
-    [Tooltip("The tag of the GameObject the AI must chase")] public string toChaseTag = Extension.Constants.Tags.PLAYER;
+    [Tooltip("The tag of the GameObject the AI must find and grab")] public string objectiveTag = Constants.Tags.ENEMY_FLAG;
+    [Tooltip("The tag of the GameObject the AI must chase")] public string toChaseTag = Constants.Tags.PLAYER;
 
     // Declarations of the navigation variables
     [Header("Navigation")]

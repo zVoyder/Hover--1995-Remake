@@ -12,7 +12,7 @@ public class AudioOnCollision : MonoBehaviour
 {
     [SerializeField]private float _forceToTrigger = 50f; //Impact force needed to trigger the audio
 
-    public List<string> bumpableTags = new List<string>() { Extension.Constants.Tags.PLAYER };
+    public List<string> bumpableTags = new List<string>() { Constants.Tags.PLAYER };
     public AudioSFX audioEffect;
 
     private void OnCollisionEnter(Collision hit)
@@ -24,7 +24,7 @@ public class AudioOnCollision : MonoBehaviour
             vel /= 10f;
 
             if (vel > _forceToTrigger)
-                Extension.Methods.Audios.PlayClipAtPoint(audioEffect, hit.contacts[0].point);
+                Extension.Audios.PlayClipAtPoint(audioEffect, hit.contacts[0].point);
         }
     }
 }

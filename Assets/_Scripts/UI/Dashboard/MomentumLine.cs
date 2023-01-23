@@ -1,4 +1,4 @@
-using Extension.Methods;
+using Extension;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +22,7 @@ public class MomentumLine : MonoBehaviour
         _image.fillAmount = 0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float curr = Mathematics.Percent(rigidBody.velocity.magnitude / 1000f, 1); // Percentage calculation based on the magnitude of the rigidbody
         _image.fillAmount = curr;

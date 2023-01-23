@@ -5305,7 +5305,7 @@ MonoBehaviour:
   size: {x: 0, y: 0}
   floorType: 0
   plane: {fileID: 0}
-  terrainData: {fileID: 0}
+  terrainData: {fileID: 15600000, guid: 8f8bc2e1287f6344d8edfa97e8a7fe40, type: 2}
 --- !u!195 &278486185
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6857,7 +6857,7 @@ MonoBehaviour:
   size: {x: 0, y: 0}
   floorType: 0
   plane: {fileID: 0}
-  terrainData: {fileID: 0}
+  terrainData: {fileID: 15600000, guid: 8f8bc2e1287f6344d8edfa97e8a7fe40, type: 2}
 --- !u!195 &1343721767
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7379,7 +7379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886079878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.7, y: 1, z: 28.2}
+  m_LocalPosition: {x: 26.36, y: 13.6, z: 9.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1106012238}
@@ -7415,7 +7415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidBody: {fileID: 1886079883}
-  m_maxSpeed: 2
+  m_maxSpeed: 14
   m_rotationForce: 70
 --- !u!1 &1977313753
 GameObject:
