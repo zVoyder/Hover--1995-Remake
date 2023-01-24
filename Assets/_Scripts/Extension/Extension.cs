@@ -131,12 +131,16 @@ namespace Extension
             return (a - b < tollerance);
         }
 
-
-        public static bool IsCentered(Transform A, Transform B, float threshold)
+        /// <summary>
+        /// Check if 2 Vector2 are approximately the same 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="tollerance">Tollerance</param>
+        /// <returns></returns>
+        public static bool Approximately(Vector2 a, Vector2 b, float tollerance)
         {
-            Vector3 centerA = A.transform.position;
-            Vector3 centerB = B.transform.position;
-            return Vector3.Distance(centerA, centerB) < threshold;
+            return Approximately(a.x, b.x, tollerance) && Approximately(a.y, b.y, tollerance);
         }
 
     }

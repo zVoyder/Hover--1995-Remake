@@ -58,10 +58,10 @@ public class BoostOnTrigger : MonoBehaviour
     /// <returns>WaitForFixedUpdate</returns>
     private IEnumerator SetLaunch(Rigidbody toThrow)
     {
-        //Do it until the rotation and position are not the same of this transform position
-        //Mathf.Absolute so negative rotations don't matter
-        while(!Extension.Mathematics.Approximately(Mathf.Abs(toThrow.transform.rotation.y), Mathf.Abs(transform.rotation.y), _rotationPrecision)
-            || !Extension.Mathematics.IsCentered(toThrow.transform, transform, _centerPrecision))
+        //Do it until the rotation and position are not the same of this transform position and rotation
+        //Mathf.Absolute so negative Y rotation doesn't matter.
+        while (!Extension.Mathematics.Approximately(Mathf.Abs(toThrow.transform.rotation.y), Mathf.Abs(transform.rotation.y), _rotationPrecision) //rotation check
+            || !Extension.Mathematics.Approximately(new Vector2(toThrow.transform.position.x, toThrow.transform.position.z), new Vector2(transform.position.x, transform.position.z), _centerPrecision)) //position check
         {
             toThrow.transform.SetPositionAndRotation(
                 Vector3.Lerp(toThrow.transform.position,
