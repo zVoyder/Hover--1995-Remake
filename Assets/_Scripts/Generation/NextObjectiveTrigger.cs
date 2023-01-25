@@ -10,7 +10,7 @@ using UnityEngine;
 public class NextObjectiveTrigger : MonoBehaviour
 {
     [Tooltip("Who can grab this objective?")]public string triggerTag = Constants.Tags.PLAYER; // Tag of the entity that can grab this objective
-    
+
     private ObjectivesGenerator _gen; //The ObjectivesGenerator
 
 
@@ -28,7 +28,7 @@ public class NextObjectiveTrigger : MonoBehaviour
     {
         if (other.CompareTag(triggerTag))
         {
-            _gen.SpawnInRandomPosition();
+            _gen.PlayerGrabbedAnObjective();
             Destroy(gameObject);
         }
     }

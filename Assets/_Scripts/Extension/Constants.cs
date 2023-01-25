@@ -37,8 +37,6 @@ namespace Constants
     public static class ScreenResolution
     {
         public static Vector2Int WINDOWED = new Vector2Int(800, 600);
-
-
     }
 
     /// <summary>
