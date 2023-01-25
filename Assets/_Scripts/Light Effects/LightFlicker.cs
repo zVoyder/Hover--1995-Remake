@@ -21,9 +21,9 @@ public class LightFlicker : MonoBehaviour
     }
 
    
-    void Update()
+    void FixedUpdate()
     {
-        time += Time.deltaTime * (1 - Random.Range(-speedRandomness, speedRandomness)) * Mathf.PI;
+        time += Time.fixedDeltaTime * (1 - Random.Range(-speedRandomness, speedRandomness)) * Mathf.PI;
         _light.intensity = startingIntensity + Mathf.Sin(time * flickersPerSecond) * flickerIntensity;
             
     }
