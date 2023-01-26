@@ -176,4 +176,29 @@ namespace Extension
         }
     
     }
+
+
+    [System.Serializable]
+    public class IntRange
+    {
+        public int min;
+        public int max;
+
+        public IntRange(int min, int max)
+        {
+            this.min = min;
+            this.max = max;
+            Validate();
+        }
+
+        private void Validate()
+        {
+            if (min > max)
+            {
+                int temp = min;
+                min = max;
+                max = temp;
+            }
+        }
+    }
 }
