@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.41155323, g: 0.43639404, b: 0.4462325, a: 1}
+  m_IndirectSpecularColor: {r: 0.15380177, g: 0.17489652, b: 0.1855315, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1643,6 +1643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidBody: {fileID: 1712195100}
+  m_acceleration: 10
   m_maxSpeed: 25
   m_rotationForce: 100
 --- !u!54 &1712195100
@@ -1988,6 +1989,14 @@ PrefabInstance:
       propertyPath: minimapLuminosity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6735348694253520485, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
+      propertyPath: sizeRenderTexture.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6735348694253520485, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
+      propertyPath: sizeRenderTexture.y
+      value: 156
+      objectReference: {fileID: 0}
     - target: {fileID: 6735348694253520486, guid: c8f2a583b9cf02c41960c6bb941351ff, type: 3}
       propertyPath: m_Name
       value: MinimapCamera
@@ -2015,27 +2024,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0.65875
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.41555554
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.06666667
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 256
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 156
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2067,11 +2076,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9046105773638285116, guid: e12b582f4ac8ed243aa805f5e5dca8d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

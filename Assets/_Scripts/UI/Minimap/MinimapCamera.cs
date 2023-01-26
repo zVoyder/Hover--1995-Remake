@@ -14,6 +14,7 @@ public class MinimapCamera : MonoBehaviour
     public GameObject pointer; // pointer object that the minimap camera will follow
 
     public RectTransform minimapUI;
+    public Vector2Int sizeRenderTexture;
     [Range(1, 5)] public float luminosity = 1f; // light intensity of the light attached to this gameobject
     [Range(5, 50)] public float cameraViewSize = 10f; // size of the minimap's view
     [Range(5, 100)] public float cameraHeight = 50f; // height of the minimap camera
@@ -56,8 +57,7 @@ public class MinimapCamera : MonoBehaviour
         mpCamera.clearFlags = CameraClearFlags.SolidColor;
         mpCamera.backgroundColor = backgroundColor;
         mpCamera.targetTexture = 
-            new RenderTexture((int)background.rectTransform.sizeDelta.x, //Creating a new render texture with the size of the minimapUI
-            (int)background.rectTransform.sizeDelta.y, 8, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
+            new RenderTexture(sizeRenderTexture.x, sizeRenderTexture.y, 8, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);//Creating a new render texture with the size
         mpCamera.targetTexture.antiAliasing = 1;
         mpCamera.targetTexture.Create(); //constructor to create it
 

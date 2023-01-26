@@ -31,11 +31,8 @@ public class StateMachineAI : MonoBehaviour
     [Header("Navigation")]
     
     [Tooltip("The detection range of the AI")] [Range(10, 100)] public float detectionRange = 20f;
-    [Tooltip("The speed of the AI")] [Range(1, 50)] public float speed = 3.5f;
+    /*[Tooltip("The speed of the AI")] [Range(1, 50)]*/ public float speed = 3.5f;
     [Tooltip("The accelearation of the AI")] [Range(1, 50)] public float acceleration = 8f;
-    [Tooltip("Offset of the NavMeshAgent Height, use it for setting the right height of the NavMesh otherwise there will be differences " +
-        "between the Collider Component and the Collider of the NavMesh"),
-    Range(0, 1), SerializeField] private float _nevMeshAgentHeightOffset = 0.1f;
 
 
     [HideInInspector, Tooltip("Set the eyes height")] public float heightEyesOffset = 0f;
@@ -60,10 +57,10 @@ public class StateMachineAI : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the agent and set up my variables
 
+
         _agent.speed = speed;
         _agent.acceleration = acceleration;
         _agent.stoppingDistance = _stoppingDistance;
-        _agent.baseOffset -= _nevMeshAgentHeightOffset;
 
         _toChase = GameObject.FindGameObjectWithTag(toChaseTag).transform; // find the player in the scene
 
