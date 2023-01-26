@@ -326,7 +326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.027500002, y: 0.82555443}
   m_AnchorMax: {x: 0.29250002, y: 0.92777884}
-  m_AnchoredPosition: {x: 0.69989014, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0.6999512, y: 0.000061035156}
   m_SizeDelta: {x: -1.9999695, y: 1.9999924}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &641807162
@@ -413,7 +413,7 @@ MonoBehaviour:
   uICounterPlayer: {fileID: 1876951617}
   uICounterEnemy: {fileID: 1109431053}
   objective: {fileID: 3279394251967285728, guid: 1b473e1019489a141bc4e93b634ee9a3, type: 3}
-  quantity: 6
+  quantity: 3
   positions:
   - {x: 10, y: 0, z: 50}
   - {x: 20, y: 0, z: 50}

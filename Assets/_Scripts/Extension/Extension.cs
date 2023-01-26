@@ -143,6 +143,11 @@ namespace Extension
             return Approximately(a.x, b.x, tollerance) && Approximately(a.y, b.y, tollerance);
         }
 
+        public static bool Approximately(Quaternion q1, Quaternion q2, float threshold)
+        {
+            return Quaternion.Angle(q1, q2) < threshold;
+        }
+
     }
     
     public static class Audios

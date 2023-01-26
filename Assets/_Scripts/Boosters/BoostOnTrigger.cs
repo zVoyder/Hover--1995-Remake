@@ -18,8 +18,8 @@ public class BoostOnTrigger : MonoBehaviour
     [Header("Thresholds")]
     [Tooltip("Precision of the rotation, lower values means more precision"), SerializeField, Range(0.01f, 1f)]
     private float _rotationPrecision = 0.02f;
-    [Tooltip("Precision of the position, lower values means more precision "), SerializeField, Range(1.3f, 5f)]
-    private float _centerPrecision = 1.3f;
+    [Tooltip("Precision of the position, lower values means more precision "), SerializeField, Range(0.05f, 5f)]
+    private float _centerPrecision = 1f;
 
     [SerializeField] AudioClip _trigger, _launch;
 
@@ -59,18 +59,24 @@ public class BoostOnTrigger : MonoBehaviour
     private IEnumerator SetLaunch(Rigidbody toThrow)
     {
         //Do it until the rotation and position are not the same of this transform position and rotation
-        //Mathf.Absolute so negative Y rotation doesn't matter.
-        while (!Extension.Mathematics.Approximately(Mathf.Abs(toThrow.transform.rotation.y), Mathf.Abs(transform.rotation.y), _rotationPrecision) //rotation check
-            || !Extension.Mathematics.Approximately(new Vector2(toThrow.transform.position.x, toThrow.transform.position.z), new Vector2(transform.position.x, transform.position.z), _centerPrecision)) //position check
+        while (
+            !Extension.Mathematics.Approximately(toThrow.transform.rotation, transform.rotation, _rotationPrecision) //rotation check
+            || !Extension.Mathematics.Approximately(toThrow.transform.position.x, transform.position.x, _centerPrecision)
+            || !Extension.Mathematics.Approximately(toThrow.transform.position.z, transform.position.z, _centerPrecision)) //position check
         {
             toThrow.transform.SetPositionAndRotation(
+                
                 Vector3.Lerp(toThrow.transform.position,
                     new Vector3(transform.position.x, toThrow.transform.position.y, transform.position.z), _drag * Time.fixedDeltaTime), //Set position based only on the Y
+                
                 Quaternion.Lerp(toThrow.transform.rotation,
-                    Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z)), _rotation * Time.fixedDeltaTime) //Set rotation based only on the Y
-            );
+                    new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w), _rotation * Time.fixedDeltaTime) //Set rotation based only on the Y
+            
+                );
             yield return new WaitForFixedUpdate(); //WaitForFixedUpdate where defaul value is 0.2f so 0.2 seconds
         }
+
+        Debug.Log(toThrow.transform.rotation + "  " + transform.rotation);
 
         StartCoroutine(LaunchIn(_timeToLaunch, toThrow)); //StartCaroutine to wait before launch
         yield return null;
