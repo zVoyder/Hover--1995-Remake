@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerInventory : MonoBehaviour
@@ -15,6 +15,8 @@ public class PlayerInventory : MonoBehaviour
     public int m_cloackCounter; //counter for how many cloack for invisibility does the player have
     [Range(0, 150)]
     public float m_jumpForce; //the force of the jump (can be setted in the inspector)
+    [HideInInspector]
+    public int m_flagsCounter; //counter for how many flags does the player have
     private bool isGrounded; //bool to be sure the player must be touching the ground or the stairs before jump
     [Range(0, 50)]
     [SerializeField] private float m_buffedMaxSpeed; //max speed of the player when buffed (can be setted in the inspector)
@@ -27,7 +29,7 @@ public class PlayerInventory : MonoBehaviour
     private float m_buffTimer = 0; //timer to set a duration for the buffs
     private float m_nerfTimer = 0; //timer to set a duration for the nerfs
     private Rigidbody rigidBody;
-    Collider sphereCollider;
+    CapsuleCollider collider;
     RBPlayerMovement pm;
 
     // Start is called before the first frame update
@@ -35,7 +37,7 @@ public class PlayerInventory : MonoBehaviour
     { 
         //getting Rigidbody and BoxCollidercomponents
         rigidBody = GetComponent<Rigidbody>();
-        sphereCollider = GetComponent<BoxCollider>();
+        collider = GetComponent<CapsuleCollider>();
         pm = GetComponent<RBPlayerMovement>();
     }
 
@@ -58,7 +60,7 @@ public class PlayerInventory : MonoBehaviour
             m_springCounter = 0;
         }
         //jumping input
-        if (m_springCounter > 0 && isGrounded && Input.GetKeyDown(InputManager.JUMP))
+        if (m_springCounter > 0 && isGrounded && Input.GetKeyDown(KeyCode.A))
         {
             //jump effective movement
             rigidBody.AddForce(Vector3.up * m_jumpForce * Time.deltaTime);
@@ -68,28 +70,28 @@ public class PlayerInventory : MonoBehaviour
         //Speed buff for Stoplight Green Light
         if (speedBuff)
         {
-            pm.m_maxSpeed += m_buffedMaxSpeed;
+            pm.m_acceleration += m_buffedMaxSpeed;
             m_buffTimer += Time.deltaTime / 1000;
             //end of the speed buff
             if (m_buffTimer == buffDurationSeconds)
             {
                 speedBuff = false;
                 m_buffTimer = 0;
-                pm.m_maxSpeed = pm.m_maxSpeed - m_buffedMaxSpeed;
+                pm.m_acceleration = pm.m_acceleration - m_buffedMaxSpeed;
             }
         }        
         
         //Speed nerf for Stoplight Red Light
         if (speedNerf)
         {
-            pm.m_maxSpeed += m_nerfedMaxSpeed;
+            pm.m_acceleration += m_nerfedMaxSpeed;
             m_nerfTimer += Time.deltaTime / 1000;
             //end of the speed nerf
             if (m_nerfTimer == buffDurationSeconds)
             {
                 speedNerf = false;
                 m_nerfTimer = 0;
-                pm.m_maxSpeed = pm.m_maxSpeed - m_nerfedMaxSpeed;
+                pm.m_acceleration = pm.m_acceleration - m_nerfedMaxSpeed;
             }
         }
     }
@@ -131,7 +133,7 @@ public class PlayerInventory : MonoBehaviour
     void OnCollisionExit(Collision other)
     {
         //isGrounded variable setting false for jumping
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Stairs")
         {
             isGrounded = false;
         }

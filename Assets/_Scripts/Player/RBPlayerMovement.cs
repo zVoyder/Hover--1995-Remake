@@ -6,6 +6,8 @@ public class RBPlayerMovement : MonoBehaviour
 {
     public Rigidbody m_rigidBody;
     [Range(0, 100)]
+    public float m_acceleration; //acceleration rate (can be setted in the inspetor)
+    [Range(1, 100)]
     public float m_maxSpeed; //maximum speed reachable (can be setted in the inspetor)
     [Range(1, 100)]
     public float m_rotationForce; //force of the rotation (can be setted in the inspetor)
@@ -20,12 +22,26 @@ public class RBPlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(InputManager.FORWARD))//forward acceleration key binding
         {
-            m_rigidBody.AddForce(transform.forward * m_maxSpeed, ForceMode.Acceleration); //forward acceleration
+            if ((m_rigidBody.velocity.magnitude < m_maxSpeed))
+            {
+                m_rigidBody.AddForce(transform.forward * m_acceleration, ForceMode.Acceleration); //forward acceleration
+            }
+            if (m_rigidBody.velocity.magnitude > m_maxSpeed)
+            {
+                m_rigidBody.AddForce(transform.forward * m_maxSpeed, ForceMode.Acceleration); //forward max speed
+            }
         }
 
         if (Input.GetKey(InputManager.BACKWARD))//backward acceleration key binding
         {
-            m_rigidBody.AddForce(-transform.forward * m_maxSpeed, ForceMode.Acceleration); //backward acceleration
+            if ((m_rigidBody.velocity.magnitude < m_maxSpeed))
+            {
+                m_rigidBody.AddForce(-transform.forward * m_acceleration, ForceMode.Acceleration); //backward acceleration
+            }
+            if (m_rigidBody.velocity.magnitude > m_maxSpeed)
+            {
+                m_rigidBody.AddForce(-transform.forward * m_maxSpeed, ForceMode.Acceleration); //backward max speed
+            }
         }
     }
 
