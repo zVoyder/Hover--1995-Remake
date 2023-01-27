@@ -57,7 +57,6 @@ public class AIBounce : MonoBehaviour
 
         yield return new WaitForSeconds(time); // Wait before renenable
 
-        _agent.SetDestination(transform.position);
         _rb.isKinematic = true; // Set velocity to zero so the navmesh will work properly again
         _en.enabled = true;
         _agent.enabled = true;
