@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Extension;
-using UnityEditor;
 
 /// <summary>
 /// This script is a state machine for an enemy AI in a Unity game.
