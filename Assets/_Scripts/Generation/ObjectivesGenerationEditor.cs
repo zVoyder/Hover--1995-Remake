@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 [CustomEditor(typeof(ObjectivesGenerator))]
 public class ObjectivesGenerationEditor : Editor
 {
@@ -34,4 +36,4 @@ public class ObjectivesGenerationEditor : Editor
 
 
 }
-
+#endif

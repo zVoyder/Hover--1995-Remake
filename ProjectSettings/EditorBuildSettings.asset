@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Examples/PauseExample.unity
     guid: 359d8bfde43933a4392b9394c84ffd51
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Examples/DashboardExample.unity
     guid: 516216590e018bb4a8ef683b55adac99
+  - enabled: 1
+    path: Assets/_Scenes/Examples/AIExample.unity
+    guid: a552d2ad4330a7b49b0cfe6b6e523bdf
   m_configObjects: {}

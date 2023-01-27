@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+
+#if UNITY_EDITOR
 using UnityEngine;
 
-/// <summary>
-/// Custom editor fot the script StateMachineAI
-/// </summary>
+
 [CustomEditor(typeof(StateMachineAI))]
 public class StateMachineAIEditor : Editor //Extend the class editor
 {
@@ -14,7 +14,6 @@ public class StateMachineAIEditor : Editor //Extend the class editor
 
     private void OnEnable()
     {
-
         _script = (StateMachineAI)target;
     }
 
@@ -45,7 +44,7 @@ public class StateMachineAIEditor : Editor //Extend the class editor
                 break;
 
             case StateMachineAI.WorldOriginGenerationType.PLANE:
-                
+
                 _script.plane = (UnityEngine.Transform)EditorGUILayout.ObjectField("Plane", _script.plane, typeof(UnityEngine.Transform), true);
 
                 break;
@@ -53,3 +52,5 @@ public class StateMachineAIEditor : Editor //Extend the class editor
     }
 
 }
+
+#endif
