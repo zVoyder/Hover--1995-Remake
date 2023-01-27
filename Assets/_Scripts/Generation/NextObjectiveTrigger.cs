@@ -26,9 +26,21 @@ public class NextObjectiveTrigger : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag(triggerTag))
         {
-            _gen.PlayerGrabbedAnObjective();
+            switch (triggerTag)
+            {
+                case Constants.Tags.PLAYER:
+                    _gen.PlayerGrabbedAnObjective();
+                    
+                    break;
+
+                case Constants.Tags.ENEMY:
+                    _gen.EnemyGrabbedAnObjective();
+                    break;
+            }
+
             Destroy(gameObject);
         }
     }
