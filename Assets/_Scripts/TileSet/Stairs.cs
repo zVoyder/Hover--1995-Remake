@@ -11,7 +11,7 @@ public class Stairs : MonoBehaviour
     {
         if (other.TryGetComponent<RBPlayerMovement>(out RBPlayerMovement player))
         {
-            if (player.transform.position.y - transform.position.y < 0)
+            if (player.transform.position.y - transform.position.y < 1.412f)
             {
                 player.transform.position += offsetRising + new Vector3(0, 0, colliderStairs.bounds.size.z);
             }
