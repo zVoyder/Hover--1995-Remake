@@ -41,11 +41,13 @@ public class MinimapCamera : MonoBehaviour
             Debug.LogError("The PLAYER GameObject was not found.");
         }
 
-        Camera plCamera = pl.GetComponentInChildren<Camera>();
-
-        plCamera.cullingMask =~ Constants.Layers.MINIMAP;
         _minimapLight = gameObject.AddComponent<Light>() as Light;
-        plCamera.gameObject.AddComponent<IgnoreLight>().Limelight = _minimapLight; // add a the IgnoreLight component to the MainCamera
+
+        foreach (Camera cam in pl.GetComponentsInChildren<Camera>()) // Attach the ignore light component foreach camera of the player
+        {
+            cam.cullingMask = ~Constants.Layers.MINIMAP;
+            cam.gameObject.AddComponent<IgnoreLight>().LIghtIgnored = _minimapLight; // add a the IgnoreLight component and set its 
+        }
 
         _minimapLight.type = LightType.Directional;
         _minimapLight.color = Color.white;

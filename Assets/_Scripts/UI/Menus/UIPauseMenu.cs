@@ -9,7 +9,7 @@ using System;
 /// activating or deactivating the pause UI gameobject
 /// and enable or disable the fullscreen
 /// </summary>
-public class UIMenu : MonoBehaviour
+public class UIPauseMenu : MonoBehaviour
 {
     [Tooltip("Input KeyCode")] public KeyCode pause = InputManager.PAUSE;
 

@@ -7,24 +7,24 @@ using UnityEngine;
 /// </summary>
 public class IgnoreLight : MonoBehaviour
 {
-    Light limelight;
+    Light _lightIgnored;
 
-    public Light Limelight { set => limelight = value; }
+    public Light LIghtIgnored { set => _lightIgnored = value; }
 
     void OnPreCull()
     {
-        if (limelight != null)
-            limelight.enabled = false;
+        if (_lightIgnored != null)
+            _lightIgnored.enabled = false;
     }
 
     void OnPreRender()
     {
-        if (limelight != null)
-            limelight.enabled = false;
+        if (_lightIgnored != null)
+            _lightIgnored.enabled = false;
     }
     void OnPostRender()
     {
-        if (limelight != null)
-            limelight.enabled = true;
+        if (_lightIgnored != null)
+            _lightIgnored.enabled = true;
     }
 }

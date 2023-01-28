@@ -37,6 +37,15 @@ namespace Constants
     public static class ScreenResolution
     {
         public static Vector2Int WINDOWED = new Vector2Int(800, 600);
+
+        public const string RESOLUTION_PREF = "RES";
+        public const string FULLSCREEN_PREF = "FULLSCREEN";
+        public const string MAXFPS_PREF = "MAXFPS";
+    }
+
+    public static class Audio
+    {
+        public const string VOLUME_PREF = "VOLUME_PREF";
     }
 
     /// <summary>
