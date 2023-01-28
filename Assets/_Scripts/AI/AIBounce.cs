@@ -60,5 +60,7 @@ public class AIBounce : MonoBehaviour
         _rb.isKinematic = true; // Set velocity to zero so the navmesh will work properly again
         _en.enabled = true;
         _agent.enabled = true;
+
+        _en.Chase();
     }
 }

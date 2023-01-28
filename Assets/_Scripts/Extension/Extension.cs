@@ -177,27 +177,41 @@ namespace Extension
     
     }
 
-
-    [System.Serializable]
-    public class IntRange
+    namespace Data
     {
-        public int min;
-        public int max;
-
-        public IntRange(int min, int max)
+        [System.Serializable]
+        public class IntRange
         {
-            this.min = min;
-            this.max = max;
-            Validate();
+            public int min;
+            public int max;
+
+            public IntRange(int min, int max)
+            {
+                this.min = min;
+                this.max = max;
+                Validate();
+            }
+
+            private void Validate()
+            {
+                if (min > max)
+                {
+                    int temp = min;
+                    min = max;
+                    max = temp;
+                }
+            }
         }
 
-        private void Validate()
+        [System.Serializable]
+        public class Reps
         {
-            if (min > max)
+            [Range(0, 1000)]public int series;
+            [Range(0, 1000)]public int steps;
+
+            public int Total()
             {
-                int temp = min;
-                min = max;
-                max = temp;
+                return series * steps;
             }
         }
     }

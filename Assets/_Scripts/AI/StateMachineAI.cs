@@ -22,6 +22,17 @@ public class StateMachineAI : MonoBehaviour
         CUSTOM
     };
 
+    public enum AIBehaviour
+    {
+        HUNTER, // Only chase the player
+        SEEKER, // Only grab the flags
+        FLEX // Do all
+    };
+
+    // Setting
+    [Header("Setting")]
+    public EmissionFlicker emission;
+
     // Tags
     [Header("Objectives")]
     [Tooltip("The tag of the GameObject the AI must find and grab")] public string objectiveTag = Constants.Tags.ENEMY_FLAG;
@@ -29,18 +40,16 @@ public class StateMachineAI : MonoBehaviour
 
     // Declarations of the navigation variables
     [Header("Navigation")]
-    
+    public AIBehaviour behaviour = AIBehaviour.FLEX;
     [Tooltip("The detection range of the AI")] [Range(10, 100)] public float detectionRange = 20f;
     /*[Tooltip("The speed of the AI")] [Range(1, 50)]*/ public float speed = 3.5f;
     [Tooltip("The accelearation of the AI")] [Range(1, 50)] public float acceleration = 8f;
-
 
     [HideInInspector, Tooltip("Set the eyes height")] public float heightEyesOffset = 0f;
     [HideInInspector] public Vector2 size;
     [HideInInspector] public WorldOriginGenerationType floorType;
     [HideInInspector] public Transform plane;
     [HideInInspector] public TerrainData terrainData;
-
 
     
     private float _stoppingDistance = 1f;
@@ -51,12 +60,11 @@ public class StateMachineAI : MonoBehaviour
 
     public enum AIState { CHASE, GRABOBJECTIVE, PATROL };
     private AIState _currentState = AIState.PATROL;
-
+    
 
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the agent and set up my variables
-
 
         _agent.speed = speed;
         _agent.acceleration = acceleration;
@@ -74,31 +82,81 @@ public class StateMachineAI : MonoBehaviour
     {
         // log the current state of the AI in the console (only enabled in DEBUG mode)
 #if DEBUG
-        Debug.Log(_currentState);
+        Debug.Log(behaviour + " is " + _currentState);
 #endif
 
-        // Check if the player is within the detection range
-        if (CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange))
+        switch (behaviour)
         {
-            // If so, set the state to CHASE
-            _currentState = AIState.CHASE;
+
+            case AIBehaviour.HUNTER:
+
+                // Check if the player is within the detection range
+                if (CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange))
+                {
+                    // If so, set the state to CHASE
+                    _currentState = AIState.CHASE;
+                }
+                else
+                {
+                    // Check if there is an objective within range
+                    if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject alfaGO)
+                        && CanSeeLocation(transform.position, alfaGO.transform.position, heightEyesOffset, detectionRange))
+                    {
+                        // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
+                        _closestObjective = alfaGO.transform;
+                        _currentState = AIState.GRABOBJECTIVE;
+                    }
+                    else
+                    {
+                        // If neither condition is met, set the state to PATROL
+                        _currentState = AIState.PATROL;
+                    }
+                }
+
+                break;
+
+            case AIBehaviour.SEEKER:
+
+                if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject omegaGO)
+                    && CanSeeLocation(transform.position, omegaGO.transform.position, heightEyesOffset, detectionRange))
+                {
+                    _closestObjective = omegaGO.transform;
+                    _currentState = AIState.GRABOBJECTIVE;
+                }
+                else
+                {
+                    // If neither condition is met, set the state to PATROL
+                    _currentState = AIState.PATROL;
+                }
+
+                break;
+
+            case AIBehaviour.FLEX:
+
+                if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject epsilonGO)
+                        && CanSeeLocation(transform.position, epsilonGO.transform.position, heightEyesOffset, detectionRange))
+                {
+                    // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
+                    _closestObjective = epsilonGO.transform;
+                    _currentState = AIState.GRABOBJECTIVE;
+                }
+                else
+                {
+                    if (CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange))
+                    {
+                        // If so, set the state to CHASE
+                        _currentState = AIState.CHASE;
+                    }
+                    else
+                    {
+                        _currentState = AIState.PATROL;
+                    }
+                }
+
+                break;
         }
-        else
-        {
-            // Check if there is an objective within range
-            if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject closest)
-                && CanSeeLocation(transform.position, closest.transform.position, heightEyesOffset, detectionRange))
-            {
-                // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
-                _closestObjective = closest.transform;
-                _currentState = AIState.GRABOBJECTIVE;
-            }
-            else
-            {
-                // If neither condition is met, set the state to PATROL
-                _currentState = AIState.PATROL;
-            }
-        }
+
+
 
         // Switch statement to perform the appropriate task based on the current state
         switch (_currentState)
@@ -116,7 +174,7 @@ public class StateMachineAI : MonoBehaviour
     }
 
 
-    #region State Machine Tasks
+    #region Tasks
 
     /// <summary>
     /// Check if the AI is close to its destination
@@ -143,7 +201,7 @@ public class StateMachineAI : MonoBehaviour
     /// <summary>
     /// Set the destination to the position of the player
     /// </summary>
-    private void Chase()
+    public void Chase()
     {
         GoToLocation(_toChase.position);
     }
@@ -151,7 +209,7 @@ public class StateMachineAI : MonoBehaviour
     #endregion
 
 
-    #region Condition Methods
+    #region Conditions
 
     /// <summary>
     /// Check if the agent can see the location
@@ -199,7 +257,40 @@ public class StateMachineAI : MonoBehaviour
     #endregion
 
 
-    #region Position Methods
+    #region Behaviour
+
+    /// <summary>
+    /// Set the behaviour of the AI and the color associated
+    /// </summary>
+    /// <param name="behaviour"></param>
+    public void SetBehaviour(AIBehaviour behaviour, Color color)
+    {
+        this.behaviour = behaviour;
+        emission.color = color;
+    }
+
+    /// <summary>
+    /// Check if the AI is a Hunter
+    /// </summary>
+    /// <returns></returns>
+    private bool isHunter()
+    {
+        return behaviour == AIBehaviour.HUNTER || behaviour == AIBehaviour.FLEX;
+    }
+
+    /// <summary>
+    /// Check if the AI is a Seeker
+    /// </summary>
+    /// <returns></returns>
+    private bool isSeeker()
+    {
+        return behaviour == AIBehaviour.SEEKER || behaviour == AIBehaviour.FLEX;
+    }
+
+    #endregion
+
+
+    #region Position
 
     /// <summary>
     /// Tell the NavMeshAgent to move to the new destination

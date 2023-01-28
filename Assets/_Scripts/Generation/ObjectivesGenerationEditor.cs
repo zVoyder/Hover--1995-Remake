@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 #if UNITY_EDITOR
-using UnityEditor;
 
+
+using UnityEditor;
 [CustomEditor(typeof(ObjectivesGenerator))]
 public class ObjectivesGenerationEditor : Editor
 {
@@ -13,25 +14,23 @@ public class ObjectivesGenerationEditor : Editor
     private void OnEnable()
     {
         _script = (ObjectivesGenerator)target;
-
-       
     }
 
     public override void OnInspectorGUI() //Override the method OnInspectorGUI
     {
         base.OnInspectorGUI();
         //Set the target of the editor to the script StateMachineAI by casting it.
+        int qnt = _script.repetitions.Total();
 
-
-        if (_script.quantity > _script.positions.Count && !Application.isPlaying)
+        if (qnt > _script.positions.Count && !Application.isPlaying)
         {
-            for (int i = _script.positions.Count; i < _script.quantity; i++)
+            for (int i = _script.positions.Count; i < qnt; i++)
             {
                 _script.positions.Add(Vector3.zero);
             }
         }
-        
-        _script.quantity = _script.quantity < 0 ? 0 : _script.quantity;
+
+
     }
 
 
