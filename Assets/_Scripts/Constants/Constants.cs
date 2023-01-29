@@ -28,24 +28,16 @@ namespace Constants
         public const int ALLMINIMAP = (1 << 6) | (1 << 7);
         public const int MINIMAP = 1 << 6;
         public const int VISIBLEMINIMAP = 1 << 7;
-
     }
 
     /// <summary>
-        /// Screen Resolution constants
-        /// </summary>
+    /// Screen Resolution constants
+    /// </summary>
     public static class ScreenResolution
     {
         public static Vector2Int WINDOWED = new Vector2Int(800, 600);
 
-        public const string RESOLUTION_PREF = "RES";
-        public const string FULLSCREEN_PREF = "FULLSCREEN";
-        public const string MAXFPS_PREF = "MAXFPS";
-    }
 
-    public static class Audio
-    {
-        public const string VOLUME_PREF = "VOLUME_PREF";
     }
 
     /// <summary>

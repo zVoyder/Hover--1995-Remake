@@ -12,6 +12,7 @@ public class ObjectivesGenerator : MonoBehaviour
 {
     public Image uICounterPlayer; //UI Image that works as a counter with the fill.amount
     public GameObject objective;
+    public int scorePerObjective = 2000;
     [Tooltip("Who can grab this objective?")] public string triggerTag = Constants.Tags.PLAYER;
     public Reps repetitions; // How many series of objectives to generate
     [Range(0, 20)]public int maxObjectives = 6; // Max objectives that can spawn
@@ -22,6 +23,7 @@ public class ObjectivesGenerator : MonoBehaviour
 
     private void Start()
     {
+
         _totalQuantity = repetitions.Total();
         _grabbedQuantity = 0;
 
@@ -86,6 +88,10 @@ public class ObjectivesGenerator : MonoBehaviour
         NextObjectiveTrigger next = go.AddComponent<NextObjectiveTrigger>();
         next.GeneratorReference = this;
         next.TriggerTag = triggerTag;
+
+        ScoreOnTrigger sot = go.AddComponent<ScoreOnTrigger>();
+        sot.scoreToAdd = scorePerObjective;
+        sot.triggerTag = triggerTag;
 
         positions.RemoveAt(randomIndex);
     }

@@ -16,7 +16,6 @@ public class NextObjectiveTrigger : MonoBehaviour
     public string TriggerTag { get => _triggerTag; set => _triggerTag = value; }
     public ObjectivesGenerator GeneratorReference { get => _generatorReference; set => _generatorReference = value; }
 
-
     /// <summary>
     /// OnTriggerEnter Event for triggering the next spawn of the objective
     /// and detroying the current one
@@ -27,7 +26,6 @@ public class NextObjectiveTrigger : MonoBehaviour
         if (other.CompareTag(TriggerTag))
         {
             GeneratorReference.GrabObjective();
-
             Destroy(gameObject);
         }
     }

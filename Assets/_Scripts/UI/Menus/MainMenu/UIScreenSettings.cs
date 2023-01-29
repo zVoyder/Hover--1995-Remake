@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,37 +13,56 @@ public class UIScreenSettings : MonoBehaviour
 
     public void Awake()
     {
-        QualitySettings.vSyncCount = 0;
-
-
-        Resolution[] resolutions = Screen.resolutions;
-        System.Array.Reverse(resolutions);
-
-        foreach (Resolution resolution in resolutions)
+        QualitySettings.vSyncCount = 0; // Disable V-Sync to allow the FPS Cap
+         
+        foreach (string resolution in GetCurrentResolutions())
         {
-            dropResolution.options.Add(new Dropdown.OptionData(resolution.width + "x" + resolution.height));
+            dropResolution.options.Add(new Dropdown.OptionData(resolution));
         }
 
-        if (LoadResolution(out int w, out int h, out int sel))
+        if (SaveManager.Screen.LoadResolution(out int w, out int h, out int sel))
         {
             dropResolution.value = sel;
-            toggleFullscreen.isOn = LoadFullscreen();
+            toggleFullscreen.isOn = SaveManager.Screen.LoadFullscreen();
             Screen.SetResolution(w, h, toggleFullscreen.isOn);
         }
         else
         {
-            Screen.SetResolution(Constants.ScreenResolution.WINDOWED.x, Constants.ScreenResolution.WINDOWED.y, false);
+            Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, false);
         }
 
-        if(LoadRefreshRate(out int hz, out int selectedHz))
+        if(SaveManager.Screen.LoadRefreshRate(out int hz, out int selectedHz))
         {
             Application.targetFrameRate = hz;
             dropFPS.value = selectedHz;
         }
     }
 
+    /// <summary>
+    /// Get the current available resolutions
+    /// as array of strings
+    /// </summary>
+    /// <returns>Available resolutions</returns>
+    private string[] GetCurrentResolutions()
+    {
+        Resolution[] resolutions = Screen.resolutions;
+        System.Array.Reverse(resolutions);
+
+        List<string> resList = new List<string>(); // Creating a list of strings
+
+        foreach (Resolution res in resolutions) // In this list of string only add the witdth and the height
+        {
+            resList.Add(res.width + "x" + res.height);
+        }
+
+        return resList.ToArray().Distinct().ToArray(); // Distinct() because there are resolutions' duplicates due the refresh rate
+    }
+
     #region Setter
 
+    /// <summary>
+    /// Set the resolution of the screen
+    /// </summary>
     public void SetResolution()
     {
         string[] res = dropResolution.options[dropResolution.value].text.Split('x');
@@ -50,11 +70,14 @@ public class UIScreenSettings : MonoBehaviour
         int width = int.Parse(res[0]);
         int height = int.Parse(res[1]);
 
-        SaveResolution(width + ":" + height + ":" + dropResolution.value);
+        SaveManager.Screen.SaveResolution(width + ":" + height + ":" + dropResolution.value);
         
         Screen.SetResolution(width, height, Fullscreen);
     }
 
+    /// <summary>
+    /// Set the refresh rate of the screen
+    /// </summary>
     public void SetRefreshRate()
     {
         string hz = dropFPS.options[dropFPS.value].text;
@@ -62,85 +85,21 @@ public class UIScreenSettings : MonoBehaviour
 
         int fps = int.Parse(hz);
 
-        SaveRefreshRate(fps, dropFPS.value);
+        SaveManager.Screen.SaveRefreshRate(fps, dropFPS.value);
         Application.targetFrameRate = fps;
     }
 
+
+    /// <summary>
+    /// Toggle for setting the prefered fullscreen mode
+    /// </summary>
     public void SetFullScreen()
     {
         Fullscreen = !Fullscreen;
 
-        SaveFullscreen(Fullscreen);
+        SaveManager.Screen.SaveFullscreen(Fullscreen);
 
         Screen.fullScreen = Fullscreen;
-    }
-
-    #endregion
-
-    #region Save
-
-    private void SaveFullscreen(bool fullscreen)
-    {
-        PlayerPrefs.SetInt(Constants.ScreenResolution.FULLSCREEN_PREF, fullscreen ? 1 : 0);
-    }
-
-    private void SaveResolution(string resolution)
-    {
-        PlayerPrefs.SetString(Constants.ScreenResolution.RESOLUTION_PREF, resolution);
-    }
-
-    private void SaveRefreshRate(int hz, int selectedHz)
-    {
-        PlayerPrefs.SetString(Constants.ScreenResolution.MAXFPS_PREF, hz.ToString() + ":" + selectedHz.ToString());
-    }
-
-    #endregion
-
-    #region Load
-
-    private bool LoadFullscreen()
-    {
-        return PlayerPrefs.GetInt(Constants.ScreenResolution.FULLSCREEN_PREF) == 1 ? true : false;
-    }
-    private bool LoadResolution(out int width, out int height, out int selectedValue)
-    {
-        string resolutionString = PlayerPrefs.GetString(Constants.ScreenResolution.RESOLUTION_PREF);
-
-        if (resolutionString != "")
-        {
-            string[] res = resolutionString.Split(':');
-            
-            width = int.Parse(res[0]);
-            height = int.Parse(res[1]);
-            selectedValue = int.Parse(res[2]);
-
-            return true;
-        }
-
-
-        width = 0;
-        height = 0;
-        selectedValue = 0;
-        return false;
-    }
-    private bool LoadRefreshRate(out int hz, out int selectedHz)
-    {
-        
-        string s = PlayerPrefs.GetString(Constants.ScreenResolution.MAXFPS_PREF);
-
-        if(s != "")
-        {
-            string[] stringHz = s.Split(':');
-
-            hz = int.Parse(stringHz[0]);
-            selectedHz = int.Parse(stringHz[1]);
-
-            return true;
-        }
-
-        hz = 0;
-        selectedHz = 0;
-        return false;
     }
 
     #endregion

@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// This class handles the Volume settings of the game in the MainMenu,
+/// It is responsible for managing the volume of Master, Music and Effects
+/// </summary>
 public class UIVolumeSettings : MonoBehaviour
 {
     public AudioMixer mixer;
@@ -14,7 +19,7 @@ public class UIVolumeSettings : MonoBehaviour
     private void Awake()
     {
 
-        if (LoadVolume(out float master, out float music, out float sfx))
+        if (SaveManager.Audio.LoadVolume(out float master, out float music, out float sfx))
         {
             mixer.SetFloat("Master", master);
             mixer.SetFloat("Music", music);
@@ -26,17 +31,20 @@ public class UIVolumeSettings : MonoBehaviour
         }
         else
         {
+            // If there were no saved values then we set the volume to 0 (that means +0dB)
             mixer.SetFloat("Master", 0);
             mixer.SetFloat("Music", 0);
             mixer.SetFloat("Effects", 0);
         }
 
-        masterTry.Stop();
+        masterTry.Stop(); // This way on application start you cant hear the sound on changing the slider
         musicTry.Stop();
         effectTry.Stop();
     }
 
-
+    /// <summary>
+    /// This method is used to set the master volume
+    /// </summary>
     public void SetMaster()
     {
         mixer.SetFloat("Master", masterSlider.value);
@@ -44,46 +52,27 @@ public class UIVolumeSettings : MonoBehaviour
         mixer.GetFloat("Master", out float v);
 
         masterTry.Play();
-        SaveVolume();
+        SaveManager.Audio.SaveVolume((int)masterSlider.value, (int)musicSlider.value, (int)effectsSlider.value);
     }
 
+    /// <summary>
+    /// This method is used to set the music volume
+    /// </summary>
     public void SetMusic()
     {
         mixer.SetFloat("Music", musicSlider.value);
         musicTry.Play();
-        SaveVolume();
+        SaveManager.Audio.SaveVolume((int)masterSlider.value, (int)musicSlider.value, (int)effectsSlider.value);
     }
 
+    /// <summary>
+    /// This method is used to set the effects volume
+    /// </summary>
     public void SetEffects()
     {
         mixer.SetFloat("Effects", effectsSlider.value);
         effectTry.Play();
-        SaveVolume();
+        SaveManager.Audio.SaveVolume((int)masterSlider.value, (int)musicSlider.value, (int)effectsSlider.value);
     }
 
-    private void SaveVolume()
-    {
-        PlayerPrefs.SetString(Constants.Audio.VOLUME_PREF, (int)masterSlider.value + ":" + (int)musicSlider.value + ":" + (int)effectsSlider.value);
-    }
-
-    private bool LoadVolume(out float master, out float music, out float effects)
-    {
-        string volString = PlayerPrefs.GetString(Constants.Audio.VOLUME_PREF);
-
-        if(volString != "")
-        {
-            string[] v = volString.Split(':');
-
-            master = (float)int.Parse(v[0]);
-            music = (float)int.Parse(v[1]);
-            effects = (float)int.Parse(v[2]);
-
-            return true;
-        }
-
-        master = 0f;
-        music = 0f;
-        effects = 0f;
-        return false;
-    }
 }
