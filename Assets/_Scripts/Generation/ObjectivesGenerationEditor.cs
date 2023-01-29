@@ -22,11 +22,11 @@ public class ObjectivesGenerationEditor : Editor
         //Set the target of the editor to the script StateMachineAI by casting it.
         int qnt = _script.repetitions.Total();
 
-        if (qnt > _script.positions.Count && !Application.isPlaying)
+        if (qnt > _script.positionsPool.Count && !Application.isPlaying)
         {
-            for (int i = _script.positions.Count; i < qnt; i++)
+            for (int i = _script.positionsPool.Count; i < qnt; i++)
             {
-                _script.positions.Add(Vector3.zero);
+                _script.positionsPool.Add(Vector3.zero);
             }
         }
 

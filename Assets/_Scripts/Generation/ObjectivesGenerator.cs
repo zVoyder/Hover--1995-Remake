@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Extension.Data;
-
+using System.Linq;
 
 /// <summary>
 /// ObjectviesGenerator is used to generate objectives in the scene to pick up
@@ -12,41 +12,51 @@ public class ObjectivesGenerator : MonoBehaviour
 {
     public Image uICounterPlayer; //UI Image that works as a counter with the fill.amount
     public GameObject objective;
-    public int scorePerObjective = 2000;
     [Tooltip("Who can grab this objective?")] public string triggerTag = Constants.Tags.PLAYER;
     public Reps repetitions; // How many series of objectives to generate
-    [Range(0, 20)]public int maxObjectives = 6; // Max objectives that can spawn
-    public List<Vector3> positions; // List of all positions the objective can spawn
+    [Range(0, 20)]public int maxObjectivesOnUI = 6; // Max objectives that can spawn
+    public List<Vector3> positionsPool; // List of all positions the objective can spawn
 
-    private int _totalQuantity, _grabbedQuantity; //total quantity to spawn and how many to grab left
+    private List<Vector3> _positionToUse;
+    private int _totalQuantity, _stepsDoneQuantity, _grabbedQuantity; //total quantity to spawn, how many to grab left and total grabbed quantity
 
+    private int QuantityInGame { get => GameObject.FindGameObjectsWithTag("PlayerFlag").Length; }
 
     private void Start()
     {
-
+        _positionToUse = new List<Vector3>(positionsPool);
         _totalQuantity = repetitions.Total();
+        _stepsDoneQuantity = 0;
         _grabbedQuantity = 0;
 
         SetUpBackgroundUI(); // Set up the backgorund based on maxobjectives
 
-        Spawn(); //Start generate
+        nextSeries(); //Start generate
     }
 
     
-    private void Spawn()
+    private bool CheckWin()
     {
-        if (repetitions.series > 0) //if there are series left to do
-        {
-            repetitions.series--;
-
-            for (int s = repetitions.steps; s > 0; s--) // do a series of S steps
-            {
-                InstantiateObjective();
-            }
-        }
-        else
+        if (_grabbedQuantity == _totalQuantity)
         {
             Completed();
+            return true;
+        }
+
+        return false;
+    }
+
+    private void nextSeries()
+    {
+        if (!CheckWin())
+        {
+            if (QuantityInGame == 1 || QuantityInGame == 0)
+            {
+                for (int s = repetitions.steps; s > 0; s--) // do a series of S steps
+                {
+                    InstantiateObjective();
+                }
+            }
         }
     }
 
@@ -58,21 +68,43 @@ public class ObjectivesGenerator : MonoBehaviour
         BroadcastMessage("SetAction");
     }
 
+
     /// <summary>
     /// Grab an objective and add one to the counter Grabbed Objectives,
-    /// Also check if the trigger has collected all the objectives to grab before
-    /// spawn a new series
+    /// Also check if the trigger has collected all the objectives to grab
     /// </summary>
-    public void GrabObjective()
+    /// <returns>True if there are no more objectives to grab, otherwise False</returns>
+    public void AddObjective()
     {
-        AddObjectiveToUI(); // Update UI
-
+        AddObjectiveToUI();
         _grabbedQuantity++;
-        if (_grabbedQuantity == repetitions.steps) // if has collected all the objectives
+        _stepsDoneQuantity++;
+
+        if (_stepsDoneQuantity == repetitions.steps) // if has collected all the objectives
         {
-            _grabbedQuantity = 0; // A series is gone and trigger must collect a new one.
-            Spawn();
-        }    
+            _stepsDoneQuantity = 0; // A series is gone and trigger must collect a new one.
+            nextSeries();
+        }
+
+        CheckWin(); // I have to it, so it check also if the stepsdone are zero
+    }
+
+    public void RemoveObjective()
+    {
+        if (_grabbedQuantity > 0)
+        {
+            _grabbedQuantity--;
+
+            _stepsDoneQuantity = _stepsDoneQuantity == 0 ? 0 : _stepsDoneQuantity - 1;
+
+            RemoveObjectiveToUI();
+
+            _positionToUse.AddRange(positionsPool);
+
+            _positionToUse = _positionToUse.Distinct().ToList();
+
+            InstantiateObjective();
+        }
     }
 
     /// <summary>
@@ -82,18 +114,14 @@ public class ObjectivesGenerator : MonoBehaviour
     /// <returns></returns>
     private void InstantiateObjective()
     {
-        int randomIndex = Random.Range(0, positions.Count - 1);
+        int randomIndex = Random.Range(0, _positionToUse.Count - 1);
         
-        GameObject go = Instantiate(objective, positions[randomIndex], Quaternion.Euler(new Vector3(0, Random.Range(0, 180), 0)));
+        GameObject go = Instantiate(objective, _positionToUse[randomIndex], Quaternion.Euler(new Vector3(0, Random.Range(0, 180), 0)));
         NextObjectiveTrigger next = go.AddComponent<NextObjectiveTrigger>();
         next.GeneratorReference = this;
         next.TriggerTag = triggerTag;
-
-        ScoreOnTrigger sot = go.AddComponent<ScoreOnTrigger>();
-        sot.scoreToAdd = scorePerObjective;
-        sot.triggerTag = triggerTag;
-
-        positions.RemoveAt(randomIndex);
+        
+        _positionToUse.RemoveAt(randomIndex);
     }
 
     /// <summary>
@@ -104,7 +132,7 @@ public class ObjectivesGenerator : MonoBehaviour
     {
         if(uICounterPlayer.transform.parent.TryGetComponent<Image>(out Image back))
         {
-            back.fillAmount = (float)_totalQuantity / (float)maxObjectives;
+            back.fillAmount = (float)_totalQuantity / (float)maxObjectivesOnUI;
         }
     }
 
@@ -113,6 +141,11 @@ public class ObjectivesGenerator : MonoBehaviour
     /// </summary>
     private void AddObjectiveToUI()
     {
-        uICounterPlayer.fillAmount += 1f / (float)maxObjectives; 
+        uICounterPlayer.fillAmount += 1f / (float)maxObjectivesOnUI; 
+    }
+
+    private void RemoveObjectiveToUI()
+    {
+        uICounterPlayer.fillAmount -= 1f / (float)maxObjectivesOnUI;
     }
 }

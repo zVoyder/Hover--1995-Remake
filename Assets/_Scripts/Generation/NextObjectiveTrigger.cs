@@ -25,7 +25,7 @@ public class NextObjectiveTrigger : MonoBehaviour
     {
         if (other.CompareTag(TriggerTag))
         {
-            GeneratorReference.GrabObjective();
+            GeneratorReference.AddObjective();
             Destroy(gameObject);
         }
     }
