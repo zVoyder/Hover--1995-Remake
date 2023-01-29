@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5652431101469930008}
-  m_LocalRotation: {x: -0, y: -0.9149622, z: -0, w: 0.40353978}
+  m_LocalRotation: {x: 0, y: -0.91496325, z: 0, w: 0.40353724}
   m_LocalPosition: {x: 39.03, y: 0.898, z: 127.98}
   m_LocalScale: {x: 3.0059915, y: 1.2375, z: 2.9419098}
   m_Children:
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 5652431101842249857}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -132.401, z: 0}
 --- !u!33 &5652431101469930002
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
     volume: 0.5
     pitch: 1
     spatialBlend: 1
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -4276760046841834998, guid: 28cbb6508ae7fdf458174cbf2cdc6428, type: 2}
 --- !u!1 &5652431101842249856
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +185,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5652431101842249857}
   - component: {fileID: 5652431101842249887}
-  - component: {fileID: 5652431101842249886}
   m_Layer: 0
   m_Name: Retro
   m_TagString: Untagged
@@ -250,14 +249,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5652431101842249886
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5652431101842249856}
-  m_Enabled: 1
 --- !u!1 &5652431103104844015
 GameObject:
   m_ObjectHideFlags: 0
