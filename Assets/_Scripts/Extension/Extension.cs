@@ -213,6 +213,7 @@ namespace Extension
             {
                 return series * steps;
             }
+
         }
     }
 }

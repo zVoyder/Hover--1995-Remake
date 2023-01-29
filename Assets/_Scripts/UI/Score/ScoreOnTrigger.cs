@@ -16,7 +16,7 @@ public class ScoreOnTrigger : MonoBehaviour
     {
         if (other.CompareTag(triggerTag))
         {
-            ScoreSingleton.instance.AddScore( (int)((float)scoreToAdd * ScoreSingleton.instance.so_Score.multiplier));
+            ScoreSingleton.instance.AddScore(scoreToAdd);
         }
     }
 }

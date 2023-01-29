@@ -8,6 +8,7 @@ TagManager:
   - EnemyFlag
   - Pickup
   - ScoreUI
+  - PlayerFlag
   layers:
   - Default
   - TransparentFX

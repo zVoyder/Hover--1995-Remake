@@ -57,8 +57,25 @@ public class ScoreSingleton : MonoBehaviour
     /// <param name="toAdd">The amount to add to the score</param>
     public void AddScore(int toAdd)
     {
-        // Add to the score stored in the scriptable object
-        so_Score.score += toAdd;
+        // Add to the score stored in the scriptable object and multiply it by the multiplier
+        so_Score.score += (int)((float)toAdd * so_Score.multiplier);
+        // Update the text with the new score
+        UpdateText();
+    }
+
+    public void RemoveScore(int toRemove)
+    {
+        int totalToRemove = (int)((float)toRemove * so_Score.multiplier);
+
+        if (so_Score.score - totalToRemove < 0)
+        {
+            so_Score.score = 0;
+        }
+        else
+        {
+            so_Score.score -= totalToRemove;
+        }
+
         // Update the text with the new score
         UpdateText();
     }
