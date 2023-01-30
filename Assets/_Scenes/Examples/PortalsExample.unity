@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-240346
+  m_Name: pb_Mesh22690
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 295795716}
   - component: {fileID: 295795715}
   m_Layer: 0
-  m_Name: PortalA
+  m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1307,7 +1307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794685ea0b401304d989b63a811029f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 0.2
+  fadeStart: 4
+  _fadeDuration: 1
   fadeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1072724292
 GameObject:
@@ -1416,7 +1417,7 @@ GameObject:
   - component: {fileID: 1259163765}
   - component: {fileID: 1259163766}
   m_Layer: 0
-  m_Name: CameraDestination
+  m_Name: PortalCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1492,8 +1493,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 946906132}
-  portal: {fileID: 1635220352}
-  otherPortal: {fileID: 295795719}
+  door: {fileID: 1635220352}
+  portal: {fileID: 295795719}
+  cameraMat: {fileID: 2100000, guid: 2d509af99d12f1746b9ab09b03cd1993, type: 2}
 --- !u!1 &1285418967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,7 +1947,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh97994
+  m_Name: pb_Mesh22524
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2983,14 +2985,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701263868}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 22.81, y: 1.42, z: -23.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.81, y: 1.42, z: -17.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 946906132}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1771145073
 GameObject:
   m_ObjectHideFlags: 0
@@ -8580,48 +8582,3 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &2116009511
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2116009513}
-  - component: {fileID: 2116009512}
-  m_Layer: 0
-  m_Name: GameSetup
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2116009512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116009511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e835bd0d04401064aa055d482cf499b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraB: {fileID: 1259163765}
-  cameraMatB: {fileID: 2100000, guid: 2d509af99d12f1746b9ab09b03cd1993, type: 2}
---- !u!4 &2116009513
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116009511}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.840042, y: -4.6760902, z: -61.80745}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

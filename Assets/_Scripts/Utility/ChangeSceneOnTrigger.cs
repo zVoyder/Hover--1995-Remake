@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Simple script for changing scene On Trigger Enter
+/// </summary>
 [RequireComponent(typeof(Collider))]
 public class ChangeSceneOnTrigger : MonoBehaviour
 {

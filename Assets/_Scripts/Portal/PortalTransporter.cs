@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Script for effectively teleport an objective to an other 
+/// </summary>
 [RequireComponent(typeof(Collider))]
 public class PortalTransporter : MonoBehaviour
 {
