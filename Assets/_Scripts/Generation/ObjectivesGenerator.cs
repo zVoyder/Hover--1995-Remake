@@ -124,6 +124,7 @@ public class ObjectivesGenerator : MonoBehaviour
         _positionToUse.RemoveAt(randomIndex);
     }
 
+    
     /// <summary>
     /// Set up the backgorund of the UI Image counter to match the total quantity
     /// to grab in this scene.
@@ -136,6 +137,7 @@ public class ObjectivesGenerator : MonoBehaviour
         }
     }
 
+
     /// <summary>
     /// Update the UI by adding one point in proportion of Max Objectives
     /// </summary>
@@ -143,6 +145,7 @@ public class ObjectivesGenerator : MonoBehaviour
     {
         uICounterPlayer.fillAmount += 1f / (float)maxObjectivesOnUI; 
     }
+
 
     private void RemoveObjectiveToUI()
     {
