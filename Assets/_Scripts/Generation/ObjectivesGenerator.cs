@@ -13,6 +13,7 @@ public class ObjectivesGenerator : MonoBehaviour
     public Image uICounterPlayer; //UI Image that works as a counter with the fill.amount
     public GameObject objective;
     [Tooltip("Who can grab this objective?")] public string triggerTag = Constants.Tags.PLAYER;
+    public string objectiveTag = Constants.Tags.PLAYER_FLAG;
     public Reps repetitions; // How many series of objectives to generate
     [Range(0, 20)]public int maxObjectivesOnUI = 6; // Max objectives that can spawn
     public List<Vector3> positionsPool; // List of all positions the objective can spawn
@@ -20,7 +21,8 @@ public class ObjectivesGenerator : MonoBehaviour
     private List<Vector3> _positionToUse;
     private int _totalQuantity, _stepsDoneQuantity, _grabbedQuantity; //total quantity to spawn, how many to grab left and total grabbed quantity
 
-    private int QuantityInGame { get => GameObject.FindGameObjectsWithTag("PlayerFlag").Length; }
+    public int QuantityInGame { get => GameObject.FindGameObjectsWithTag(objectiveTag).Length; }
+    public int GrabbedQuantity { get => _grabbedQuantity; }
 
     private void Start()
     {
@@ -50,7 +52,7 @@ public class ObjectivesGenerator : MonoBehaviour
     {
         if (!CheckWin())
         {
-            if (QuantityInGame == 1 || QuantityInGame == 0)
+            if (QuantityInGame == 0 || QuantityInGame == 1) // Generate only if there are none objectives in game (also equals to one because on the last trigger enter it sees that there is still one in game)
             {
                 for (int s = repetitions.steps; s > 0; s--) // do a series of S steps
                 {
@@ -65,7 +67,9 @@ public class ObjectivesGenerator : MonoBehaviour
 #if DEBUG
         Debug.Log(triggerTag + " has Completed");
 #endif
-        BroadcastMessage("SetAction");
+
+
+        SendMessage("SetAction");
     }
 
 
@@ -85,8 +89,6 @@ public class ObjectivesGenerator : MonoBehaviour
             _stepsDoneQuantity = 0; // A series is gone and trigger must collect a new one.
             nextSeries();
         }
-
-        CheckWin(); // I have to it, so it check also if the stepsdone are zero
     }
 
     public void RemoveObjective()

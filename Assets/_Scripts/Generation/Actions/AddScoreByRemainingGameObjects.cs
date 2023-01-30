@@ -5,22 +5,16 @@ using UnityEngine;
 public class AddScoreByRemainingGameObjects : Action
 {
     public ObjectivesGenerator objectivesGeneratorReference;
-    public string objectiveTag = Constants.Tags.ENEMY_FLAG;
     public int scorePerObjective = 2000;
-    
 
     public override void SetAction()
     {
-        GameObject[] gos = GameObject.FindGameObjectsWithTag(objectiveTag);
+        int qnt = objectivesGeneratorReference.repetitions.Total() - objectivesGeneratorReference.GrabbedQuantity;
 
-        int toAdd = objectivesGeneratorReference.repetitions.Total() + gos.Length;
+        Debug.Log(qnt);
 
         ScoreSingleton.instance.
-            AddScore(toAdd * scorePerObjective);
+            AddScore(qnt * scorePerObjective);
     }
 
-    private void Update()
-    {
-        
-    }
 }

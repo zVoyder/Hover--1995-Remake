@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &40390239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 40390241}
+  - component: {fileID: 40390240}
+  m_Layer: 0
+  m_Name: SetMultiplier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &40390240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40390239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba67c2acaa36e1418c713b2d659c555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+--- !u!4 &40390241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40390239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.647776, y: 0, z: 58.45181}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &110996213
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,8 +448,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectivesGeneratorReference: {fileID: 713267744}
-  newPositionToStore: {x: 50, y: 0, z: 50}
   triggerTag: Player
+  scoreToRemove: 2000
 --- !u!82 &539838975
 AudioSource:
   m_ObjectHideFlags: 0
@@ -576,7 +620,7 @@ Transform:
   m_LocalScale: {x: 3.4504, y: 0.6144779, z: 3.4504}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &616440030
 GameObject:
@@ -757,11 +801,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 713267743}
-  - component: {fileID: 713267747}
   - component: {fileID: 713267744}
   - component: {fileID: 713267746}
+  - component: {fileID: 713267747}
   - component: {fileID: 713267745}
-  - component: {fileID: 713267748}
   m_Layer: 0
   m_Name: PlayerObjectiveSpawner
   m_TagString: Untagged
@@ -798,9 +841,10 @@ MonoBehaviour:
   uICounterPlayer: {fileID: 1540512142}
   objective: {fileID: 3279394251967285728, guid: c334e16f35043474da1aa2f8772d9989, type: 3}
   triggerTag: Player
+  objectiveTag: PlayerFlag
   repetitions:
-    series: 3
-    steps: 2
+    series: 1
+    steps: 1
   maxObjectivesOnUI: 6
   positionsPool:
   - {x: 30, y: 0, z: 30}
@@ -818,11 +862,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 713267742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eba14b36e3173d14ebabe632d77c4758, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f9c49a9f870abf4abc6a41970b68cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 1
-  sceneToLoad: Level1
+  scoreToAdd: 2500
 --- !u!114 &713267746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,24 +888,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 713267742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba67c2acaa36e1418c713b2d659c555, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  multiplier: 1
---- !u!114 &713267748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713267742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3eafcd0463f5ce048a2f3faa4531db90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectivesGeneratorReference: {fileID: 1660759819}
-  objectiveTag: EnemyFlag
   scorePerObjective: 2000
 --- !u!1 &783691629
 GameObject:
@@ -989,7 +1018,7 @@ Transform:
   m_Children:
   - {fileID: 911484604}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &824085538
 GameObject:
@@ -1810,9 +1839,10 @@ MonoBehaviour:
   uICounterPlayer: {fileID: 1109431053}
   objective: {fileID: 3279394251967285728, guid: 1b473e1019489a141bc4e93b634ee9a3, type: 3}
   triggerTag: Enemy
+  objectiveTag: EnemyFlag
   repetitions:
-    series: 3
-    steps: 2
+    series: 1
+    steps: 1
   maxObjectivesOnUI: 6
   positionsPool:
   - {x: 30, y: 0, z: 50}
@@ -1820,6 +1850,7 @@ MonoBehaviour:
   - {x: 10, y: 0, z: 50}
   - {x: 50, y: 0, z: 50}
   - {x: 60, y: 0, z: 50}
+  - {x: 0, y: 0, z: 0}
 --- !u!4 &1660759820
 Transform:
   m_ObjectHideFlags: 0
@@ -1832,7 +1863,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1660759821
 MonoBehaviour:
