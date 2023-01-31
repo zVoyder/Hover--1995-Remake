@@ -31,8 +31,6 @@ public class PortalCamera : MonoBehaviour
         cameraMat.mainTexture = _camera.targetTexture;
     }
 
-
-
     private void LateUpdate()
     {
         Vector3 playerOffsetFromPortal = playerCamera.position - portal.position; // Calculating the offset position of the player

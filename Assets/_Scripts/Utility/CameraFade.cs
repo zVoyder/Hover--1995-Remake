@@ -28,25 +28,25 @@ public class CameraFade : MonoBehaviour
         {
             case StartFade.FADEIN:
 
-                DoFadeIn();
+                DoFadeIn(_fadeDuration);
 
                 break;
 
             case StartFade.FADEOUT:
 
-                DoFadeOut();
+                DoFadeOut(_fadeDuration);
 
                 break;
 
             case StartFade.FADEIN_FADEOUT:
-                DoFadeInOut();
+                DoFadeInOut(_fadeDuration);
 
                 break;
 
 
             case StartFade.FADEOUT_FADEIN:
 
-                DoFadeOutIn();
+                DoFadeOutIn(_fadeDuration);
 
                 break;
 
@@ -59,60 +59,60 @@ public class CameraFade : MonoBehaviour
     /// <summary>
     /// Start fade out effect.
     /// </summary>
-    public void DoFadeOut()
+    public void DoFadeOut(float time)
     {
-        StartCoroutine(FadeOut());
+        StartCoroutine(FadeOut(time));
     }
 
     /// <summary>
     /// Start fade in effect.
     /// </summary>
-    public void DoFadeIn()
+    public void DoFadeIn(float time)
     {
-        StartCoroutine(FadeIn());
+        StartCoroutine(FadeIn(time));
     }
 
     /// <summary>
     /// Start fade out followed by fade in.
     /// </summary>
-    public void DoFadeOutIn()
+    public void DoFadeOutIn(float time)
     {
-        StartCoroutine(FadeOutIn());
+        StartCoroutine(FadeOutIn(time));
     }
 
 
     /// <summary>
     /// Start fade in followed by fade out.
     /// </summary>
-    public void DoFadeInOut()
+    public void DoFadeInOut(float time)
     {
-        StartCoroutine(FadeInOut());
+        StartCoroutine(FadeInOut(time));
     }
 
 
     /// <summary>
     /// Coroutine for fading in followed by fading out.
     /// </summary>
-    private IEnumerator FadeInOut()
+    private IEnumerator FadeInOut(float time)
     {
-        yield return FadeIn();
-        yield return FadeOut();
+        yield return FadeIn(time);
+        yield return FadeOut(time);
     }
 
 
     /// <summary>
     /// Coroutine for fading out followed by fading in.
     /// </summary>
-    private IEnumerator FadeOutIn()
+    private IEnumerator FadeOutIn(float time)
     {
-        yield return FadeOut();
-        yield return FadeIn();
+        yield return FadeOut(time);
+        yield return FadeIn(time);
     }
 
     /// <summary>
     /// Coroutine for fading out.
     /// </summary>
-    private IEnumerator FadeOut()
+    private IEnumerator FadeOut(float time)
     {
         float startAlpha = 1f; // Alpha is 1 so the FadeOut start with a DrawTexture already fully visible.
         float progress = 0f;
@@ -120,7 +120,7 @@ public class CameraFade : MonoBehaviour
         // Continuously update the alpha value while the progress is less than 1.
         while (progress < 1f)
         {
-            progress = Mathf.Clamp01(progress + Time.deltaTime / _fadeDuration); // clamping the progress value to the range of 0 to 1, the fading effect is always controlled and never exceeds the desired fadeDuration.
+            progress = Mathf.Clamp01(progress + Time.deltaTime / time); // clamping the progress value to the range of 0 to 1, the fading effect is always controlled and never exceeds the desired fadeDuration.
             alpha = Mathf.Lerp(startAlpha, 0f, progress);
             yield return null;
         }
@@ -129,14 +129,14 @@ public class CameraFade : MonoBehaviour
     /// <summary>
     /// Coroutine for fading in.
     /// </summary>
-    private IEnumerator FadeIn()
+    private IEnumerator FadeIn(float time)
     {
         float startAlpha = 0f; // Alpha is 0 because the FadeIn start with a DrawTexture invisible.
         float progress = 0f;
 
         while (progress < 1f)
         {
-            progress = Mathf.Clamp01(progress + Time.deltaTime / _fadeDuration);
+            progress = Mathf.Clamp01(progress + Time.deltaTime / time);
             alpha = Mathf.Lerp(startAlpha, 1f, progress);
             yield return null;
         }

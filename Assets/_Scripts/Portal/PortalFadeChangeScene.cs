@@ -7,16 +7,18 @@ using UnityEngine.SceneManagement;
 /// Simple script for changing scene On Trigger Enter
 /// </summary>
 [RequireComponent(typeof(Collider))]
-public class ChangeSceneOnTrigger : MonoBehaviour
+public class PortalFadeChangeScene : MonoBehaviour
 {
     public string triggerTag = Constants.Tags.PLAYER;
     public string sceneToLoad;
+    public CameraFade cameraFadeComponent;
     public float timeToLoad;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(triggerTag))
         {
+            cameraFadeComponent.DoFadeIn(timeToLoad);
             StartCoroutine(LoadScene());
         }
     }

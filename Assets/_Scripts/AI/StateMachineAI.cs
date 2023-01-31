@@ -29,10 +29,6 @@ public class StateMachineAI : MonoBehaviour
         FLEX // Do all
     };
 
-    // Setting
-    [Header("Setting")]
-    public EmissionFlicker emission;
-
     // Tags
     [Header("Objectives")]
     [Tooltip("The tag of the GameObject the AI must find and grab")] public string objectiveTag = Constants.Tags.ENEMY_FLAG;
@@ -260,13 +256,12 @@ public class StateMachineAI : MonoBehaviour
     #region Behaviour
 
     /// <summary>
-    /// Set the behaviour of the AI and the color associated
+    /// Set the behaviour of the AI
     /// </summary>
     /// <param name="behaviour"></param>
-    public void SetBehaviour(AIBehaviour behaviour, Color color)
+    public void SetBehaviour(AIBehaviour behaviour)
     {
         this.behaviour = behaviour;
-        emission.color = color;
     }
 
     /// <summary>
