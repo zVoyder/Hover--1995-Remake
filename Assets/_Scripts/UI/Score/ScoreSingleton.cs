@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ public class ScoreSingleton : MonoBehaviour
     public static ScoreSingleton instance; //static instance of ScoreSingleton 
     internal SO_Score so_Score; // Reference to the scriptable object for storing score
 
-    Text _scoreText; // Reference to the text component for displaying the score
+    TMP_Text _scoreText; // Reference to the text component for displaying the score
 
 
     private void Awake()
@@ -45,7 +46,7 @@ public class ScoreSingleton : MonoBehaviour
         if (Extension.Finder.TryFindGameObjectWithTag("ScoreUI", out GameObject scoreUI))
         {
             // Get the Text component from the object and store it in _scoreText
-            _scoreText = scoreUI.GetComponent<Text>();
+            _scoreText = scoreUI.GetComponent<TextMeshProUGUI>();
             // Update the text with the current score
             UpdateText();
         }
