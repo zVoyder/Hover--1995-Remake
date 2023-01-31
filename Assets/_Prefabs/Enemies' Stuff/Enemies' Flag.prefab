@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6421171220465783546}
   - component: {fileID: 6308544061007005338}
   - component: {fileID: 8452544901334212482}
+  - component: {fileID: 5443935514704848778}
   m_Layer: 0
   m_Name: Enemies' Flag
   m_TagString: EnemyFlag
@@ -232,8 +233,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00053afa1fe987645a828d06cc9742fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerTag: Enemy
   behaviourToSet: 2
-  color: {r: 1, g: 0.6085619, b: 0, a: 1}
+--- !u!114 &5443935514704848778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421171220465783493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46796b5736f00d4fb0c3948dba2d53a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newColor: {r: 0.7684727, g: 0, b: 1, a: 1}
 --- !u!1 &6421171220472849460
 GameObject:
   m_ObjectHideFlags: 0

@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 5652431103104844012}
   - component: {fileID: 5652431103104844010}
   - component: {fileID: 5652431103104844013}
+  - component: {fileID: 5652431101576565584}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -376,7 +377,7 @@ Camera:
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 50
@@ -388,7 +389,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 58.715508
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -414,6 +415,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5652431103104844015}
   m_Enabled: 1
+--- !u!114 &5652431101576565584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5652431103104844015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794685ea0b401304d989b63a811029f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeStart: 1
+  _fadeDuration: 1
+  fadeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &5476873170636827048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -421,6 +437,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5652431101469930009}
     m_Modifications:
+    - target: {fileID: 175846002925600452, guid: 910727114fefd0b49bb4f31bc0298c1e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.6607056
+      objectReference: {fileID: 0}
     - target: {fileID: 175846002971197321, guid: 910727114fefd0b49bb4f31bc0298c1e, type: 3}
       propertyPath: m_Name
       value: UI
@@ -517,6 +537,10 @@ PrefabInstance:
       propertyPath: rigidBody
       value: 
       objectReference: {fileID: 5652431101469930007}
+    - target: {fileID: 175846004057711130, guid: 910727114fefd0b49bb4f31bc0298c1e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 175846004058580001, guid: 910727114fefd0b49bb4f31bc0298c1e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000061035156
