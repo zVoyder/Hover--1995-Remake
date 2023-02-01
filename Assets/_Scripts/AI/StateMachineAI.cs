@@ -315,6 +315,7 @@ public class StateMachineAI : MonoBehaviour
         return transform.position; // otherwise stay there
     }
 
+
     /// <summary>
     /// Set the world origin
     /// </summary>

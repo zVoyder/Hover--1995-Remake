@@ -85,6 +85,8 @@ public class MinimapCamera : MonoBehaviour
 
         // update the minimap camera's rotation to match the pointer object's rotation
         transform.rotation = Quaternion.Euler(90, _toFollow.eulerAngles.y, 0f);
+
+        
     }
 
 
