@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class ActivateGameObject : Action
 {
-    public GameObject uIToShowOnLoose;
+    public GameObject gameObject;
 
     public override void SetAction()
     {
-        uIToShowOnLoose.SetActive(true);
+        gameObject.SetActive(true);
     }
 }

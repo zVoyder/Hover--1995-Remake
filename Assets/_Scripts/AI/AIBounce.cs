@@ -61,6 +61,6 @@ public class AIBounce : MonoBehaviour
         _en.enabled = true;
         _agent.enabled = true;
 
-        _en.Chase();
+        _en.Stay();
     }
 }

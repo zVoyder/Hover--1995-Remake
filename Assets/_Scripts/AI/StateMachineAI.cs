@@ -1,6 +1,6 @@
+using Extension;
 using UnityEngine;
 using UnityEngine.AI;
-using Extension;
 
 /// <summary>
 /// This script is a state machine for an enemy AI in a Unity game.
@@ -15,13 +15,6 @@ using Extension;
 [RequireComponent(typeof(NavMeshAgent))]
 public class StateMachineAI : MonoBehaviour
 {
-    public enum WorldOriginGenerationType
-    {
-        TERRAIN,
-        PLANE,
-        CUSTOM
-    };
-
     public enum AIBehaviour
     {
         HUNTER, // Only chase the player
@@ -31,32 +24,40 @@ public class StateMachineAI : MonoBehaviour
 
     // Tags
     [Header("Objectives")]
-    [Tooltip("The tag of the GameObject the AI must find and grab")] public string objectiveTag = Constants.Tags.ENEMY_FLAG;
-    [Tooltip("The tag of the GameObject the AI must chase")] public string toChaseTag = Constants.Tags.PLAYER;
+
+    [Tooltip("The tag of the GameObject the AI must find and grab")]
+    public string objectiveTag = Constants.Tags.ENEMY_FLAG;
+
+    [Tooltip("The tag of the GameObject the AI must chase")]
+    public string toChaseTag = Constants.Tags.PLAYER;
 
     // Declarations of the navigation variables
     [Header("Navigation")]
     public AIBehaviour behaviour = AIBehaviour.FLEX;
-    [Tooltip("The detection range of the AI")] [Range(10, 100)] public float detectionRange = 20f;
-    /*[Tooltip("The speed of the AI")] [Range(1, 50)]*/ public float speed = 3.5f;
-    [Tooltip("The accelearation of the AI")] [Range(1, 50)] public float acceleration = 8f;
 
-    [HideInInspector, Tooltip("Set the eyes height")] public float heightEyesOffset = 0f;
-    [HideInInspector] public Vector2 size;
-    [HideInInspector] public WorldOriginGenerationType floorType;
-    [HideInInspector] public Transform plane;
-    [HideInInspector] public TerrainData terrainData;
+    [Tooltip("Path Range of the AI"), Range(1, 100f)]
+    public float pathRange = 100f;
 
-    
+    [Tooltip("The detection range of the AI"), Range(10, 100)]
+    public float detectionRange = 20f;
+
+    [Tooltip("The speed of the AI"), Range(1, 100)]
+    public float speed = 3.5f;
+
+    [Tooltip("The accelearation of the AI"), Range(1, 50)] 
+    public float acceleration = 8f;
+
+    [Tooltip("Set the eyes height")]
+    public float heightEyesOffset = 0f;
+
     private float _stoppingDistance = 1f;
-    private Vector3 _originPosition, _destination; 
+    private Vector3 _destination;
     private Transform _toChase, _closestObjective;
     private NavMeshAgent _agent;
-    private float _navmeshRange;
 
     public enum AIState { CHASE, GRABOBJECTIVE, PATROL };
     private AIState _currentState = AIState.PATROL;
-    
+
 
     private void Start()
     {
@@ -68,9 +69,6 @@ public class StateMachineAI : MonoBehaviour
 
         _toChase = GameObject.FindGameObjectWithTag(toChaseTag).transform; // find the player in the scene
 
-        _originPosition = SetWorldOrigin(out float range); // Setting the world origin position and getting the range (radius) of the map
-        _navmeshRange = range; 
-
         GoToLocation(RandomPoint()); // Go to a random location
     }
 
@@ -81,77 +79,57 @@ public class StateMachineAI : MonoBehaviour
         Debug.Log(behaviour + " is " + _currentState);
 #endif
 
+        bool canSeeTarget = CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange);
+        bool canReachObjective = Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject objectiveGameObject)
+            && CanSeeLocation(transform.position, objectiveGameObject.transform.position, heightEyesOffset, detectionRange);
+
+
         switch (behaviour)
         {
 
             case AIBehaviour.HUNTER:
 
                 // Check if the player is within the detection range
-                if (CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange))
+                if (canSeeTarget)
+                    _currentState = AIState.CHASE; // If so, set the state to CHASE
+                else if (canReachObjective) // Check if there is an objective within range
                 {
-                    // If so, set the state to CHASE
-                    _currentState = AIState.CHASE;
+                    // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
+                    _closestObjective = objectiveGameObject.transform;
+                    _currentState = AIState.GRABOBJECTIVE;
                 }
                 else
-                {
-                    // Check if there is an objective within range
-                    if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject alfaGO)
-                        && CanSeeLocation(transform.position, alfaGO.transform.position, heightEyesOffset, detectionRange))
-                    {
-                        // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
-                        _closestObjective = alfaGO.transform;
-                        _currentState = AIState.GRABOBJECTIVE;
-                    }
-                    else
-                    {
-                        // If neither condition is met, set the state to PATROL
-                        _currentState = AIState.PATROL;
-                    }
-                }
-
-                break;
+                    _currentState = AIState.PATROL; // If neither condition is met, set the state to PATROL
+            break;
 
             case AIBehaviour.SEEKER:
 
-                if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject omegaGO)
-                    && CanSeeLocation(transform.position, omegaGO.transform.position, heightEyesOffset, detectionRange))
+                if (canReachObjective)
                 {
-                    _closestObjective = omegaGO.transform;
+                    _closestObjective = objectiveGameObject.transform;
                     _currentState = AIState.GRABOBJECTIVE;
                 }
                 else
-                {
-                    // If neither condition is met, set the state to PATROL
                     _currentState = AIState.PATROL;
-                }
 
-                break;
+            break;
 
             case AIBehaviour.FLEX:
 
-                if (Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject epsilonGO)
-                        && CanSeeLocation(transform.position, epsilonGO.transform.position, heightEyesOffset, detectionRange))
+                if (canReachObjective)
                 {
                     // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
-                    _closestObjective = epsilonGO.transform;
+                    _closestObjective = objectiveGameObject.transform;
                     _currentState = AIState.GRABOBJECTIVE;
                 }
+                else if (canSeeTarget)
+                    _currentState = AIState.CHASE;// If so, set the state to CHASE
                 else
-                {
-                    if (CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange))
-                    {
-                        // If so, set the state to CHASE
-                        _currentState = AIState.CHASE;
-                    }
-                    else
-                    {
-                        _currentState = AIState.PATROL;
-                    }
-                }
+                    _currentState = AIState.PATROL;
+ 
 
-                break;
+            break;
         }
-
 
 
         // Switch statement to perform the appropriate task based on the current state
@@ -197,9 +175,14 @@ public class StateMachineAI : MonoBehaviour
     /// <summary>
     /// Set the destination to the position of the player
     /// </summary>
-    public void Chase()
+    private void Chase()
     {
         GoToLocation(_toChase.position);
+    }
+
+    public void Stay()
+    {
+        GoToLocation(transform.position);
     }
 
     #endregion
@@ -216,7 +199,7 @@ public class StateMachineAI : MonoBehaviour
     /// <returns></returns>
     private bool CanSeeLocation(Vector3 from, Vector3 to, float offset, float range)
     {
-        bool r = Vector3.Distance(from, to) <= range 
+        bool r = Vector3.Distance(from, to) <= range
             && !NavMesh.Raycast(new Vector3(from.x, from.y + offset, from.z), to, out NavMeshHit hit, NavMesh.AllAreas);
 
 #if DEBUG
@@ -264,24 +247,6 @@ public class StateMachineAI : MonoBehaviour
         this.behaviour = behaviour;
     }
 
-    /// <summary>
-    /// Check if the AI is a Hunter
-    /// </summary>
-    /// <returns></returns>
-    private bool isHunter()
-    {
-        return behaviour == AIBehaviour.HUNTER || behaviour == AIBehaviour.FLEX;
-    }
-
-    /// <summary>
-    /// Check if the AI is a Seeker
-    /// </summary>
-    /// <returns></returns>
-    private bool isSeeker()
-    {
-        return behaviour == AIBehaviour.SEEKER || behaviour == AIBehaviour.FLEX;
-    }
-
     #endregion
 
 
@@ -303,69 +268,14 @@ public class StateMachineAI : MonoBehaviour
     /// <returns>A random point on the NavMesh</returns>
     private Vector3 RandomPoint()
     {
-        // I set the randompoint from the world origin, then i add a random point in a sphere
-        // and i mulitply it by the radius of the navmesh
-        Vector3 randomPoint = _originPosition + Random.insideUnitSphere * _navmeshRange;
+        // I set the randompoint from the transform origin, then i add a random point in a sphere
+        // and i mulitply it by path range
+        Vector3 randomPoint = transform.position + Random.insideUnitSphere * pathRange;
 
         if (CanReachLocation(randomPoint, out Vector3 dest)) // if the path with the point is found and Complete
-        {
             return dest;
-        }
 
         return transform.position; // otherwise stay there
-    }
-
-
-    /// <summary>
-    /// Set the world origin
-    /// </summary>
-    /// <param name="radius">the radius of the world</param>
-    /// <returns>the position of the world origin</returns>
-    private Vector3 SetWorldOrigin(out float radius)
-    {
-        float width, height;
-
-        switch (floorType)
-        {
-
-            case WorldOriginGenerationType.TERRAIN:
-                width = terrainData.size.x;
-                height = terrainData.size.z;
-
-                break;
-
-            case WorldOriginGenerationType.PLANE:
-                width = plane.lossyScale.x * 10f;
-                height = plane.lossyScale.x * 10f;
-                break;
-
-
-            case WorldOriginGenerationType.CUSTOM:
-                width = size.x;
-                height = size.y;
-
-                break;
-
-            default:
-                width = 100f;
-                height = 100f;
-                break;
-        }
-
-        width /= 2;
-        height /= 2;
-
-        radius = Mathf.Sqrt(Mathf.Pow(width, 2) + Mathf.Pow(height, 2)); // Math formula for calculating the radius of the map.
-
-        /*
-         * This lines here needs for testing, it checks if the radius generate is correct by creating a sphere at the center of the map.
-        GameObject sphere =
-            GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.position = new Vector3(width, 0, height);
-        sphere.transform.localScale = new Vector3(radius*2, radius*2, radius*2); // multiply by 2 because this is the scale not the radius
-        */
-
-        return new Vector3(width, 0, height); // return the origin position
     }
 
     #endregion
