@@ -11,36 +11,50 @@ public class RBPlayerMovement : MonoBehaviour
     public float m_maxSpeed; //maximum speed reachable (can be setted in the inspetor)
     [Range(1, 100)]
     public float m_rotationForce; //force of the rotation (can be setted in the inspetor)
+    [HideInInspector]
+    public float m_timer = 0; //timer to count the seconds of the movement stop
+    public bool CanMove { get; set; } = true;//wrapper to enable player to move
+    [Range(1, 50)]
+    public float m_movementStopDuration; //for how long does the player can't move
+    public string m_immobilizerObjectTag = "Immobilize Platform"; //set the object that immobilize the player
+    private AudioSource m_audioSource;
 
 
     void Start() // Start is called before the first frame update
     {
         m_rigidBody = GetComponent<Rigidbody>();
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate() //updates every 0.02 seconds to adapt to the physics
     {
-        if (Input.GetKey(InputManager.FORWARD))//forward acceleration key binding
+        if (CanMove)
         {
-            if ((m_rigidBody.velocity.magnitude < m_maxSpeed))
-            {
-                m_rigidBody.AddForce(transform.forward * m_acceleration, ForceMode.Acceleration); //forward acceleration
-            }
-            if (m_rigidBody.velocity.magnitude > m_maxSpeed)
-            {
-                m_rigidBody.AddForce(transform.forward * m_maxSpeed, ForceMode.Acceleration); //forward max speed
-            }
-        }
 
-        if (Input.GetKey(InputManager.BACKWARD))//backward acceleration key binding
-        {
-            if ((m_rigidBody.velocity.magnitude < m_maxSpeed))
+            if (Input.GetKey(KeyCode.UpArrow))//forward acceleration key binding
             {
-                m_rigidBody.AddForce(-transform.forward * m_acceleration, ForceMode.Acceleration); //backward acceleration
+                if (m_rigidBody.velocity.magnitude < m_maxSpeed)
+                {
+                    //m_audioSource.Play(); //play movement audio
+                    m_rigidBody.AddForce(transform.forward * m_acceleration, ForceMode.Acceleration); //forward acceleration
+                }
+                if (m_rigidBody.velocity.magnitude > m_maxSpeed)
+                {
+                    m_rigidBody.AddForce(transform.forward * m_maxSpeed, ForceMode.Acceleration); //forward max speed
+                }
             }
-            if (m_rigidBody.velocity.magnitude > m_maxSpeed)
+
+            if (Input.GetKey(KeyCode.DownArrow))//backward acceleration key binding
             {
-                m_rigidBody.AddForce(-transform.forward * m_maxSpeed, ForceMode.Acceleration); //backward max speed
+                if (m_rigidBody.velocity.magnitude < m_maxSpeed)
+                {
+                    //m_audioSource.Play(); //play movement audio
+                    m_rigidBody.AddForce(-transform.forward * m_acceleration, ForceMode.Acceleration); //backward acceleration
+                }
+                if (m_rigidBody.velocity.magnitude > m_maxSpeed)
+                {
+                    m_rigidBody.AddForce(-transform.forward * m_maxSpeed, ForceMode.Acceleration); //backward max speed
+                }
             }
         }
     }
@@ -48,12 +62,12 @@ public class RBPlayerMovement : MonoBehaviour
     void Update() // Update is called once per frame
     {
 
-        if (Input.GetKey(InputManager.TURNLEFT))//left rotation key binding
+        if (Input.GetKey(KeyCode.LeftArrow))//left rotation key binding
         {
             transform.Rotate(Vector3.up, -m_rotationForce * Time.deltaTime); //effective left rotation
         }
-        
-        if (Input.GetKey(InputManager.TURNRIGHT)) //right rotation key binding
+
+        if (Input.GetKey(KeyCode.RightArrow)) //right rotation key binding
         {
             transform.Rotate(Vector3.up, m_rotationForce * Time.deltaTime); //effective right rotation
         }
