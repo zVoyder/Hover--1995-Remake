@@ -25,7 +25,6 @@ public class PlayerInventory : MonoBehaviour
 
     public int invisibilityCounter; //counter for how many cloack for invisibility does the player have
 
-    [Range(0, 150)]
     public float m_jumpForce; //the force of the jump (can be setted in the inspector)
     private bool _isGrounded; //bool to be sure the player must be touching the ground or the stairs before jump
     public bool IsGrounded { get => _isGrounded; }

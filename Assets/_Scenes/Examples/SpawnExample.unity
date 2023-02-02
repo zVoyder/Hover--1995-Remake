@@ -910,7 +910,7 @@ MonoBehaviour:
   objectiveTag: PlayerFlag
   repetitions:
     series: 1
-    steps: 1
+    steps: 3
   maxObjectivesOnUI: 6
   positionsPool:
   - {x: 30, y: 0, z: 30}
@@ -919,6 +919,32 @@ MonoBehaviour:
   - {x: 50, y: 0, z: 30}
   - {x: 60, y: 0, z: 30}
   - {x: 70, y: 0, z: 30}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!114 &713267745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,7 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4865e0ce83b91c45b621c2e902a9dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 0}
+  gameObjectToEnable: {fileID: 1714344856}
 --- !u!114 &713267747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1907,7 +1933,7 @@ MonoBehaviour:
   triggerTag: Enemy
   objectiveTag: EnemyFlag
   repetitions:
-    series: 1
+    series: 3
     steps: 1
   maxObjectivesOnUI: 6
   positionsPool:
@@ -1943,7 +1969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4865e0ce83b91c45b621c2e902a9dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 0}
+  gameObjectToEnable: {fileID: 0}
 --- !u!114 &1660759822
 MonoBehaviour:
   m_ObjectHideFlags: 0
