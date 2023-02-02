@@ -198,7 +198,7 @@ public class PlayerInventory : MonoBehaviour
         while (timer < invisibilityDuration)
         {
             timer += Time.fixedDeltaTime;
-            wallImage.fillAmount = 1 - (timer / speedNerfDuration);
+            wallImage.fillAmount = 1 - (timer / wallLifeTime);
             yield return new WaitForFixedUpdate();
         }
 
