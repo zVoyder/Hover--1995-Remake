@@ -50,13 +50,15 @@ public class PlayerInventory : MonoBehaviour
     public bool IsNerfed { get; set; } = false;
     public bool IsBuffed { get; set; } = false;
 
+    private float _startedMaxSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
-
         //getting Rigidbody and BoxCollidercomponents
         _rigidBody = GetComponent<Rigidbody>();
         pm = GetComponent<RBPlayerMovement>();
+        _startedMaxSpeed = pm.maxSpeed;
         UIUpdateCounter();
     }
 
@@ -112,25 +114,24 @@ public class PlayerInventory : MonoBehaviour
     {
         if (!IsBuffed)
         {
+            StopCoroutine(StartSpeedNerf());
             IsBuffed = true;
-            float tempMaxSpeed = pm.maxSpeed;
             pm.maxSpeed = buffedSpeed;
             yield return new WaitForSeconds(speedBuffDuration);
             IsBuffed = false;
-            pm.maxSpeed = tempMaxSpeed;
+            pm.maxSpeed = _startedMaxSpeed;
         }
     }
 
     private IEnumerator StartSpeedNerf()
     {
         if (!IsNerfed) {
+            StopCoroutine(StartSpeedBuff());
             IsNerfed = true;
-
-            float tempMaxSpeed = pm.maxSpeed;
             pm.maxSpeed = nerfedSpeed;
             yield return new WaitForSeconds(speedBuffDuration);
             IsNerfed = false;
-            pm.maxSpeed = tempMaxSpeed;
+            pm.maxSpeed = _startedMaxSpeed;
         }
     }
 
