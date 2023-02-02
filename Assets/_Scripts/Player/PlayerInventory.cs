@@ -47,6 +47,9 @@ public class PlayerInventory : MonoBehaviour
 
     public bool IsInvisible { get; set; } = false;
 
+    public bool IsNerfed { get; set; } = false;
+    public bool IsBuffed { get; set; } = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -107,16 +110,25 @@ public class PlayerInventory : MonoBehaviour
 
     private IEnumerator StartSpeedBuff()
     {
-        pm.maxSpeed += buffedSpeed;
-        yield return new WaitForSeconds(speedBuffDuration);
-        pm.maxSpeed -= buffedSpeed;
+        if (!IsBuffed)
+        {
+            IsBuffed = true;
+            pm.maxSpeed += buffedSpeed;
+            yield return new WaitForSeconds(speedBuffDuration);
+            IsBuffed = false;
+            pm.maxSpeed -= buffedSpeed;
+        }
     }
 
     private IEnumerator StartSpeedNerf()
     {
-        pm.maxSpeed -= nerfedSpeed;
-        yield return new WaitForSeconds(speedBuffDuration);
-        pm.maxSpeed -= nerfedSpeed;
+        if (!IsNerfed) {
+            IsNerfed = true;
+            pm.maxSpeed -= nerfedSpeed;
+            yield return new WaitForSeconds(speedBuffDuration);
+            IsNerfed = false;
+            pm.maxSpeed += nerfedSpeed;
+        }
     }
 
     private void WallSpawn()

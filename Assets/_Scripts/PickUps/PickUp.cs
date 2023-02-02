@@ -24,7 +24,7 @@ public class PickUp : MonoBehaviour
             {
                 case PickUpType.SPRING:
                     pli.IncreaseSpringCounter();
-                    break;
+                break;
 
                 case PickUpType.CLOAK:
                     pli.IncreaseCloakCounter();
@@ -36,7 +36,7 @@ public class PickUp : MonoBehaviour
 
                 case PickUpType.GREENLIGHT:
                     pli.SpeedBuff();
-                    break;
+                break;
 
                 case PickUpType.REDLIGHT:
                     pli.SpeedNerf();
