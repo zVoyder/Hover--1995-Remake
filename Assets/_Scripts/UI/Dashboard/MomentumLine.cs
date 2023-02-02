@@ -12,11 +12,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class MomentumLine : MonoBehaviour
 {
-    private Rigidbody rigidBody;
+    public Rigidbody rigidBody;
 
     private Image _image;
-
-    public Rigidbody RigidBody { get => rigidBody; set => rigidBody = value; }
 
     void Start()
     {
@@ -26,11 +24,11 @@ public class MomentumLine : MonoBehaviour
 
     void FixedUpdate()
     {
-        float curr = Mathematics.Percent(RigidBody.velocity.magnitude / 1000f, 1); // Percentage calculation based on the magnitude of the rigidbody
+        float curr = Mathematics.Percent(rigidBody.velocity.magnitude / 1000f, 1); // Percentage calculation based on the magnitude of the rigidbody
         _image.fillAmount = curr;
 
          // Calculate the SignedAngle beetween the Vector3 of the velocity end the forward Vector3 of the transform of the rigidbody
-        float angle = Vector3.SignedAngle(RigidBody.velocity, RigidBody.transform.forward, RigidBody.transform.up);
+        float angle = Vector3.SignedAngle(rigidBody.velocity, rigidBody.transform.forward, rigidBody.transform.up);
         _image.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

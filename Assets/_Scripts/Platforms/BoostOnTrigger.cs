@@ -76,7 +76,7 @@ public class BoostOnTrigger : MonoBehaviour
             yield return new WaitForFixedUpdate(); //WaitForFixedUpdate where defaul value is 0.2f so 0.2 seconds
         }
 
-        Debug.Log(toThrow.transform.rotation + "  " + transform.rotation);
+        //Debug.Log(toThrow.transform.rotation + "  " + transform.rotation);
 
         StartCoroutine(LaunchIn(_timeToLaunch, toThrow)); //StartCaroutine to wait before launch
         yield return null;

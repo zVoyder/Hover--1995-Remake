@@ -14409,10 +14409,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a89d289bb2b09498ea976ffb17a790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rigidBody: {fileID: 935006079}
-  m_acceleration: 0
-  m_maxSpeed: 32
-  m_rotationForce: 100
+  acceleration: 0
+  maxSpeed: 15
+  rotationForce: 70
+  timer: 0
+  upperDistance: 0
+  upperOffset: 0
+  lowerDistance: 0
+  lowerOffset: 0
+  stepHeight: 0
 --- !u!54 &935006079
 Rigidbody:
   m_ObjectHideFlags: 0

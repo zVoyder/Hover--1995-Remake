@@ -97,11 +97,11 @@ public class RBPlayerMovement : MonoBehaviour
 
         if (Physics.Raycast(lowerPos, transform.forward, out RaycastHit hitLower, lowerDistance))
         {
-            Debug.Log("hitLow");
+            //Debug.Log("hitLow");
 
             if (!Physics.Raycast(upperPos, transform.forward, out RaycastHit hitUpper, upperDistance))
             {
-                Debug.Log("hitUpper");
+                //Debug.Log("hitUpper");
 
                 transform.position += new Vector3(0, stepHeight, 0);
             }

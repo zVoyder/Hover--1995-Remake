@@ -21,7 +21,6 @@ public class ImmobilizePlatform : MonoBehaviour
             _audio.Play();
             StartCoroutine(ReEnableIn(immobilizeDuration, player.CanMove));
         }
-        Debug.Log("tigger");
     }
 
     private IEnumerator ReEnableIn(float time, bool b)
