@@ -22,48 +22,42 @@ public class PickUp : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerInventory>(out PlayerInventory pli))
         {
-            if (random)
+            if(random)
+                pickUp = (PickUpType)Random.Range(0, System.Enum.GetValues(typeof(PickUpType)).Length - 1);
+
+            switch (pickUp)
             {
-                if (!pli.IsShielded)
-                    pickUp = (PickUpType)Random.Range(0, System.Enum.GetValues(typeof(PickUpType)).Length-1);
-            }
-            else
-            {
-                switch (pickUp)
-                {
 
-                    case PickUpType.SPRING:
-                        pli.IncreaseSpringCounter();
-                        break;
-
-                    case PickUpType.CLOAK:
-                        pli.IncreaseCloakCounter();
-                        break;
-
-                    case PickUpType.WALL:
-                        pli.IncreaseWallCounter();
-                        break;
-
-                    case PickUpType.GREENLIGHT:
-                        pli.SpeedBuff();
-                        break;
-
-                    case PickUpType.REDLIGHT:
-                        if (!pli.IsShielded)
-                            pli.SpeedNerf();
+                case PickUpType.SPRING:
+                    pli.IncreaseSpringCounter();
                     break;
 
-                    case PickUpType.SHIELD:
-                        pli.Shield();
-                        break;
+                case PickUpType.CLOAK:
+                    pli.IncreaseCloakCounter();
+                    break;
 
-                    case PickUpType.BREAKOUT:
-                        if (!pli.IsShielded)
-                            pli.Breakout();
-                        break;
-                }
+                case PickUpType.WALL:
+                    pli.IncreaseWallCounter();
+                    break;
+
+                case PickUpType.GREENLIGHT:
+                    pli.SpeedBuff();
+                    break;
+
+                case PickUpType.REDLIGHT:
+                    if (!pli.IsShielded)
+                        pli.SpeedNerf();
+                break;
+
+                case PickUpType.SHIELD:
+                    pli.Shield();
+                    break;
+
+                case PickUpType.BREAKOUT:
+                    if (!pli.IsShielded)
+                        pli.Breakout();
+                    break;
             }
         }
     }
-
 }
