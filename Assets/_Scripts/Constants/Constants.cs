@@ -18,6 +18,8 @@ namespace Constants
         public const string ENEMY_FLAG = "EnemyFlag";
         public const string PICKUP = "Pickup";
         public const string MINIMAP = "Minimap";
+
+        public const string GROUND = "Ground";
     }
 
     /// <summary>

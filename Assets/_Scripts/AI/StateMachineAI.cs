@@ -1,4 +1,5 @@
 using Extension;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,7 +13,7 @@ using UnityEngine.AI;
 /// random destination for the AI to move to.
 /// </summary>
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(AudioSource))]
 public class StateMachineAI : MonoBehaviour
 {
     public enum AIBehaviour
@@ -59,8 +60,21 @@ public class StateMachineAI : MonoBehaviour
     private AIState _currentState = AIState.PATROL;
 
 
+    //Audio SFX
+    [Header("Audio SFX")]
+    [Tooltip("How much does it talk? In seconds."), Range(1, 60)]public float audioFrequency = 1f;
+    public AudioClip engaging;
+    public AudioClip found;
+    public AudioClip patroling;
+
+    private AudioSource _audio;
+    private bool sfxDone = false;
+
+    private bool _targetIsVisible;
+
     private void Start()
     {
+        _audio = GetComponent<AudioSource>();
         _agent = GetComponent<NavMeshAgent>(); // Get the agent and set up my variables
 
         _agent.speed = speed;
@@ -76,10 +90,14 @@ public class StateMachineAI : MonoBehaviour
     {
         // log the current state of the AI in the console (only enabled in DEBUG mode)
 #if DEBUG
-        Debug.Log(behaviour + " is " + _currentState);
+        //Debug.Log(behaviour + " is " + _currentState);
 #endif
 
-        bool canSeeTarget = CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange);
+        if(_toChase.transform.TryGetComponent<PlayerInventory>(out PlayerInventory pli)){
+            _targetIsVisible = !pli.IsInvisible;
+        }
+
+        bool canSeeTarget = CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange) && _targetIsVisible;
         bool canReachObjective = Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject objectiveGameObject)
             && CanSeeLocation(transform.position, objectiveGameObject.transform.position, heightEyesOffset, detectionRange);
 
@@ -91,15 +109,20 @@ public class StateMachineAI : MonoBehaviour
 
                 // Check if the player is within the detection range
                 if (canSeeTarget)
+                {
                     _currentState = AIState.CHASE; // If so, set the state to CHASE
+                }
                 else if (canReachObjective) // Check if there is an objective within range
                 {
+
                     // If so, set the closest objective as the target and set the state to GRABOBJECTIVE
                     _closestObjective = objectiveGameObject.transform;
                     _currentState = AIState.GRABOBJECTIVE;
                 }
                 else
+                {
                     _currentState = AIState.PATROL; // If neither condition is met, set the state to PATROL
+                }
             break;
 
             case AIBehaviour.SEEKER:
@@ -159,6 +182,7 @@ public class StateMachineAI : MonoBehaviour
         // Check if the AI is close to its destination
         if (Vector3.Distance(transform.position, _destination) < _agent.stoppingDistance + 1f)
         {
+            StartCoroutine(PlaySFX(patroling));
             // If so, set a new random destination for the AI
             GoToLocation(RandomPoint());
         }
@@ -169,6 +193,7 @@ public class StateMachineAI : MonoBehaviour
     /// </summary>
     private void GrabObjective()
     {
+        StartCoroutine(PlaySFX(found));
         GoToLocation(_closestObjective.position);
     }
 
@@ -177,6 +202,7 @@ public class StateMachineAI : MonoBehaviour
     /// </summary>
     private void Chase()
     {
+        StartCoroutine(PlaySFX(engaging));
         GoToLocation(_toChase.position);
     }
 
@@ -276,6 +302,23 @@ public class StateMachineAI : MonoBehaviour
             return dest;
 
         return transform.position; // otherwise stay there
+    }
+
+    #endregion
+
+
+    #region Audio
+
+    private IEnumerator PlaySFX(AudioClip clip)
+    {
+        if (!sfxDone)
+        {
+            _audio.clip = clip;
+            _audio.Play();
+            sfxDone = true;
+        }
+        yield return new WaitForSeconds(audioFrequency);
+        sfxDone = false;
     }
 
     #endregion

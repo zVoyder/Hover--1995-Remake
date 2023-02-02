@@ -1,141 +1,174 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
-
+[RequireComponent(typeof(RBPlayerMovement))]
 public class PlayerInventory : MonoBehaviour
 {
-    public Text springText;
-    public Text wallText;
-    public Text cloackText;
+    public TextMeshProUGUI springText;
+    public TextMeshProUGUI wallText;
+    public TextMeshProUGUI cloackText;
+
     public GameObject placeableWall;
     [Range(0,10)]
     public float wallSpawnRange;
     [Range(1, 50)]
     public float wallLifeTime = 1;
-    [HideInInspector]
-    public int m_springCounter; //counter for how many spring the player have to jump
-    [HideInInspector]
-    public int m_placeWallCounter; // counter for how many placeable wall does the player have
-    [HideInInspector]
-    public int m_cloackCounter; //counter for how many cloack for invisibility does the player have
+
+
+    public int springCounter; //counter for how many spring the player have to jump
+
+    public int placeWallCounter; // counter for how many placeable wall does the player have
+
+    public int invisibilityCounter; //counter for how many cloack for invisibility does the player have
+
     [Range(0, 150)]
     public float m_jumpForce; //the force of the jump (can be setted in the inspector)
-    private bool isGrounded; //bool to be sure the player must be touching the ground or the stairs before jump
-    [Range(0, 50)]
-    [SerializeField] private float m_buffedMaxSpeed; //max speed of the player when buffed (can be setted in the inspector)
-    [Range(0, -50)]
-    [SerializeField] private float m_nerfedMaxSpeed; //max speed of the player when nerfed (can be setted in the inspector)
-    [Range(0, 30)]
-    public float buffDurationSeconds; //duration of the buff/debuff (can be setted in the inspector)
-    private bool speedBuff; //bool to enable temporary buff of maximum speed
-    private bool speedNerf; //bool to enable temporary nerf of maximum speed
-    private float m_buffTimer = 0; //timer to set a duration for the buffs
-    private float m_nerfTimer = 0; //timer to set a duration for the nerfs
-    private Rigidbody rigidBody;
-    private new CapsuleCollider collider;
+    private bool _isGrounded; //bool to be sure the player must be touching the ground or the stairs before jump
+    public bool IsGrounded { get => _isGrounded; }
+
+    [Range(1, 30)]
+    public float speedBuffDuration = 1, speedNerfDuration = 1; //duration of the buff/debuff (can be setted in the inspector)
+    [Range(0, 1000)]
+    public float buffedSpeed; //bool to enable temporary buff of maximum speed
+    [Range(0, 1000)]
+    public float nerfedSpeed; //bool to enable temporary nerf of maximum speed
+
+    [Range(1, 60)]public float invisibilityCooldown = 10f;
+    public Color invisibilityColor = Color.blue;
+    private float _alpha = 0f;
+
+    private Rigidbody _rigidBody;
     RBPlayerMovement pm;
+
+    public AudioSFX jumpSFX, invisibleSFX, wallSFX; // Audio SFXs for the skills
+
+    public bool IsInvisible { get; set; } = false;
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
+
         //getting Rigidbody and BoxCollidercomponents
-        rigidBody = GetComponent<Rigidbody>();
-        collider = GetComponent<CapsuleCollider>();
+        _rigidBody = GetComponent<Rigidbody>();
         pm = GetComponent<RBPlayerMovement>();
         UIUpdateCounter();
-    }
-
-    void FixedUpdate()
-    {
-        //bool for unable jumping if not colliding with ground objects as floor and stairs
-        if (m_springCounter > 0 && isGrounded && Input.GetKeyDown(KeyCode.A))
-        {
-            //jump effective movement
-            rigidBody.AddForce(Vector3.up * m_jumpForce * Time.deltaTime);
-            //removing 1 spring counter each jump
-            m_springCounter--;
-            UIUpdateCounter();
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S) && m_placeWallCounter > 0)//spawn placeable wall
+        if (Input.GetKeyDown(InputManager.WALL) && placeWallCounter > 0)//spawn placeable wall
         {
             WallSpawn();
-            m_placeWallCounter--;
-            UIUpdateCounter();
         }
 
-        //Speed buff for Stoplight Green Light
-        if (speedBuff)
+        //bool for unable jumping if not colliding with ground objects as floor and stairs
+        if (Input.GetKeyDown(InputManager.JUMP) && springCounter > 0 && _isGrounded)
         {
-            pm.m_maxSpeed += m_buffedMaxSpeed;
-            m_buffTimer += Time.deltaTime / 1000;
-            //end of the speed buff
-            if (m_buffTimer == buffDurationSeconds)
-            {
-                speedBuff = false;
-                m_buffTimer = 0;
-                pm.m_maxSpeed -= m_buffedMaxSpeed;
-            }
-        }        
-        
-        //Speed nerf for Stoplight Red Light
-        if (speedNerf)
+            Jump();
+        }
+
+        if(Input.GetKeyDown(InputManager.INVISIBLE) && invisibilityCounter > 0 && !IsInvisible)
         {
-            pm.m_maxSpeed += m_nerfedMaxSpeed;
-            m_nerfTimer += Time.deltaTime / 1000;
-            //end of the speed nerf
-            if (m_nerfTimer == buffDurationSeconds)
-            {
-                speedNerf = false;
-                m_nerfTimer = 0;
-                pm.m_maxSpeed -= m_nerfedMaxSpeed;
-            }
+            Invisibility();
         }
     }
-    void OnCollisionEnter(Collision other)
+
+    public void IncreaseSpringCounter()
     {
-        if (other.gameObject.tag == "Ground") //isGrounded variable setting true for jumping
-        {
-            isGrounded = true;
-        }
-        
-        if (other.gameObject.tag == "Spring_Collectible") //what happens on collision with collectible springs
-        {
-            m_springCounter++;
-            UIUpdateCounter();
-        }
+        springCounter++;
+        UIUpdateCounter();
+    }
 
-        if (other.gameObject.tag == "Cloack_Collectible") //what happens on collision with collectible cloack
-        {
-            m_cloackCounter++;
-            UIUpdateCounter();
-        }
+    public void IncreaseCloakCounter()
+    {
+        invisibilityCounter++;
+        UIUpdateCounter();
+    }
 
-        if (other.gameObject.tag == "Wall_Collectible") //what happens on collision with collectible wall
-        {
-            m_placeWallCounter++;
-            UIUpdateCounter();
-        }
+    public void IncreaseWallCounter()
+    {
+        placeWallCounter++;
+        UIUpdateCounter();
+    }
 
-        if (other.gameObject.tag == "Stoplight_GreenLight") //what happens on collision with speed buff
-        {
-            speedBuff = true;
-            m_nerfTimer = buffDurationSeconds;
-        }
+    public void SpeedBuff()
+    {
+        StartCoroutine(StartSpeedBuff());
+    }
 
-        if (other.gameObject.tag == "Stoplight_RedLight") //what happens on collision with speed nerf
-        {
-            speedNerf = true;
-            m_buffTimer = buffDurationSeconds;
-        }
+    public void SpeedNerf()
+    {
+        StartCoroutine(StartSpeedNerf());
+    }
+
+    private IEnumerator StartSpeedBuff()
+    {
+        pm.maxSpeed += buffedSpeed;
+        yield return new WaitForSeconds(speedBuffDuration);
+        pm.maxSpeed -= buffedSpeed;
+    }
+
+    private IEnumerator StartSpeedNerf()
+    {
+        pm.maxSpeed -= nerfedSpeed;
+        yield return new WaitForSeconds(speedBuffDuration);
+        pm.maxSpeed -= nerfedSpeed;
+    }
+
+    private void WallSpawn()
+    {
+        placeWallCounter--;
+        UIUpdateCounter();
+
+        Extension.Audios.PlayClipAtPoint(wallSFX, transform.position);
+        Vector3 position = transform.position + transform.forward * -wallSpawnRange;
+        Quaternion rotation = Quaternion.LookRotation(-transform.forward);
+        GameObject wall = Instantiate(placeableWall, position, rotation);
+        Destroy(wall.gameObject, wallLifeTime);
+    }
+
+    private void Jump() 
+    {
+        Extension.Audios.PlayClipAtPoint(jumpSFX, transform.position);
+        _rigidBody.AddForce(Vector3.up * m_jumpForce); //jump effective movement
+        springCounter--; //removing 1 spring counter each jump
+        UIUpdateCounter();
+    }
+
+    private void Invisibility()
+    {
+        Extension.Audios.PlayClipAtPoint(invisibleSFX, transform.position);
+        invisibilityCounter--;
+        UIUpdateCounter();
+        StartCoroutine(GoInvisibleFor(invisibilityCooldown));
+    }
+
+    private void UIUpdateCounter()
+    {
+        springText.text = springCounter.ToString();
+        wallText.text = placeWallCounter.ToString();
+        cloackText.text = invisibilityCounter.ToString();
+    }
+
+
+    private IEnumerator GoInvisibleFor(float time)
+    {
+        IsInvisible = true;
+        _alpha = invisibilityColor.a;
+        yield return new WaitForSeconds(time);
+        _alpha = 0f;
+        IsInvisible = false;
+    }
+
+    private void OnGUI()
+    {
+        GUI.color = new Color(invisibilityColor.r, invisibilityColor.g, invisibilityColor.b, _alpha);
+        GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture); // Draw Texture with the size of the screen
     }
 
     void OnCollisionExit(Collision other)
@@ -143,20 +176,16 @@ public class PlayerInventory : MonoBehaviour
         //isGrounded variable setting false for jumping
         if (other.gameObject.tag == "Ground")
         {
-            isGrounded = false;
+            _isGrounded = false;
         }
     }
-    private void WallSpawn()
+
+    void OnCollisionEnter(Collision other)
     {
-        Vector3 position = new Vector3(transform.position.x, transform.position.y, transform.position.z - wallSpawnRange);
-        Quaternion rotation = transform.rotation;
-        GameObject wall = Instantiate(placeableWall, position, rotation);
-        Destroy(wall.gameObject, wallLifeTime);
-    }
-    private void UIUpdateCounter()
-    {
-        springText.text = m_springCounter.ToString();
-        wallText.text = m_placeWallCounter.ToString();
-        cloackText.text = m_cloackCounter.ToString();
+        if (other.gameObject.tag == Constants.Tags.GROUND) //isGrounded variable setting true for jumping
+        {
+            _isGrounded = true;
+        }
+        
     }
 }

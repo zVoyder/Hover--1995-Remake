@@ -36,9 +36,9 @@ public class BoostOnTrigger : MonoBehaviour
         {
             Play(_trigger); // Play the triggered audio
 
-            pl.m_rigidBody.velocity = Vector3.zero;
+            pl.rigidBody.velocity = Vector3.zero;
             pl.enabled = false;
-            StartCoroutine(SetLaunch(pl.m_rigidBody));
+            StartCoroutine(SetLaunch(pl.rigidBody));
         }
     }
 

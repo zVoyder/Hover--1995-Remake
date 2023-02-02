@@ -2,22 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class ImmobilizePlatform : MonoBehaviour
 {
-    public float timeRecover;
+    public float immobilizeDuration;
     private RBPlayerMovement player;
+    private AudioSource _audio;
+
+    private void Start()
+    {
+        _audio = GetComponent<AudioSource>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<RBPlayerMovement>(out player)) //when the player collides set the variable true
         {
-            StartCoroutine(ReEnableIn(timeRecover, player.CanMove));
+            _audio.Play();
+            StartCoroutine(ReEnableIn(immobilizeDuration, player.CanMove));
         }
         Debug.Log("tigger");
     }
+
     private IEnumerator ReEnableIn(float time, bool b)
     {
         player.CanMove = false;
-        player.m_rigidBody.velocity = Vector3.zero;
+        player.rigidBody.velocity = Vector3.zero;
         yield return new WaitForSeconds(time);
         player.CanMove = true;
     }

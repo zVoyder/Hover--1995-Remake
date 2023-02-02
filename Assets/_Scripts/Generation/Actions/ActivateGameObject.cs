@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class ActivateGameObject : Action
 {
-    public GameObject gameObject;
+    public GameObject gameObjectToEnable;
 
     public override void SetAction()
     {
-        gameObject.SetActive(true);
+        gameObjectToEnable.SetActive(true);
     }
 }
