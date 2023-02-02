@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public class ScoreSingleton : MonoBehaviour
 {
     public static ScoreSingleton instance; //static instance of ScoreSingleton 
-    internal SO_Score so_Score; // Reference to the scriptable object for storing score
+    public SO_Score so_Score; // Reference to the scriptable object for storing score
 
     TMP_Text _scoreText; // Reference to the text component for displaying the score
 

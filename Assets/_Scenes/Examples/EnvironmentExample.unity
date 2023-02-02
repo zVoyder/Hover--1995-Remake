@@ -691,6 +691,9 @@ MonoBehaviour:
   cloakImage: {fileID: 389019709}
   wallImage: {fileID: 1809873202}
   shieldImage: {fileID: 640749265}
+  invisibilityColor: {r: 0, g: 0, b: 1, a: 0.23529412}
+  colorBuffedSpeed: {r: 0, g: 1, b: 0, a: 1}
+  colorNerfedSpeed: {r: 1, g: 0, b: 0, a: 1}
   springCounter: 1
   placeWallCounter: 1
   invisibilityCounter: 8
@@ -706,9 +709,6 @@ MonoBehaviour:
   buffedSpeed: 20
   nerfedSpeed: 10
   jumpForce: 0
-  invisibilityColor: {r: 0, g: 0, b: 1, a: 0.23529412}
-  colorBuffedSpeed: {r: 0, g: 1, b: 0, a: 1}
-  colorNerfedSpeed: {r: 1, g: 0, b: 0, a: 1}
   jumpSFX:
     clip: {fileID: 8300000, guid: 04f1eaaa1c7868b4eb6ecf89cc6dc2e1, type: 3}
     volume: 1
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  random: 0
+  random: 1
   pickUp: 6
 --- !u!114 &439790605
 MonoBehaviour:
