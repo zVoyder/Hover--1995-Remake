@@ -20,7 +20,7 @@ public class ScoreSingleton : MonoBehaviour
 
     public float Multiplier { get => _multiplier; set => _multiplier = value; }
 
-    private void Awake()
+    private void Start()
     {
         // Check if an instance of ScoreSingleton already exists
         if (instance == null)
@@ -61,6 +61,11 @@ public class ScoreSingleton : MonoBehaviour
         _score += (int)((float)toAdd * _multiplier);
         // Update the text with the new score
         UpdateText();
+    }
+
+    public void ResetScore()
+    {
+        _score = 0f;
     }
 
     public void RemoveScore(int toRemove)
