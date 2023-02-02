@@ -213,7 +213,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134761634887783967}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.73, y: -0.3, z: 86.977}
   m_LocalScale: {x: 0.365, y: 0.365, z: 0.365}
   m_Children:
@@ -318,6 +318,9 @@ GameObject:
   - component: {fileID: 1134761635506681801}
   - component: {fileID: 1134761635506681814}
   - component: {fileID: 1134761635506681815}
+  - component: {fileID: 2231711370333500398}
+  - component: {fileID: 7132020358791767443}
+  - component: {fileID: 7749911955218860928}
   m_Layer: 0
   m_Name: ArrowUp
   m_TagString: Untagged
@@ -425,3 +428,44 @@ MonoBehaviour:
     min: 1
     max: 2
   time: 1
+--- !u!136 &2231711370333500398
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134761635506681813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5.2159853
+  m_Height: 16.114914
+  m_Direction: 1
+  m_Center: {x: 0, y: -4.5983505, z: 0.06318824}
+--- !u!114 &7132020358791767443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134761635506681813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUp: 3
+--- !u!114 &7749911955218860928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134761635506681813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fdd1c2b639e144b88f83ce50fb65a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerTag: Player
+  time: 20

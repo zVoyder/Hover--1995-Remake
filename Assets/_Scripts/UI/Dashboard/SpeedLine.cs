@@ -26,7 +26,7 @@ public class SpeedLine : MonoBehaviour
         _image.fillAmount = 0f;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         float len = Mathematics.Percent(rigidBody.velocity.magnitude / (_fillDump * 1000f), 1); // Percentage calculation based on the magnitude of the rigidbody
         len = len > cap ? cap : len; //Check if it is higher of the cap

@@ -132,7 +132,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789366001218116957}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 133, y: -0.6838838, z: -26.1}
   m_LocalScale: {x: 0.365, y: 0.365, z: 0.365}
   m_Children:
@@ -318,6 +318,9 @@ GameObject:
   - component: {fileID: 8274236077742354139}
   - component: {fileID: 6809881049272079833}
   - component: {fileID: 4105364491685852644}
+  - component: {fileID: 528596399035797872}
+  - component: {fileID: 6601637773201369981}
+  - component: {fileID: 5734829482896351828}
   m_Layer: 0
   m_Name: Molla
   m_TagString: Untagged
@@ -425,3 +428,44 @@ MonoBehaviour:
     min: 1
     max: 2
   time: 1
+--- !u!114 &528596399035797872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625440447600676622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fdd1c2b639e144b88f83ce50fb65a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerTag: Player
+  time: 20
+--- !u!114 &6601637773201369981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625440447600676622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUp: 0
+--- !u!136 &5734829482896351828
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625440447600676622}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 4.522011
+  m_Height: 13.701703
+  m_Direction: 1
+  m_Center: {x: 0.00012180503, y: -1.942278, z: -0.03687669}
