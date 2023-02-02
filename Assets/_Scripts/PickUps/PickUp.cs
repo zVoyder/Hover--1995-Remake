@@ -22,10 +22,10 @@ public class PickUp : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerInventory>(out PlayerInventory pli))
         {
-            if (random && !pli.IsShielded)
+            if (random)
             {
-
-                pickUp = (PickUpType)Random.Range(0, System.Enum.GetValues(typeof(PickUpType)).Length-1);
+                if (!pli.IsShielded)
+                    pickUp = (PickUpType)Random.Range(0, System.Enum.GetValues(typeof(PickUpType)).Length-1);
             }
             else
             {
