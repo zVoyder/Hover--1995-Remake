@@ -25,6 +25,8 @@ public class RBPlayerMovement : MonoBehaviour
     public float lowerOffset;
     public float stepHeight;
 
+    public LayerMask climbableLayers;
+
     void Start() // Start is called before the first frame update
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -95,11 +97,11 @@ public class RBPlayerMovement : MonoBehaviour
         Vector3 lowerPos = new Vector3(transform.position.x, transform.position.y + lowerOffset, transform.position.z);
         Vector3 upperPos = new Vector3(transform.position.x, transform.position.y + upperOffset, transform.position.z);
 
-        if (Physics.Raycast(lowerPos, transform.forward, out RaycastHit hitLower, lowerDistance))
+        if (Physics.Raycast(lowerPos, transform.forward, out RaycastHit hitLower, lowerDistance, climbableLayers))
         {
             //Debug.Log("hitLow");
 
-            if (!Physics.Raycast(upperPos, transform.forward, out RaycastHit hitUpper, upperDistance))
+            if (!Physics.Raycast(upperPos, transform.forward, out RaycastHit hitUpper, upperDistance, climbableLayers))
             {
                 //Debug.Log("hitUpper");
 
