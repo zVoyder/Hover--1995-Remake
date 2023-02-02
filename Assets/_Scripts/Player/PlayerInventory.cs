@@ -239,7 +239,7 @@ public class PlayerInventory : MonoBehaviour
         while (timer < invisibilityDuration)
         {
             timer += Time.fixedDeltaTime;
-            cloakImage.fillAmount = 1 - (timer / speedNerfDuration);
+            cloakImage.fillAmount = 1 - (timer / time);
             yield return new WaitForFixedUpdate();
         }
 
