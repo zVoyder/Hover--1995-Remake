@@ -64,7 +64,6 @@ public class RBPlayerMovement : MonoBehaviour
                 }
             }
         }
-
     }
 
     void Update() // Update is called once per frame

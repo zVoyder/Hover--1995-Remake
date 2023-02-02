@@ -7,7 +7,6 @@ using UnityEngine;
 public class RemoveObjectiveOnTrigger : MonoBehaviour
 {
     public ObjectivesGenerator objectivesGeneratorReference;
-    public string triggerTag = Constants.Tags.PLAYER;
     public int scoreToRemove = 2000;
 
     private AudioSource _audio;
@@ -19,7 +18,8 @@ public class RemoveObjectiveOnTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(triggerTag))
+        if (other.TryGetComponent<PlayerInventory>(out PlayerInventory pli)
+        && !pli.IsShielded)
         {
             _audio.Play();
             objectivesGeneratorReference.RemoveObjective();

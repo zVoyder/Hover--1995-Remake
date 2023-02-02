@@ -34,11 +34,15 @@ public class BoostOnTrigger : MonoBehaviour
     {
         if (other.TryGetComponent<RBPlayerMovement>(out RBPlayerMovement pl))
         {
-            Play(_trigger); // Play the triggered audio
+            if (other.TryGetComponent<PlayerInventory>(out PlayerInventory pli) 
+                && !pli.IsShielded)
+            {
+                Play(_trigger); // Play the triggered audio
 
-            pl.rigidBody.velocity = Vector3.zero;
-            pl.enabled = false;
-            StartCoroutine(SetLaunch(pl.rigidBody));
+                pl.rigidBody.velocity = Vector3.zero;
+                pl.enabled = false;
+                StartCoroutine(SetLaunch(pl.rigidBody));
+            }
         }
     }
 

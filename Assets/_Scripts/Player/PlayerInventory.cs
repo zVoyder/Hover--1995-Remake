@@ -8,52 +8,59 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RBPlayerMovement))]
 public class PlayerInventory : MonoBehaviour
 {
+    [Header("UI")]
     public TextMeshProUGUI springText;
     public TextMeshProUGUI wallText;
     public TextMeshProUGUI cloackText;
+    public Image speedImage, cloakImage, wallImage, shieldImage;
+    public Color invisibilityColor = Color.blue;
+    public Color colorBuffedSpeed = Color.green, colorNerfedSpeed = Color.red;
 
-    public GameObject placeableWall;
-    [Range(0,10)]
-    public float wallSpawnRange;
-    [Range(1, 50)]
-    public float wallLifeTime = 1;
-
-
+    [Header("Counters")]
     public int springCounter; //counter for how many spring the player have to jump
-
     public int placeWallCounter; // counter for how many placeable wall does the player have
-
     public int invisibilityCounter; //counter for how many cloack for invisibility does the player have
 
-    public float m_jumpForce; //the force of the jump (can be setted in the inspector)
+    [Header("Durations")]
+    [Range(1, 30)] public float speedBuffDuration = 1;
+    [Range(1, 30)] public float speedNerfDuration = 1;
+    [Range(1, 30)] public float shieldDuration = 1;
+    [Range(1, 30)] public float invisibilityDuration = 10f;
+    [Range(1, 30)] public float breakoutDuration = 1;
+    [Range(1, 30)] public float wallLifeTime = 1;
+
+    [Header("Placeables")]
+    public GameObject placeableWall;
+    [Range(0, 10)] public float wallSpawnRange;
+
+    [Header("MinimapBreakout")]
+    public GameObject minimap;
+
+    [Header("Speed Modyfiers")]
+    [Range(0, 1000)] public float buffedSpeed;
+    [Range(0, 1000)] public float nerfedSpeed;
+
+    [Header("Abilities")]
+    public float jumpForce; //the force of the jump (can be setted in the inspector)
+
+    [Header("Audio")]
+    public AudioSFX jumpSFX;
+    public AudioSFX invisibleSFX;
+    public AudioSFX wallSFX; // Audio SFXs for the skills
+
     private bool _isGrounded; //bool to be sure the player must be touching the ground or the stairs before jump
     public bool IsGrounded { get => _isGrounded; }
-
-    [Range(1, 30)]
-    public float speedBuffDuration = 1, speedNerfDuration = 1; //duration of the buff/debuff (can be setted in the inspector)
-    [Range(0, 1000)]
-    public float buffedSpeed; //bool to enable temporary buff of maximum speed
-    [Range(0, 1000)]
-    public float nerfedSpeed; //bool to enable temporary nerf of maximum speed
-
-    [Range(1, 60)]public float invisibilityDuration = 10f;
-    public Color invisibilityColor = Color.blue;
-    private float _alpha = 0f;
-
-    private Rigidbody _rigidBody;
-    RBPlayerMovement pm;
-
-    public AudioSFX jumpSFX, invisibleSFX, wallSFX; // Audio SFXs for the skills
-
     public bool IsInvisible { get; set; } = false;
-
     public bool IsNerfed { get; set; } = false;
     public bool IsBuffed { get; set; } = false;
+    public bool IsShielded { get; set; } = false;
+
 
     private float _startedMaxSpeed;
+    private float _alpha = 0f;
+    private Rigidbody _rigidBody;
+    private RBPlayerMovement pm;
 
-
-    public Image nerfImage, buffImage, cloakImage, wallImage;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +70,11 @@ public class PlayerInventory : MonoBehaviour
         pm = GetComponent<RBPlayerMovement>();
         _startedMaxSpeed = pm.maxSpeed;
         UIUpdateCounter();
+
+        speedImage.fillAmount = 0;
+        cloakImage.fillAmount = 0;
+        wallImage.fillAmount = 0;
+        shieldImage.fillAmount = 0;
     }
 
     // Update is called once per frame
@@ -105,50 +117,64 @@ public class PlayerInventory : MonoBehaviour
 
     public void SpeedBuff()
     {
-        StartCoroutine(StartSpeedBuff());
+        speedImage.color = colorBuffedSpeed;
+        StartCoroutine(SpeedChangeFor(speedBuffDuration, buffedSpeed));
     }
 
     public void SpeedNerf()
     {
-        StartCoroutine(StartSpeedNerf());
+        speedImage.color = colorNerfedSpeed;
+        StartCoroutine(SpeedChangeFor(speedNerfDuration, nerfedSpeed));
     }
 
-    private IEnumerator StartSpeedBuff()
+    public void Shield()
     {
-        StopCoroutine(StartSpeedNerf());
+        StartCoroutine(ActivateShieldFor(shieldDuration));
+    }
 
+    public void Breakout()
+    {
+        StartCoroutine(BreakOutFor(breakoutDuration));
+    }
+
+    private IEnumerator BreakOutFor(float time)
+    {
+        minimap.SetActive(false);
+        yield return new WaitForSeconds(time);
+        minimap.SetActive(true);
+    }
+
+    private IEnumerator ActivateShieldFor(float time)
+    {
         float timer = 0f;
-        while (timer < speedBuffDuration)
+
+        while (timer < time)
         {
-            nerfImage.fillAmount = 1;
-            pm.maxSpeed = buffedSpeed;
+            IsShielded = true;
             timer += Time.fixedDeltaTime;
-            buffImage.fillAmount = 1 - (timer / speedBuffDuration);
+            shieldImage.fillAmount = 1 - (timer / shieldDuration);
             yield return new WaitForFixedUpdate();
         }
 
-        pm.maxSpeed = _startedMaxSpeed;
-        buffImage.fillAmount = 1;
+        shieldImage.fillAmount = 0;
+        IsShielded = false;
 
         yield return null;
     }
 
-    private IEnumerator StartSpeedNerf()
+    private IEnumerator SpeedChangeFor(float time, float newSpeed)
     {
-        StopCoroutine(StartSpeedBuff());
-
         float timer = 0f;
-        while (timer < speedNerfDuration)
+
+        while (timer < time)
         {
-            buffImage.fillAmount = 1;
-            pm.maxSpeed = nerfedSpeed;
+            pm.maxSpeed = newSpeed;
             timer += Time.fixedDeltaTime;
-            nerfImage.fillAmount = 1 - (timer / speedNerfDuration);
+            speedImage.fillAmount = 1 - (timer / time);
             yield return new WaitForFixedUpdate();
         }
 
         pm.maxSpeed = _startedMaxSpeed;
-        nerfImage.fillAmount = 1;
 
         yield return null;
     }
@@ -176,7 +202,6 @@ public class PlayerInventory : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        wallImage.fillAmount = 1;
         Destroy(wall);
         yield return null;
     }
@@ -184,7 +209,7 @@ public class PlayerInventory : MonoBehaviour
     private void Jump() 
     {
         Extension.Audios.PlayClipAtPoint(jumpSFX, transform.position);
-        _rigidBody.AddForce(Vector3.up * m_jumpForce); //jump effective movement
+        _rigidBody.AddForce(Vector3.up * jumpForce); //jump effective movement
         springCounter--; //removing 1 spring counter each jump
         UIUpdateCounter();
     }
@@ -218,7 +243,6 @@ public class PlayerInventory : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        cloakImage.fillAmount = 1;
         _alpha = 0f;
         IsInvisible = false;
         yield return null;

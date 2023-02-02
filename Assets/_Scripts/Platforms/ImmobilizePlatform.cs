@@ -18,8 +18,12 @@ public class ImmobilizePlatform : MonoBehaviour
     {
         if (other.TryGetComponent<RBPlayerMovement>(out player)) //when the player collides set the variable true
         {
-            _audio.Play();
-            StartCoroutine(ReEnableIn(immobilizeDuration, player.CanMove));
+            if (other.TryGetComponent<PlayerInventory>(out PlayerInventory pli)
+    && !pli.IsShielded)
+            {
+                _audio.Play();
+                StartCoroutine(ReEnableIn(immobilizeDuration, player.CanMove));
+            }
         }
     }
 
