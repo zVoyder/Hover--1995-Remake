@@ -12,6 +12,6 @@ public class SceneSetMultiplier : MonoBehaviour
 
     private void Start()
     {
-        ScoreSingleton.instance.so_Score.multiplier = multiplier;
+        ScoreSingleton.instance.Multiplier = multiplier;
     }
 }

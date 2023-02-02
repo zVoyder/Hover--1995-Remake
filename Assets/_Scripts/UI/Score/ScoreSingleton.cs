@@ -13,10 +13,12 @@ using UnityEngine.UI;
 public class ScoreSingleton : MonoBehaviour
 {
     public static ScoreSingleton instance; //static instance of ScoreSingleton 
-    public SO_Score so_Score; // Reference to the scriptable object for storing score
+    private float _score; // Reference to the scriptable object for storing score
+    private float _multiplier;
 
     TMP_Text _scoreText; // Reference to the text component for displaying the score
 
+    public float Multiplier { get => _multiplier; set => _multiplier = value; }
 
     private void Awake()
     {
@@ -26,8 +28,6 @@ public class ScoreSingleton : MonoBehaviour
             // If not, set this object as the instance and subscribe to the SceneLoaded event
             SceneManager.sceneLoaded += OnSceneLoaded;
             instance = this;
-            // Create an instance of the scriptable object for storing the score
-            so_Score = ScriptableObject.CreateInstance<SO_Score>();
             // Prevent this object from being destroyed when changing scenes
             DontDestroyOnLoad(this);
         }
@@ -37,7 +37,6 @@ public class ScoreSingleton : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
     //Event that is called every time a new scene is loaded
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -59,22 +58,22 @@ public class ScoreSingleton : MonoBehaviour
     public void AddScore(int toAdd)
     {
         // Add to the score stored in the scriptable object and multiply it by the multiplier
-        so_Score.score += (int)((float)toAdd * so_Score.multiplier);
+        _score += (int)((float)toAdd * _multiplier);
         // Update the text with the new score
         UpdateText();
     }
 
     public void RemoveScore(int toRemove)
     {
-        int totalToRemove = (int)((float)toRemove * so_Score.multiplier);
+        int totalToRemove = (int)((float)toRemove * _multiplier);
 
-        if (so_Score.score - totalToRemove < 0)
+        if (_score - totalToRemove < 0)
         {
-            so_Score.score = 0;
+            _score = 0;
         }
         else
         {
-            so_Score.score -= totalToRemove;
+            _score -= totalToRemove;
         }
 
         // Update the text with the new score
@@ -86,7 +85,7 @@ public class ScoreSingleton : MonoBehaviour
     /// </summary>
     private void UpdateText()
     {
-        _scoreText.text = so_Score.score.ToString();
+        _scoreText.text = _score.ToString();
     }
 
 }
