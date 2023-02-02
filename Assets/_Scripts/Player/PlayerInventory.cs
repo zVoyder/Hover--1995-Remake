@@ -113,10 +113,11 @@ public class PlayerInventory : MonoBehaviour
         if (!IsBuffed)
         {
             IsBuffed = true;
-            pm.maxSpeed += buffedSpeed;
+            float tempMaxSpeed = pm.maxSpeed;
+            pm.maxSpeed = buffedSpeed;
             yield return new WaitForSeconds(speedBuffDuration);
             IsBuffed = false;
-            pm.maxSpeed -= buffedSpeed;
+            pm.maxSpeed = tempMaxSpeed;
         }
     }
 
@@ -124,10 +125,12 @@ public class PlayerInventory : MonoBehaviour
     {
         if (!IsNerfed) {
             IsNerfed = true;
-            pm.maxSpeed -= nerfedSpeed;
+
+            float tempMaxSpeed = pm.maxSpeed;
+            pm.maxSpeed = nerfedSpeed;
             yield return new WaitForSeconds(speedBuffDuration);
             IsNerfed = false;
-            pm.maxSpeed += nerfedSpeed;
+            pm.maxSpeed = tempMaxSpeed;
         }
     }
 
