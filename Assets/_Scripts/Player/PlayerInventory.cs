@@ -36,7 +36,7 @@ public class PlayerInventory : MonoBehaviour
     [Range(0, 1000)]
     public float nerfedSpeed; //bool to enable temporary nerf of maximum speed
 
-    [Range(1, 60)]public float invisibilityCooldown = 10f;
+    [Range(1, 60)]public float invisibilityDuration = 10f;
     public Color invisibilityColor = Color.blue;
     private float _alpha = 0f;
 
@@ -51,6 +51,9 @@ public class PlayerInventory : MonoBehaviour
     public bool IsBuffed { get; set; } = false;
 
     private float _startedMaxSpeed;
+
+
+    public Image nerfImage, buffImage, cloakImage, wallImage;
 
     // Start is called before the first frame update
     void Start()
@@ -112,27 +115,42 @@ public class PlayerInventory : MonoBehaviour
 
     private IEnumerator StartSpeedBuff()
     {
-        if (!IsBuffed)
+        StopCoroutine(StartSpeedNerf());
+
+        float timer = 0f;
+        while (timer < speedBuffDuration)
         {
-            StopCoroutine(StartSpeedNerf());
-            IsBuffed = true;
+            nerfImage.fillAmount = 1;
             pm.maxSpeed = buffedSpeed;
-            yield return new WaitForSeconds(speedBuffDuration);
-            IsBuffed = false;
-            pm.maxSpeed = _startedMaxSpeed;
+            timer += Time.fixedDeltaTime;
+            buffImage.fillAmount = 1 - (timer / speedBuffDuration);
+            yield return new WaitForFixedUpdate();
         }
+
+        pm.maxSpeed = _startedMaxSpeed;
+        buffImage.fillAmount = 1;
+
+        yield return null;
     }
 
     private IEnumerator StartSpeedNerf()
     {
-        if (!IsNerfed) {
-            StopCoroutine(StartSpeedBuff());
-            IsNerfed = true;
+        StopCoroutine(StartSpeedBuff());
+
+        float timer = 0f;
+        while (timer < speedNerfDuration)
+        {
+            buffImage.fillAmount = 1;
             pm.maxSpeed = nerfedSpeed;
-            yield return new WaitForSeconds(speedBuffDuration);
-            IsNerfed = false;
-            pm.maxSpeed = _startedMaxSpeed;
+            timer += Time.fixedDeltaTime;
+            nerfImage.fillAmount = 1 - (timer / speedNerfDuration);
+            yield return new WaitForFixedUpdate();
         }
+
+        pm.maxSpeed = _startedMaxSpeed;
+        nerfImage.fillAmount = 1;
+
+        yield return null;
     }
 
     private void WallSpawn()
@@ -144,7 +162,23 @@ public class PlayerInventory : MonoBehaviour
         Vector3 position = transform.position + transform.forward * -wallSpawnRange;
         Quaternion rotation = Quaternion.LookRotation(-transform.forward);
         GameObject wall = Instantiate(placeableWall, position, rotation);
-        Destroy(wall.gameObject, wallLifeTime);
+        StartCoroutine(WallSpawnDuration(wall));
+    }
+
+    private IEnumerator WallSpawnDuration(GameObject wall)
+    {
+        float timer = 0f;
+
+        while (timer < invisibilityDuration)
+        {
+            timer += Time.fixedDeltaTime;
+            wallImage.fillAmount = 1 - (timer / speedNerfDuration);
+            yield return new WaitForFixedUpdate();
+        }
+
+        wallImage.fillAmount = 1;
+        Destroy(wall);
+        yield return null;
     }
 
     private void Jump() 
@@ -160,7 +194,7 @@ public class PlayerInventory : MonoBehaviour
         Extension.Audios.PlayClipAtPoint(invisibleSFX, transform.position);
         invisibilityCounter--;
         UIUpdateCounter();
-        StartCoroutine(GoInvisibleFor(invisibilityCooldown));
+        StartCoroutine(GoInvisibleFor(invisibilityDuration));
     }
 
     private void UIUpdateCounter()
@@ -170,14 +204,24 @@ public class PlayerInventory : MonoBehaviour
         cloackText.text = invisibilityCounter.ToString();
     }
 
-
     private IEnumerator GoInvisibleFor(float time)
     {
         IsInvisible = true;
         _alpha = invisibilityColor.a;
-        yield return new WaitForSeconds(time);
+
+        float timer = 0f;
+
+        while (timer < invisibilityDuration)
+        {
+            timer += Time.fixedDeltaTime;
+            cloakImage.fillAmount = 1 - (timer / speedNerfDuration);
+            yield return new WaitForFixedUpdate();
+        }
+
+        cloakImage.fillAmount = 1;
         _alpha = 0f;
         IsInvisible = false;
+        yield return null;
     }
 
     private void OnGUI()

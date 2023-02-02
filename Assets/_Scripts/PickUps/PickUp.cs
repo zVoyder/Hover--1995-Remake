@@ -13,6 +13,7 @@ public class PickUp : MonoBehaviour
         REDLIGHT
     }
 
+    public bool random;
     public PickUpType pickUp;
 
 
@@ -20,8 +21,14 @@ public class PickUp : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerInventory>(out PlayerInventory pli))
         {
+            if (random)
+            {
+                pickUp = (PickUpType)Random.Range(0, 4);
+            }
+
             switch (pickUp)
             {
+
                 case PickUpType.SPRING:
                     pli.IncreaseSpringCounter();
                 break;
@@ -40,7 +47,8 @@ public class PickUp : MonoBehaviour
 
                 case PickUpType.REDLIGHT:
                     pli.SpeedNerf();
-                    break;
+                break;
+            
             }
         }
     }
