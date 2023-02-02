@@ -881,6 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  random: 0
   pickUp: 3
 --- !u!65 &182020571
 BoxCollider:
@@ -8320,6 +8321,9 @@ MonoBehaviour:
   lowerDistance: 0
   lowerOffset: 0
   stepHeight: 0
+  climbableLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1886079885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8335,19 +8339,28 @@ MonoBehaviour:
   springText: {fileID: 288284589}
   wallText: {fileID: 178789971}
   cloackText: {fileID: 1131692185}
-  placeableWall: {fileID: 1011434271}
-  wallSpawnRange: 2.28
-  wallLifeTime: 10.8
+  speedImage: {fileID: 0}
+  cloakImage: {fileID: 0}
+  wallImage: {fileID: 0}
+  shieldImage: {fileID: 0}
+  invisibilityColor: {r: 0, g: 0, b: 1, a: 0.49019608}
+  colorBuffedSpeed: {r: 0, g: 1, b: 0, a: 1}
+  colorNerfedSpeed: {r: 1, g: 0, b: 0, a: 1}
   springCounter: 2
   placeWallCounter: 2
   invisibilityCounter: 0
-  m_jumpForce: 31.3
   speedBuffDuration: 5
   speedNerfDuration: 5
+  shieldDuration: 1
+  invisibilityDuration: 10
+  breakoutDuration: 1
+  wallLifeTime: 10.8
+  placeableWall: {fileID: 1011434271}
+  wallSpawnRange: 2.28
+  minimap: {fileID: 0}
   buffedSpeed: 23
   nerfedSpeed: 23
-  invisibilityCooldown: 3
-  invisibilityColor: {r: 0, g: 0, b: 1, a: 0.49019608}
+  jumpForce: 0
   jumpSFX:
     clip: {fileID: 8300000, guid: ba9a611ccec9a99488ce6095cebf1214, type: 3}
     volume: 1

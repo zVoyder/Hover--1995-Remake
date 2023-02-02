@@ -18,8 +18,6 @@ public class ScoreSingleton : MonoBehaviour
 
     TMP_Text _scoreText; // Reference to the text component for displaying the score
 
-    public float Multiplier { get => _multiplier; set => _multiplier = value; }
-
     private void Start()
     {
         // Check if an instance of ScoreSingleton already exists
@@ -62,12 +60,6 @@ public class ScoreSingleton : MonoBehaviour
         // Update the text with the new score
         UpdateText();
     }
-
-    public void ResetScore()
-    {
-        _score = 0f;
-    }
-
     public void RemoveScore(int toRemove)
     {
         int totalToRemove = (int)((float)toRemove * _multiplier);
@@ -83,6 +75,16 @@ public class ScoreSingleton : MonoBehaviour
 
         // Update the text with the new score
         UpdateText();
+    }
+
+    public void ResetScore()
+    {
+        _score = 0f;
+    }
+
+    public void SetMultiplier(float multiplier)
+    {
+        this._multiplier = multiplier;
     }
 
     /// <summary>
