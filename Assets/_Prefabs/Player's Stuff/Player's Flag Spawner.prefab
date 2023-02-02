@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5973840205474199027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5973840205474199037}
+  - component: {fileID: 5973840205474199026}
+  - component: {fileID: 5973840205474199036}
+  - component: {fileID: 5973840205474199038}
+  - component: {fileID: 5973840205474199039}
+  m_Layer: 0
+  m_Name: Player's Flag Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5973840205474199037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973840205474199027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 105.66171, y: 193.66081, z: 167.76788}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5973840205474199026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973840205474199027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b646770a7bc79124f9cbb1e9f14c4bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uICounterPlayer: {fileID: 0}
+  objective: {fileID: 5025004186194331799, guid: c7d393c3cd812664e98fcff22fb50be4, type: 3}
+  triggerTag: Player
+  objectiveTag: PlayerFlag
+  repetitions:
+    series: 1
+    steps: 3
+  maxObjectivesOnUI: 6
+  positionsPool:
+  - {x: 175, y: 1.3, z: 35.5}
+  - {x: 180, y: 1.3, z: 80}
+  - {x: 190, y: 1.3, z: 150}
+  - {x: 180, y: 1.3, z: 220}
+  - {x: 176, y: 1.3, z: 277}
+  - {x: 100, y: 1.3, z: 250}
+  - {x: 20, y: 1.3, z: 262}
+  - {x: 16.15, y: 1.3, z: 221}
+  - {x: 98, y: 1.3, z: 170}
+  - {x: 138, y: 6.6, z: 127}
+  - {x: 60, y: 1.3, z: 70}
+  - {x: 9.4, y: 1.3, z: 144}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+--- !u!114 &5973840205474199036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973840205474199027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eafcd0463f5ce048a2f3faa4531db90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectivesGeneratorReference: {fileID: 5973840205474199026}
+  scorePerObjective: 2500
+--- !u!114 &5973840205474199038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973840205474199027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4865e0ce83b91c45b621c2e902a9dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObject: {fileID: 0}
+--- !u!114 &5973840205474199039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973840205474199027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9c49a9f870abf4abc6a41970b68cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreToAdd: 3000

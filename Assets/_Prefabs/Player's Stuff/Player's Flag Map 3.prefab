@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 6223406615620373582}
   - component: {fileID: 5807920244612834092}
   m_Layer: 0
-  m_Name: Player's Flag 1
+  m_Name: Player's Flag Map 3
   m_TagString: PlayerFlag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerTag: Player
-  scoreToAdd: 2000
+  scoreToAdd: 5000
 --- !u!1 &5114057449841170940
 GameObject:
   m_ObjectHideFlags: 0
