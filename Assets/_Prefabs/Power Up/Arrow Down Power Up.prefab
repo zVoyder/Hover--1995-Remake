@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 419619494183608426}
   - component: {fileID: 419619494183608427}
   - component: {fileID: 419619494183608424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -83,7 +83,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1.32
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 169008998734519636}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrow Down Power Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 2908380846231805692}
   - component: {fileID: 5740132733894515181}
   - component: {fileID: 197443468822976539}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder4_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 6586195527198901416}
   - component: {fileID: 3871055986745758417}
   - component: {fileID: 3107877612151726748}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cono
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,11 +317,12 @@ GameObject:
   - component: {fileID: 8841253468650318640}
   - component: {fileID: 6725710867142762490}
   - component: {fileID: 5068372665772342828}
-  - component: {fileID: 1158574074}
   - component: {fileID: 1158574075}
   - component: {fileID: 1158574077}
+  - component: {fileID: 1158574074}
   - component: {fileID: 1158574080}
-  m_Layer: 0
+  - component: {fileID: 4865211009588626479}
+  m_Layer: 7
   m_Name: ArrowDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,20 +412,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1158574074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5068372665772342831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8fdd1c2b639e144b88f83ce50fb65a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerTag: Player
-  time: 20
 --- !u!114 &1158574075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,8 +427,8 @@ MonoBehaviour:
   bumpableTags:
   - Player
   audioEffect:
-    clip: {fileID: 8300000, guid: da6e63a30f4acc640944921a342a5b4b, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 157e2eaa04df6ee49b05a619529d18e0, type: 3}
+    volume: 0.5
     pitch: 1
     spatialBlend: 0
     mixerGroup: {fileID: -4276760046841834998, guid: 28cbb6508ae7fdf458174cbf2cdc6428, type: 2}
@@ -457,7 +444,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  random: 0
   pickUp: 4
+--- !u!114 &1158574074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5068372665772342831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fdd1c2b639e144b88f83ce50fb65a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerTag: Player
+  time: 20
 --- !u!136 &1158574080
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -472,3 +474,20 @@ CapsuleCollider:
   m_Height: 12.629529
   m_Direction: 1
   m_Center: {x: -0.7369795, y: -2.8556564, z: -0.566789}
+--- !u!114 &4865211009588626479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5068372665772342831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd12519a5451b841856ecad26400da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.003921569, g: 0.3882353, b: 0.3019608, a: 0}
+  intensity:
+    min: 1
+    max: 2
+  time: 1

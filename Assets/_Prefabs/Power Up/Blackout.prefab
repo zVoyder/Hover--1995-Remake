@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2360546760293772004}
   - component: {fileID: 5628450339256941725}
   - component: {fileID: 5802293363890064592}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cono
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6050623285933453488}
   - component: {fileID: 3750805133024868257}
   - component: {fileID: 8726270613684844119}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder4_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,9 +177,9 @@ GameObject:
   - component: {fileID: 5880980658053434585}
   - component: {fileID: 8597271826017082857}
   - component: {fileID: 6649166928093893243}
-  - component: {fileID: 3144468818774532787}
   - component: {fileID: 7982624024599732712}
-  m_Layer: 0
+  - component: {fileID: 3144468818774532787}
+  m_Layer: 7
   m_Name: Radar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,20 +314,6 @@ CapsuleCollider:
   m_Height: 13.729972
   m_Direction: 1
   m_Center: {x: 0, y: -3.388801, z: 0}
---- !u!114 &3144468818774532787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6021291745080605253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8fdd1c2b639e144b88f83ce50fb65a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerTag: Player
-  time: 20
 --- !u!114 &7982624024599732712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,11 +329,25 @@ MonoBehaviour:
   bumpableTags:
   - Player
   audioEffect:
-    clip: {fileID: 8300000, guid: 75893ad9ac969a8428d784175a36bc0d, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: f999717339181664383addd21fa23f10, type: 3}
+    volume: 0.6
     pitch: 1
     spatialBlend: 0
     mixerGroup: {fileID: -4276760046841834998, guid: 28cbb6508ae7fdf458174cbf2cdc6428, type: 2}
+--- !u!114 &3144468818774532787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021291745080605253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fdd1c2b639e144b88f83ce50fb65a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerTag: Player
+  time: 20
 --- !u!1 &8266116663085984162
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8790170931073725208}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blackout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 9112555141804036159}
   - component: {fileID: 9112555141804036144}
   - component: {fileID: 9112555141804036145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -465,7 +465,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1.32

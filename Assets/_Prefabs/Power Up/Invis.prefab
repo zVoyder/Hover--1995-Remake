@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2691219754059585356}
   - component: {fileID: 5442388070054232373}
   - component: {fileID: 6133508846317482360}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cono
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6224919217959537944}
   - component: {fileID: 3573311340084103689}
   - component: {fileID: 8971885405236579327}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder4_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,10 +176,10 @@ GameObject:
   - component: {fileID: 7440200945521620753}
   - component: {fileID: 7440200945521620752}
   - component: {fileID: 472848315}
+  - component: {fileID: 472848316}
   - component: {fileID: 472848313}
   - component: {fileID: 472848314}
-  - component: {fileID: 472848316}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Invisibility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,6 +300,26 @@ CapsuleCollider:
   m_Height: 11.913245
   m_Direction: 1
   m_Center: {x: 0, y: -2.2118568, z: -0.00012210537}
+--- !u!114 &472848316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440200945521620751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e060495f66694364b9375b78817ed9fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bumpableTags:
+  - Player
+  audioEffect:
+    clip: {fileID: 8300000, guid: 19feb1482c8242644ac37172640d9cda, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    mixerGroup: {fileID: -4276760046841834998, guid: 28cbb6508ae7fdf458174cbf2cdc6428, type: 2}
 --- !u!114 &472848313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,27 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  random: 0
   pickUp: 1
---- !u!114 &472848316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7440200945521620751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e060495f66694364b9375b78817ed9fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bumpableTags:
-  - Player
-  audioEffect:
-    clip: {fileID: 8300000, guid: d92b665c4a43fa140988ecaf616f6026, type: 3}
-    volume: 1
-    pitch: 1
-    spatialBlend: 0
-    mixerGroup: {fileID: 0}
 --- !u!1 &8587343666686940170
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8964291078339628720}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Invis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +393,7 @@ GameObject:
   - component: {fileID: 8929853287421538914}
   - component: {fileID: 8929853287421538915}
   - component: {fileID: 8929853287421538916}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +432,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -464,7 +465,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1.32

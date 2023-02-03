@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5610524640959077898}
   - component: {fileID: 6236216039700665961}
   - component: {fileID: 6139840563129568660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Casual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,11 +181,11 @@ MonoBehaviour:
   bumpableTags:
   - Player
   audioEffect:
-    clip: {fileID: 8300000, guid: 5a350968ff7cc404c81cd69b8d1de6fb, type: 3}
+    clip: {fileID: 8300000, guid: cbf58b9d20c6f804fac467fdbafc8d1b, type: 3}
     volume: 1
     pitch: 1
     spatialBlend: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -4276760046841834998, guid: 28cbb6508ae7fdf458174cbf2cdc6428, type: 2}
 --- !u!1 &1429610946431964168
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 8212526551491922300}
   - component: {fileID: 2244723794171633413}
   - component: {fileID: 125954228176269128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cono
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 198924145048982312}
   - component: {fileID: 7293316554585347129}
   - component: {fileID: 2892271131844990415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder4_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2938154851130708096}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Casual pick up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 3408333456522750770}
   - component: {fileID: 3408333456522750769}
   - component: {fileID: 3408333456522750768}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -465,7 +465,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1.32

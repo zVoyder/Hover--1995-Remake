@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 447279009491547198}
   - component: {fileID: 447279009491547197}
   - component: {fileID: 447279009491547196}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -83,7 +83,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1.32
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 126017908488800231}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 3151218669557122127}
   - component: {fileID: 5498552202029269854}
   - component: {fileID: 97585636886725288}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder4_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 6377406827953348123}
   - component: {fileID: 3917855416135649378}
   - component: {fileID: 2938214407182432303}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cono
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,10 +318,11 @@ GameObject:
   - component: {fileID: 8274236077742354139}
   - component: {fileID: 6809881049272079833}
   - component: {fileID: 4105364491685852644}
-  - component: {fileID: 528596399035797872}
+  - component: {fileID: 3084043676320364608}
   - component: {fileID: 6601637773201369981}
+  - component: {fileID: 528596399035797872}
   - component: {fileID: 5734829482896351828}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Molla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,6 +429,40 @@ MonoBehaviour:
     min: 1
     max: 2
   time: 1
+--- !u!114 &3084043676320364608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625440447600676622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e060495f66694364b9375b78817ed9fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bumpableTags:
+  - Player
+  audioEffect:
+    clip: {fileID: 8300000, guid: 71096eb4d81a24e45bdaed063530aa0d, type: 3}
+    volume: 0.3
+    pitch: 1
+    spatialBlend: 0
+    mixerGroup: {fileID: -4276760046841834998, guid: 28cbb6508ae7fdf458174cbf2cdc6428, type: 2}
+--- !u!114 &6601637773201369981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625440447600676622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  random: 0
+  pickUp: 0
 --- !u!114 &528596399035797872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,19 +477,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerTag: Player
   time: 20
---- !u!114 &6601637773201369981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7625440447600676622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUp: 0
 --- !u!136 &5734829482896351828
 CapsuleCollider:
   m_ObjectHideFlags: 0

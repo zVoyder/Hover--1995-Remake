@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 160153909325980802}
   - component: {fileID: 160153909325980801}
   - component: {fileID: 351721398}
+  - component: {fileID: 351721403}
   - component: {fileID: 351721396}
   - component: {fileID: 351721397}
-  - component: {fileID: 351721403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,33 +138,6 @@ CapsuleCollider:
   m_Height: 14.993058
   m_Direction: 1
   m_Center: {x: 0, y: -3.3053396, z: 0}
---- !u!114 &351721396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160153909325980800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUp: 2
---- !u!114 &351721397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160153909325980800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8fdd1c2b639e144b88f83ce50fb65a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerTag: Player
-  time: 20
 --- !u!114 &351721403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,11 +153,39 @@ MonoBehaviour:
   bumpableTags:
   - Player
   audioEffect:
-    clip: {fileID: 8300000, guid: 8ebaab9b269b96a4cb0939ba5594421e, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 935ebd8b069434f4885c2627bbd201b2, type: 3}
+    volume: 0.7
     pitch: 1
     spatialBlend: 0
     mixerGroup: {fileID: -4276760046841834998, guid: 28cbb6508ae7fdf458174cbf2cdc6428, type: 2}
+--- !u!114 &351721396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160153909325980800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bd193bd53add043b5c45ccf00a299b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  random: 0
+  pickUp: 2
+--- !u!114 &351721397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160153909325980800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fdd1c2b639e144b88f83ce50fb65a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerTag: Player
+  time: 20
 --- !u!1 &6213358365573904813
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6733330245938291479}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +231,7 @@ GameObject:
   - component: {fileID: 6555870318820182688}
   - component: {fileID: 6555870318820182689}
   - component: {fileID: 6555870318820182690}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +270,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -302,7 +303,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1.32
@@ -339,7 +340,7 @@ GameObject:
   - component: {fileID: 310525213124393707}
   - component: {fileID: 7678962888530242706}
   - component: {fileID: 8361089793292016863}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cono
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +421,7 @@ GameObject:
   - component: {fileID: 8607869956783317183}
   - component: {fileID: 1189201720333182894}
   - component: {fileID: 6743187367328999000}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder4_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}

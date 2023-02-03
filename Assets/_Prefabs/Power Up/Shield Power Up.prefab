@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 412480448948932889}
   - component: {fileID: 412480448948932890}
   - component: {fileID: 412480448948932891}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 158705386971619232}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shield Power Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 1648593167847662220}
   - component: {fileID: 1193544834481866941}
   - component: {fileID: 2012130326062522989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,11 +282,11 @@ MonoBehaviour:
   bumpableTags:
   - Player
   audioEffect:
-    clip: {fileID: 8300000, guid: e69946c64ad474949962df3b10dc8bd6, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 110072b9343498e46a727d59305a9bcb, type: 3}
+    volume: 0.1
     pitch: 1
     spatialBlend: 0
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -4276760046841834998, guid: 28cbb6508ae7fdf458174cbf2cdc6428, type: 2}
 --- !u!114 &1648593167847662220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 2897786555848088584}
   - component: {fileID: 5747342113206950681}
   - component: {fileID: 204580311003175663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pCylinder4_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 6561032805994530396}
   - component: {fileID: 3878555397147676709}
   - component: {fileID: 3119520389919236200}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cono
   m_TagString: Untagged
   m_Icon: {fileID: 0}

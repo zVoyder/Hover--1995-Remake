@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5973840205474199037}
   - component: {fileID: 5973840205474199026}
   - component: {fileID: 5973840205474199036}
+  - component: {fileID: 2863078753734299463}
   - component: {fileID: 5973840205474199038}
   - component: {fileID: 5973840205474199039}
   m_Layer: 0
@@ -84,6 +85,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectivesGeneratorReference: {fileID: 5973840205474199026}
   scorePerObjective: 2500
+--- !u!114 &2863078753734299463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973840205474199027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4865e0ce83b91c45b621c2e902a9dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectToEnable: {fileID: 0}
 --- !u!114 &5973840205474199038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4865e0ce83b91c45b621c2e902a9dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 0}
+  gameObjectToEnable: {fileID: 0}
 --- !u!114 &5973840205474199039
 MonoBehaviour:
   m_ObjectHideFlags: 0
