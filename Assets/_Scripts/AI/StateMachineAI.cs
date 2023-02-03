@@ -13,7 +13,7 @@ using UnityEngine.AI;
 /// random destination for the AI to move to.
 /// </summary>
 
-[RequireComponent(typeof(NavMeshAgent), typeof(AudioSource))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class StateMachineAI : MonoBehaviour
 {
     public enum AIBehaviour
@@ -60,21 +60,12 @@ public class StateMachineAI : MonoBehaviour
     private AIState _currentState = AIState.PATROL;
 
 
-    //Audio SFX
-    [Header("Audio SFX")]
-    [Tooltip("How much does it talk? In seconds."), Range(1, 60)]public float audioFrequency = 1f;
-    public AudioClip engaging;
-    public AudioClip found;
-    public AudioClip patroling;
+    public AIState GetCurrentState { get => _currentState; }
 
-    private AudioSource _audio;
-    private bool sfxDone = false;
-
-    private bool _targetIsVisible;
+    private bool _targetIsVisible; // Checking if the target has activated the invisibility
 
     private void Start()
     {
-        _audio = GetComponent<AudioSource>();
         _agent = GetComponent<NavMeshAgent>(); // Get the agent and set up my variables
 
         _agent.speed = speed;
@@ -100,7 +91,6 @@ public class StateMachineAI : MonoBehaviour
         bool canSeeTarget = CanSeeLocation(transform.position, _toChase.position, heightEyesOffset, detectionRange) && _targetIsVisible;
         bool canReachObjective = Finder.TryGetClosestGameObjectWithTag(transform, objectiveTag, out GameObject objectiveGameObject)
             && CanSeeLocation(transform.position, objectiveGameObject.transform.position, heightEyesOffset, detectionRange);
-
 
         switch (behaviour)
         {
@@ -154,7 +144,6 @@ public class StateMachineAI : MonoBehaviour
             break;
         }
 
-
         // Switch statement to perform the appropriate task based on the current state
         switch (_currentState)
         {
@@ -168,6 +157,7 @@ public class StateMachineAI : MonoBehaviour
                 Patrol();
                 break;
         }
+
     }
 
 
@@ -182,7 +172,6 @@ public class StateMachineAI : MonoBehaviour
         // Check if the AI is close to its destination
         if (Vector3.Distance(transform.position, _destination) < _agent.stoppingDistance + 1f)
         {
-            StartCoroutine(PlaySFX(patroling));
             // If so, set a new random destination for the AI
             GoToLocation(RandomPoint());
         }
@@ -193,7 +182,6 @@ public class StateMachineAI : MonoBehaviour
     /// </summary>
     private void GrabObjective()
     {
-        StartCoroutine(PlaySFX(found));
         GoToLocation(_closestObjective.position);
     }
 
@@ -202,7 +190,6 @@ public class StateMachineAI : MonoBehaviour
     /// </summary>
     private void Chase()
     {
-        StartCoroutine(PlaySFX(engaging));
         GoToLocation(_toChase.position);
     }
 
@@ -307,19 +294,5 @@ public class StateMachineAI : MonoBehaviour
     #endregion
 
 
-    #region Audio
 
-    private IEnumerator PlaySFX(AudioClip clip)
-    {
-        if (!sfxDone)
-        {
-            _audio.clip = clip;
-            _audio.Play();
-            sfxDone = true;
-        }
-        yield return new WaitForSeconds(audioFrequency);
-        sfxDone = false;
-    }
-
-    #endregion
 }

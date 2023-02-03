@@ -5664,10 +5664,6 @@ MonoBehaviour:
   speed: 10
   acceleration: 8
   heightEyesOffset: 0
-  audioFrequency: 0
-  engaging: {fileID: 0}
-  found: {fileID: 0}
-  patroling: {fileID: 0}
 --- !u!195 &278486185
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6444,6 +6440,7 @@ GameObject:
   - component: {fileID: 959730973}
   - component: {fileID: 959730969}
   - component: {fileID: 959730968}
+  - component: {fileID: 959730974}
   m_Layer: 0
   m_Name: Hover
   m_TagString: Enemy
@@ -6488,10 +6485,6 @@ MonoBehaviour:
   speed: 10
   acceleration: 8
   heightEyesOffset: 0.123
-  audioFrequency: 10
-  engaging: {fileID: 8300000, guid: 21ef9a4664e9b40d795e11602bd7152b, type: 3}
-  found: {fileID: 8300000, guid: 7a4b2f6e4240e4b3289e777e6d655c67, type: 3}
-  patroling: {fileID: 8300000, guid: f0e82a843546b4b2994737f15f5c3494, type: 3}
 --- !u!195 &959730970
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6526,7 +6519,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 3
@@ -6641,6 +6634,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &959730974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959730967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252e5e658415384478490ab312f33edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioFrequency: 2
+  engagings:
+  - {fileID: 8300000, guid: f0de28bd32ee6480aa10b88b5083cbf6, type: 3}
+  - {fileID: 8300000, guid: 534583d054e33405c95aa1d6b1400021, type: 3}
+  - {fileID: 8300000, guid: 21ef9a4664e9b40d795e11602bd7152b, type: 3}
+  founds:
+  - {fileID: 8300000, guid: 7a4b2f6e4240e4b3289e777e6d655c67, type: 3}
+  - {fileID: 8300000, guid: 4f43a7e66564c44cda1aad824f29aa88, type: 3}
+  - {fileID: 8300000, guid: 5171617fc322f448ba4df95d930d348c, type: 3}
+  patrolings:
+  - {fileID: 8300000, guid: f0e82a843546b4b2994737f15f5c3494, type: 3}
+  - {fileID: 8300000, guid: f3307556077934f16ac7daae375202b4, type: 3}
+  - {fileID: 8300000, guid: 29f30f222b1494bf49def8ef17703316, type: 3}
 --- !u!1 &985772483
 GameObject:
   m_ObjectHideFlags: 0
@@ -8199,6 +8217,7 @@ GameObject:
   - component: {fileID: 1886079885}
   - component: {fileID: 1886079887}
   - component: {fileID: 1886079886}
+  - component: {fileID: 1886079888}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -8389,7 +8408,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 04f1eaaa1c7868b4eb6ecf89cc6dc2e1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c0dffa5d06b7b1945bbe27149e5d69ca, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -8490,6 +8509,28 @@ MonoBehaviour:
   minPitch: 0
   maxPitch: 2
   accelerationScale: 50
+--- !u!195 &1886079888
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886079878}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5000001
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1977313753
 GameObject:
   m_ObjectHideFlags: 0
