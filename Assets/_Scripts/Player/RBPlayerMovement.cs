@@ -12,8 +12,8 @@ public class RBPlayerMovement : MonoBehaviour
     public float acceleration = 0; //acceleration rate (can be setted in the inspetor)
     [Range(1, 100)]
     public float maxSpeed = 15; //maximum speed reachable (can be setted in the inspetor)
-    [Range(1, 100)]
-    public float rotationForce = 70; //force of the rotation (can be setted in the inspetor)
+    [Range(1, 500)]
+    public float rotationSpeed = 70; //force of the rotation (can be setted in the inspetor)
     [HideInInspector]
     public float timer = 0; //timer to count the seconds of the movement stop
     public bool CanMove { get; set; } = true;//wrapper to enable player to move
@@ -72,12 +72,12 @@ public class RBPlayerMovement : MonoBehaviour
         if (Input.GetKey(InputManager.TURNLEFT))//left rotation key binding
         {
             
-            transform.Rotate(Vector3.up, -rotationForce * Time.deltaTime); //effective left rotation
+            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime); //effective left rotation
         }
 
         if (Input.GetKey(InputManager.TURNRIGHT)) //right rotation key binding
         {
-            transform.Rotate(Vector3.up, rotationForce * Time.deltaTime); //effective right rotation
+            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime); //effective right rotation
         }
 
 

@@ -10,7 +10,7 @@ using System.Linq;
 /// </summary>
 public class ObjectivesGenerator : MonoBehaviour
 {
-    public Image uICounterPlayer; //UI Image that works as a counter with the fill.amount
+    public Image uICounter; //UI Image that works as a counter with the fill.amount
     public GameObject objective;
     [Tooltip("Who can grab this objective?")] public string triggerTag = Constants.Tags.PLAYER;
     public string objectiveTag = Constants.Tags.PLAYER_FLAG;
@@ -133,7 +133,7 @@ public class ObjectivesGenerator : MonoBehaviour
     /// </summary>
     private void SetUpBackgroundUI()
     {
-        if(uICounterPlayer.transform.parent.TryGetComponent<Image>(out Image back))
+        if(uICounter.transform.parent.TryGetComponent<Image>(out Image back))
         {
             back.fillAmount = (float)_totalQuantity / (float)maxObjectivesOnUI;
         }
@@ -145,12 +145,12 @@ public class ObjectivesGenerator : MonoBehaviour
     /// </summary>
     private void AddObjectiveToUI()
     {
-        uICounterPlayer.fillAmount += 1f / (float)maxObjectivesOnUI; 
+        uICounter.fillAmount += 1f / (float)maxObjectivesOnUI; 
     }
 
 
     private void RemoveObjectiveToUI()
     {
-        uICounterPlayer.fillAmount -= 1f / (float)maxObjectivesOnUI;
+        uICounter.fillAmount -= 1f / (float)maxObjectivesOnUI;
     }
 }
