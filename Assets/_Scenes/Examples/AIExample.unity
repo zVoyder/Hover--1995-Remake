@@ -6646,11 +6646,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252e5e658415384478490ab312f33edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioFrequency: 2
+  audioFrequency: 5
   engagings:
   - {fileID: 8300000, guid: f0de28bd32ee6480aa10b88b5083cbf6, type: 3}
   - {fileID: 8300000, guid: 534583d054e33405c95aa1d6b1400021, type: 3}
   - {fileID: 8300000, guid: 21ef9a4664e9b40d795e11602bd7152b, type: 3}
+  - {fileID: 8300000, guid: f5bc552033d354835911f1f6a3c1494f, type: 3}
   founds:
   - {fileID: 8300000, guid: 7a4b2f6e4240e4b3289e777e6d655c67, type: 3}
   - {fileID: 8300000, guid: 4f43a7e66564c44cda1aad824f29aa88, type: 3}
