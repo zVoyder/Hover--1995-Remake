@@ -95,7 +95,7 @@ public class PlayerInventory : MonoBehaviour
             Invisibility();
         }
 
-        Debug.DrawLine(transform.position, -transform.up);
+
     }
 
     public void IncreaseSpringCounter()
