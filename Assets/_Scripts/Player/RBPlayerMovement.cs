@@ -25,7 +25,9 @@ public class RBPlayerMovement : MonoBehaviour
     public float lowerOffset;
     public float stepHeight;
 
-    public LayerMask climbableLayers;
+    public float groundHeight = 1f;
+
+    public LayerMask groundMask;
 
     void Start() // Start is called before the first frame update
     {
@@ -80,6 +82,7 @@ public class RBPlayerMovement : MonoBehaviour
             transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime); //effective right rotation
         }
 
+        Debug.DrawRay(transform.position, -transform.up * groundHeight);
 
 #if DEBUG
         Vector3 lowerPos = new Vector3(transform.position.x, transform.position.y + lowerOffset, transform.position.z);
@@ -96,11 +99,11 @@ public class RBPlayerMovement : MonoBehaviour
         Vector3 lowerPos = new Vector3(transform.position.x, transform.position.y + lowerOffset, transform.position.z);
         Vector3 upperPos = new Vector3(transform.position.x, transform.position.y + upperOffset, transform.position.z);
 
-        if (Physics.Raycast(lowerPos, transform.forward, out RaycastHit hitLower, lowerDistance, climbableLayers))
+        if (Physics.Raycast(lowerPos, transform.forward, out RaycastHit hitLower, lowerDistance, groundMask))
         {
             //Debug.Log("hitLow");
 
-            if (!Physics.Raycast(upperPos, transform.forward, out RaycastHit hitUpper, upperDistance, climbableLayers))
+            if (!Physics.Raycast(upperPos, transform.forward, out RaycastHit hitUpper, upperDistance, groundMask))
             {
                 //Debug.Log("hitUpper");
 
@@ -109,4 +112,8 @@ public class RBPlayerMovement : MonoBehaviour
         }
     }
 
+    public bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -transform.up, groundHeight, groundMask);
+    }
 }

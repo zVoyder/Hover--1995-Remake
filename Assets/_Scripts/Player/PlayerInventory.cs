@@ -48,12 +48,11 @@ public class PlayerInventory : MonoBehaviour
     public AudioSFX invisibleSFX;
     public AudioSFX wallSFX; // Audio SFXs for the skills
 
-    private bool _isGrounded; //bool to be sure the player must be touching the ground or the stairs before jump
-    public bool IsGrounded { get => _isGrounded; }
     public bool IsInvisible { get; set; } = false;
     public bool IsNerfed { get; set; } = false;
     public bool IsBuffed { get; set; } = false;
     public bool IsShielded { get; set; } = false;
+
 
 
     private float _startedMaxSpeed;
@@ -86,7 +85,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         //bool for unable jumping if not colliding with ground objects as floor and stairs
-        if (Input.GetKeyDown(InputManager.JUMP) && springCounter > 0 && _isGrounded)
+        if (Input.GetKeyDown(InputManager.JUMP) && springCounter > 0 && pm.IsGrounded())
         {
             Jump();
         }
@@ -95,6 +94,8 @@ public class PlayerInventory : MonoBehaviour
         {
             Invisibility();
         }
+
+        Debug.DrawLine(transform.position, -transform.up);
     }
 
     public void IncreaseSpringCounter()
@@ -252,23 +253,5 @@ public class PlayerInventory : MonoBehaviour
     {
         GUI.color = new Color(invisibilityColor.r, invisibilityColor.g, invisibilityColor.b, _alpha);
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture); // Draw Texture with the size of the screen
-    }
-
-    void OnCollisionExit(Collision other)
-    {
-        //isGrounded variable setting false for jumping
-        if (other.gameObject.tag == "Ground")
-        {
-            _isGrounded = false;
-        }
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == Constants.Tags.GROUND) //isGrounded variable setting true for jumping
-        {
-            _isGrounded = true;
-        }
-        
     }
 }

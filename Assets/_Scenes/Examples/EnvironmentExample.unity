@@ -653,7 +653,8 @@ MonoBehaviour:
   lowerDistance: 1
   lowerOffset: -0.8
   stepHeight: 1
-  climbableLayers:
+  groundHeight: 1.2
+  groundMask:
     serializedVersion: 2
     m_Bits: 256
 --- !u!54 &417343870
@@ -694,7 +695,7 @@ MonoBehaviour:
   invisibilityColor: {r: 0, g: 0, b: 1, a: 0.23529412}
   colorBuffedSpeed: {r: 0, g: 1, b: 0, a: 1}
   colorNerfedSpeed: {r: 1, g: 0, b: 0, a: 1}
-  springCounter: 1
+  springCounter: 67
   placeWallCounter: 1
   invisibilityCounter: 8
   speedBuffDuration: 10
@@ -708,7 +709,7 @@ MonoBehaviour:
   minimap: {fileID: 3219602906512295823}
   buffedSpeed: 20
   nerfedSpeed: 10
-  jumpForce: 0
+  jumpForce: 200
   jumpSFX:
     clip: {fileID: 8300000, guid: 04f1eaaa1c7868b4eb6ecf89cc6dc2e1, type: 3}
     volume: 1
@@ -4134,7 +4135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1337706557
 MonoBehaviour:
   m_ObjectHideFlags: 0
