@@ -2242,7 +2242,8 @@ MonoBehaviour:
   lowerDistance: 1
   lowerOffset: -0.5
   stepHeight: 1
-  climbableLayers:
+  groundHeight: 1
+  groundMask:
     serializedVersion: 2
     m_Bits: 256
 --- !u!114 &6106798550736178254
@@ -2544,7 +2545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c740c61eee06bf7448759edfc62f84e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08d3d1e7dcc24da4cbfe4123f7d33516, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

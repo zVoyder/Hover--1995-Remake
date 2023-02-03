@@ -18136,6 +18136,10 @@ PrefabInstance:
       propertyPath: minimap
       value: 
       objectReference: {fileID: 1156729635}
+    - target: {fileID: 6106798550736178253, guid: f1b8ff73afd0805439d0f6df91446dac, type: 3}
+      propertyPath: springCounter
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1b8ff73afd0805439d0f6df91446dac, type: 3}
 --- !u!1 &1931706477953225064 stripped
