@@ -24,7 +24,6 @@ public class ScoreSingleton : MonoBehaviour
         if (instance == null)
         {
             // If not, set this object as the instance and subscribe to the SceneLoaded event
-            SceneManager.sceneLoaded += OnSceneLoaded;
             instance = this;
             // Prevent this object from being destroyed when changing scenes
             DontDestroyOnLoad(this);
@@ -34,12 +33,7 @@ public class ScoreSingleton : MonoBehaviour
             // If an instance already exists, destroy this object
             Destroy(gameObject);
         }
-    }
 
-    //Event that is called every time a new scene is loaded
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        //Check if an object with the "ScoreUI" tag exists in the scene
         if (Extension.Finder.TryFindGameObjectWithTag("ScoreUI", out GameObject scoreUI))
         {
             // Get the Text component from the object and store it in _scoreText
